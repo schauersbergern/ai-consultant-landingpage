@@ -659,16 +659,22 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {[
               {
-                name: "René",
+                name: "René Koch",
+                role: "Dipl.-Ing. & IT-Consultant",
                 videoId: "uGUrBdPuCBA",
+                quote: "Endlich ein Kurs mit echtem Praxisbezug statt nur Theorie. Durch die Live-Sessions und die Community habe ich fertige Automationen und Chatbot-Konzepte entwickelt, die ich direkt bei meinen Kunden einsetzen kann.",
               },
               {
-                name: "Katharina",
+                name: "Katharina Jakob",
+                role: "Gründerin",
                 videoId: "Ar2GXCjUdLg",
+                quote: "Ich habe mehrere KI-Weiterbildungen durchlaufen, aber diese war mit Abstand die praxisnächste. Man erhält direkt umsetzbare Schritte und versteht endlich das Warum hinter einer guten, skalierbaren Automation.",
               },
               {
-                name: "Nicole",
+                name: "Nicole Schauerte",
+                role: "Social Media Management",
                 videoId: "lbr3TQ7zqdo",
+                quote: "Ich spare jede Woche mehrere Stunden durch eine Automation, die meine Content-Planung übernimmt. Diese Zeit nutze ich für kreative Entscheidungen – eine enorme Hilfe, die meinen Arbeitsalltag spürbar erleichtert.",
               },
             ].map((testimonial, index) => (
               <motion.div
@@ -678,7 +684,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="glass-card overflow-hidden border-border/50 hover:border-primary/30 transition-all group">
+                <Card className="glass-card overflow-hidden border-border/50 hover:border-primary/30 transition-all group h-full flex flex-col">
                   <div className="aspect-video relative">
                     <iframe
                       src={`https://www.youtube.com/embed/${testimonial.videoId}?rel=0`}
@@ -688,20 +694,23 @@ export default function Home() {
                       className="w-full h-full"
                     />
                   </div>
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between">
+                  <CardContent className="p-4 flex-1 flex flex-col">
+                    <p className="text-sm text-muted-foreground mb-4 flex-1 leading-relaxed">
+                      "{testimonial.quote}"
+                    </p>
+                    <div className="flex items-center justify-between pt-3 border-t border-border/50">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold">
-                          {testimonial.name.charAt(0)}
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold text-sm">
+                          {testimonial.name.split(' ').map(n => n.charAt(0)).join('')}
                         </div>
                         <div>
-                          <div className="font-display font-semibold">{testimonial.name}</div>
-                          <div className="text-xs text-muted-foreground">AI Practitioner Absolvent</div>
+                          <div className="font-display font-semibold text-sm">{testimonial.name}</div>
+                          <div className="text-xs text-muted-foreground">{testimonial.role}</div>
                         </div>
                       </div>
                       <div className="flex gap-0.5">
                         {[1, 2, 3, 4, 5].map((star) => (
-                          <svg key={star} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                          <svg key={star} className="w-3 h-3 text-accent" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                           </svg>
                         ))}
@@ -718,11 +727,15 @@ export default function Home() {
             {[
               {
                 name: "Carsten",
+                role: "Lehrer",
                 videoId: "sHiImBIc8Tk",
+                quote: "Mir fehlten die technischen Grundlagen. Im Kurs war mein Aha-Erlebnis, wie einfach man Tools über Schnittstellen verknüpfen kann. Jetzt automatisiere ich Unterrichtsmaterialien für meine Schüler – das war ein echter Augenöffner.",
               },
               {
-                name: "Claudia",
+                name: "Claudia Augustin",
+                role: "Finanzcoach & Hypnose-Expertin",
                 videoId: "m-xKE0NjK8w",
+                quote: "Ich baue mein Coaching-Business von Beginn an automatisiert auf. Der Kurs hat mir die Sicherheit gegeben, das DSGVO-konform umzusetzen – ein entscheidender Faktor, wenn man mit sensiblen Kundendaten arbeitet.",
               },
             ].map((testimonial, index) => (
               <motion.div
@@ -732,7 +745,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: (index + 3) * 0.1 }}
               >
-                <Card className="glass-card overflow-hidden border-border/50 hover:border-primary/30 transition-all group">
+                <Card className="glass-card overflow-hidden border-border/50 hover:border-primary/30 transition-all group h-full flex flex-col">
                   <div className="aspect-video relative">
                     <iframe
                       src={`https://www.youtube.com/embed/${testimonial.videoId}?rel=0`}
@@ -742,20 +755,23 @@ export default function Home() {
                       className="w-full h-full"
                     />
                   </div>
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between">
+                  <CardContent className="p-4 flex-1 flex flex-col">
+                    <p className="text-sm text-muted-foreground mb-4 flex-1 leading-relaxed">
+                      "{testimonial.quote}"
+                    </p>
+                    <div className="flex items-center justify-between pt-3 border-t border-border/50">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold">
-                          {testimonial.name.charAt(0)}
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold text-sm">
+                          {testimonial.name.split(' ').map(n => n.charAt(0)).join('')}
                         </div>
                         <div>
-                          <div className="font-display font-semibold">{testimonial.name}</div>
-                          <div className="text-xs text-muted-foreground">AI Practitioner Absolvent</div>
+                          <div className="font-display font-semibold text-sm">{testimonial.name}</div>
+                          <div className="text-xs text-muted-foreground">{testimonial.role}</div>
                         </div>
                       </div>
                       <div className="flex gap-0.5">
                         {[1, 2, 3, 4, 5].map((star) => (
-                          <svg key={star} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                          <svg key={star} className="w-3 h-3 text-accent" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                           </svg>
                         ))}
