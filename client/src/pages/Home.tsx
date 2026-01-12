@@ -1,5 +1,5 @@
 /**
- * AI-Consultant Landingpage - CONVERSION OPTIMIERT
+ * AI Practitioner Landingpage - CONVERSION OPTIMIERT
  * 
  * Optimierungen implementiert:
  * 1. Emotionalere Headlines mit klarem Kundennutzen
@@ -168,7 +168,7 @@ export default function Home() {
         <div className="container flex items-center justify-between h-16">
           <div className="flex items-center gap-2">
             <Brain className="w-8 h-8 text-primary" />
-            <span className="font-display font-bold text-lg">AI-Consultant</span>
+            <span className="font-display font-bold text-lg">AI Practitioner</span>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm">
             <a href="#module" className="text-muted-foreground hover:text-foreground transition-colors">Module</a>
@@ -191,7 +191,7 @@ export default function Home() {
       >
         <div className="container flex items-center justify-between gap-4">
           <div className="hidden sm:block">
-            <span className="text-sm text-muted-foreground">AI-Consultant Ausbildung</span>
+            <span className="text-sm text-muted-foreground">AI Practitioner Ausbildung</span>
             <div className="flex items-center gap-2">
               <span className="text-lg font-bold">4.997€</span>
               <span className="text-sm text-muted-foreground line-through">6.500€</span>
@@ -261,7 +261,7 @@ export default function Home() {
                 variants={fadeInUp}
                 className="text-base lg:text-lg text-muted-foreground leading-relaxed"
               >
-                In 8 Wochen vom Einsteiger zum gefragten AI-Consultant mit IHK-Zertifikat. Baue KI-Automatisierungen, die Unternehmen wirklich bezahlen.
+                In 8 Wochen vom Einsteiger zum gefragten AI Practitioner mit IHK-Zertifikat. Baue KI-Automatisierungen, die Unternehmen wirklich bezahlen.
               </motion.p>
 
               {/* Key Benefits */}
@@ -325,7 +325,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-2xl group-hover:blur-3xl transition-all" />
                 <img
                   src="/images/hero-abstract.png"
-                  alt="AI-Consultant Ausbildung - Fertige Vorlagen"
+                  alt="AI Practitioner Ausbildung - Fertige Vorlagen"
                   className="relative w-full rounded-2xl border border-border shadow-2xl"
                 />
                 {/* Play Button Overlay */}
@@ -446,7 +446,7 @@ export default function Home() {
               <span className="gradient-text">6 Branchen</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Der AI-Consultant wurde erfolgreich mit 50+ Teilnehmern aus sechs verschiedenen Branchen durchlaufen – von Informatikern über Consultants bis hin zu Coaches und Finanzexperten.
+              Der AI Practitioner wurde erfolgreich mit 50+ Teilnehmern aus sechs verschiedenen Branchen durchlaufen – von Informatikern über Consultants bis hin zu Coaches und Finanzexperten.
             </p>
           </motion.div>
 
@@ -1505,7 +1505,7 @@ export default function Home() {
           >
             <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
               Werde jetzt zum{" "}
-              <span className="gradient-text">AI-Consultant</span>
+              <span className="gradient-text">AI Practitioner</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-6">
               Die Nachfrage nach KI-Experten explodiert. Positioniere dich jetzt – bevor es alle anderen tun.
@@ -1532,7 +1532,7 @@ export default function Home() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-2">
               <Brain className="w-6 h-6 text-primary" />
-              <span className="font-display font-semibold">AI-Consultant Ausbildung</span>
+              <span className="font-display font-semibold">AI Practitioner Ausbildung</span>
             </div>
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
               <a href="#" className="hover:text-foreground transition-colors">Impressum</a>
@@ -1540,7 +1540,7 @@ export default function Home() {
               <a href="#" className="hover:text-foreground transition-colors">AGB</a>
             </div>
             <p className="text-sm text-muted-foreground">
-              © 2026 AI-Consultant. Alle Rechte vorbehalten.
+              © 2026 AI Practitioner. Alle Rechte vorbehalten.
             </p>
           </div>
         </div>
