@@ -1459,8 +1459,20 @@ export default function Home() {
                   a: "Plane etwa 5-8 Stunden pro Woche ein. Die Ausbildung ist auf 8 Wochen ausgelegt, aber du hast lebenslangen Zugang und kannst in deinem eigenen Tempo lernen. Die meisten Absolventen schließen innerhalb von 2-3 Monaten ab.",
                 },
                 {
+                  q: "Wie läuft die Ausbildung konkret ab?",
+                  a: "Die Ausbildung besteht aus 8 Modulen mit Video-Lektionen, praktischen Übungen und fertigen Templates. Du arbeitest selbstständig durch die Inhalte und hast Zugang zur Community für Fragen. Jedes Modul baut aufeinander auf – von den Grundlagen über Chatbots und Automatisierungen bis hin zu Akquise und Compliance.",
+                },
+                {
+                  q: "Was genau ist im Preis enthalten?",
+                  a: "Du erhältst Zugang zu allen 8 Modulen, über 50 praxiserprobte Templates und Blueprints, den ROI-Rechner für Kundengespräche, DSGVO-Vorlagen, lebenslangen Zugang zur Community und alle zukünftigen Updates. Außerdem ist die IHK-Zertifizierungsprüfung inklusive.",
+                },
+                {
                   q: "Kann ich damit wirklich Geld verdienen?",
                   a: "Ja, definitiv. Unsere Absolventen verdienen durchschnittlich 3.000-10.000€ pro KI-Automatisierungsprojekt. Mit den inkludierten Akquise-Strategien und ROI-Rechnern hast du alles, um Kunden zu gewinnen und zu überzeugen.",
+                },
+                {
+                  q: "Für wen ist die Ausbildung geeignet?",
+                  a: "Die Ausbildung richtet sich an Berater, Freelancer, Unternehmer und Angestellte, die KI-Automatisierungen für sich oder ihre Kunden umsetzen möchten. Egal ob du aus IT, Marketing, Coaching oder einer anderen Branche kommst – die Inhalte sind branchenunabhängig anwendbar.",
                 },
                 {
                   q: "Was ist, wenn mir die Ausbildung nicht gefällt?",
@@ -1468,11 +1480,23 @@ export default function Home() {
                 },
                 {
                   q: "Ist das IHK-Zertifikat wirklich anerkannt?",
-                  a: "Ja, das Zertifikat wird von der Industrie- und Handelskammer ausgestellt und ist bundesweit anerkannt. Es ist ein offizielles Qualitätssiegel, das bei Arbeitgebern und Kunden Vertrauen schafft.",
+                  a: "Ja, das Zertifikat wird von der Industrie- und Handelskammer ausgestellt und ist bundesweit anerkannt. Es ist ein offizielles Qualitätssiegel, das bei Arbeitgebern und Kunden Vertrauen schafft und dich von nicht-zertifizierten Anbietern abhebt.",
+                },
+                {
+                  q: "Wie erhalte ich das IHK-Zertifikat?",
+                  a: "Nach Abschluss aller Module absolvierst du eine Online-Prüfung. Diese besteht aus Multiple-Choice-Fragen und einer praktischen Aufgabe. Bei Bestehen erhältst du das offizielle IHK-Zertifikat als PDF und auf Wunsch auch als gedrucktes Dokument.",
+                },
+                {
+                  q: "Welche Tools lerne ich in der Ausbildung?",
+                  a: "Du lernst die wichtigsten KI- und Automatisierungstools: ChatGPT und andere LLMs, Make für Workflow-Automatisierung, N8N für Self-Hosting, Voiceflow für Chatbots, ManyChat für Marketing-Automatisierung und Flowise für KI-Agenten. Alle Tools werden praxisnah erklärt.",
                 },
                 {
                   q: "Bekomme ich Unterstützung während der Ausbildung?",
                   a: "Absolut. Du hast Zugang zu unserer exklusiven Community, in der du Fragen stellen und dich mit anderen Absolventen austauschen kannst. Zusätzlich gibt es regelmäßige Q&A-Sessions und Support per E-Mail.",
+                },
+                {
+                  q: "Gibt es eine Ratenzahlung?",
+                  a: "Ja, du kannst die Ausbildung in 6 bequemen Monatsraten bezahlen. Die genauen Konditionen findest du im Bestellprozess. Bei Einmalzahlung profitierst du vom aktuellen Frühjahrsrabatt.",
                 },
               ].map((faq, index) => (
                 <AccordionItem key={index} value={`item-${index}`} className="border border-border rounded-xl px-6 bg-card/50">
