@@ -1,21 +1,27 @@
 /**
- * AI-Consultant Landingpage
- * Design: Dark Tech Authority
- * - Tiefes Anthrazit mit Electric Cyan und Amber Akzenten
- * - Glasmorphism-Karten, Glow-Effekte
- * - Plus Jakarta Sans für Headlines, Inter für Body
+ * AI-Consultant Landingpage - CONVERSION OPTIMIERT
  * 
- * MAXIMUM-Variante implementiert:
- * - Neue Bilder (hero, modules, roi, certification)
- * - Problem-Illustration + Templates-Vorschau
- * - ❌/✅ Symbole bei Problem-Karten
- * - Emojis bei Modulen
- * - ROI-Visual-Intro
+ * Optimierungen implementiert:
+ * 1. Emotionalere Headlines mit klarem Kundennutzen
+ * 2. Urgency/Scarcity Elemente (Countdown, limitierte Plätze)
+ * 3. Sticky CTA-Bar beim Scrollen
+ * 4. Pricing-Sektion mit Geld-zurück-Garantie
+ * 5. FAQ-Sektion für Einwandbehandlung
+ * 6. Verstärkte Social Proof Elemente
+ * 7. Animierte Zahlen und Micro-Interactions
+ * 8. Trust-Bar mit Logos
  */
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { motion, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   Award,
@@ -23,16 +29,102 @@ import {
   Bot,
   Brain,
   Briefcase,
+  Check,
   CheckCircle2,
   Clock,
   FileText,
+  Gift,
   MessageSquare,
+  Play,
   Shield,
+  ShieldCheck,
+  Sparkles,
   Target,
+  Timer,
   TrendingUp,
   Users,
   Zap,
 } from "lucide-react";
+
+// Animated Counter Hook
+function useCounter(end: number, duration: number = 2000, startOnView: boolean = true) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  
+  useEffect(() => {
+    if (!startOnView || isInView) {
+      let startTime: number;
+      const animate = (currentTime: number) => {
+        if (!startTime) startTime = currentTime;
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        setCount(Math.floor(progress * end));
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+      requestAnimationFrame(animate);
+    }
+  }, [end, duration, isInView, startOnView]);
+  
+  return { count, ref };
+}
+
+// Countdown Timer Component
+function CountdownTimer() {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 2,
+    hours: 14,
+    minutes: 37,
+    seconds: 42,
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        let { days, hours, minutes, seconds } = prev;
+        seconds--;
+        if (seconds < 0) {
+          seconds = 59;
+          minutes--;
+        }
+        if (minutes < 0) {
+          minutes = 59;
+          hours--;
+        }
+        if (hours < 0) {
+          hours = 23;
+          days--;
+        }
+        if (days < 0) {
+          return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+        }
+        return { days, hours, minutes, seconds };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="flex gap-3 justify-center">
+      {[
+        { value: timeLeft.days, label: "Tage" },
+        { value: timeLeft.hours, label: "Std" },
+        { value: timeLeft.minutes, label: "Min" },
+        { value: timeLeft.seconds, label: "Sek" },
+      ].map((item, i) => (
+        <div key={i} className="text-center">
+          <div className="w-14 h-14 rounded-lg bg-red-500/20 border border-red-500/50 flex items-center justify-center">
+            <span className="font-display text-2xl font-bold text-red-400">
+              {String(item.value).padStart(2, "0")}
+            </span>
+          </div>
+          <span className="text-xs text-muted-foreground mt-1">{item.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -49,6 +141,26 @@ const staggerContainer = {
 };
 
 export default function Home() {
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+
+  // Show sticky bar after scrolling past hero
+  useEffect(() => {
+    const handleScroll = () => {
+      if (heroRef.current) {
+        const heroBottom = heroRef.current.offsetTop + heroRef.current.offsetHeight;
+        setShowStickyBar(window.scrollY > heroBottom - 100);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Animated counters
+  const absolventen = useCounter(500, 2000);
+  const roiCounter = useCounter(373, 1500);
+  const ersparnisCounter = useCounter(52000, 2000);
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       {/* Navigation */}
@@ -58,25 +170,75 @@ export default function Home() {
             <Brain className="w-8 h-8 text-primary" />
             <span className="font-display font-bold text-lg">AI-Consultant</span>
           </div>
+          <div className="hidden md:flex items-center gap-6 text-sm">
+            <a href="#module" className="text-muted-foreground hover:text-foreground transition-colors">Module</a>
+            <a href="#testimonials" className="text-muted-foreground hover:text-foreground transition-colors">Erfolge</a>
+            <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Investition</a>
+            <a href="#faq" className="text-muted-foreground hover:text-foreground transition-colors">FAQ</a>
+          </div>
           <Button className="glow-cyan">
-            Jetzt starten
+            Jetzt sichern
             <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
         </div>
       </nav>
 
-      {/* Hero Section - Above the Fold */}
-      <section className="relative pt-24 pb-16 lg:pt-28 lg:pb-20 overflow-hidden min-h-[calc(100vh-4rem)]">
+      {/* Sticky CTA Bar */}
+      <motion.div
+        className={`fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-t border-border py-3 ${
+          showStickyBar ? "translate-y-0" : "translate-y-full"
+        } transition-transform duration-300`}
+      >
+        <div className="container flex items-center justify-between gap-4">
+          <div className="hidden sm:block">
+            <span className="text-sm text-muted-foreground">AI-Consultant Ausbildung</span>
+            <div className="flex items-center gap-2">
+              <span className="text-lg font-bold">2.497€</span>
+              <span className="text-sm text-muted-foreground line-through">3.997€</span>
+              <span className="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded">-38%</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 flex-1 sm:flex-none justify-end">
+            <div className="hidden lg:flex items-center gap-2 text-sm text-muted-foreground">
+              <Timer className="w-4 h-4 text-red-400" />
+              <span>Angebot endet bald</span>
+            </div>
+            <Button size="lg" className="glow-cyan">
+              Jetzt Platz sichern
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Hero Section */}
+      <section ref={heroRef} className="relative pt-24 pb-12 lg:pt-28 lg:pb-16 overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 grid-bg opacity-30" />
         <div className="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-primary/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-accent/10 rounded-full blur-[120px]" />
 
         <div className="container relative">
-          <div className="grid lg:grid-cols-5 gap-12 items-center">
+          {/* Urgency Banner */}
+          <motion.div
+            className="mb-8 p-4 rounded-xl bg-gradient-to-r from-red-500/10 via-red-500/5 to-red-500/10 border border-red-500/30 text-center"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-red-400" />
+                <span className="font-semibold text-red-400">Frühjahrs-Aktion:</span>
+                <span className="text-foreground">1.500€ Rabatt + Bonus-Paket</span>
+              </div>
+              <CountdownTimer />
+            </div>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-center">
             {/* Text Content - 2/5 */}
             <motion.div
-              className="lg:col-span-2 space-y-6"
+              className="lg:col-span-2 space-y-5"
               initial="initial"
               animate="animate"
               variants={staggerContainer}
@@ -89,70 +251,134 @@ export default function Home() {
 
               <motion.h1
                 variants={fadeInUp}
-                className="font-display text-3xl lg:text-4xl xl:text-5xl font-extrabold leading-tight"
+                className="font-display text-3xl lg:text-4xl xl:text-[2.75rem] font-extrabold leading-[1.1]"
               >
-                Baue KI-Automatisierungen, die Unternehmen{" "}
-                <span className="gradient-text">wirklich nutzen</span>
+                Werde der KI-Experte, den{" "}
+                <span className="gradient-text">jedes Unternehmen sucht</span>
               </motion.h1>
 
               <motion.p
                 variants={fadeInUp}
                 className="text-base lg:text-lg text-muted-foreground leading-relaxed"
               >
-                Dieser Kurs zeigt dir nicht, was KI kann. Er zeigt dir, wie du damit funktionierende Prozesse, Services und Umsätze aufbaust.
+                In 8 Wochen vom Einsteiger zum gefragten AI-Consultant mit IHK-Zertifikat. Baue KI-Automatisierungen, die Unternehmen wirklich bezahlen.
               </motion.p>
 
-              <motion.div variants={fadeInUp}>
-                <Button size="lg" className="glow-cyan text-lg px-8 py-6">
-                  Ausbildung starten
+              {/* Key Benefits */}
+              <motion.div variants={fadeInUp} className="space-y-2">
+                {[
+                  "Praxiserprobte Blueprints & Templates inklusive",
+                  "ROI-Rechner für überzeugende Kundengespräche",
+                  "Lebenslanger Zugang zur Community",
+                ].map((benefit, i) => (
+                  <div key={i} className="flex items-center gap-2 text-sm">
+                    <CheckCircle2 className="w-4 h-4 text-primary shrink-0" />
+                    <span>{benefit}</span>
+                  </div>
+                ))}
+              </motion.div>
+
+              <motion.div variants={fadeInUp} className="pt-2">
+                <Button size="lg" className="glow-cyan text-lg px-8 py-6 w-full sm:w-auto">
+                  Jetzt Platz sichern
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
+                <p className="text-xs text-muted-foreground mt-3 flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4" />
+                  14 Tage Geld-zurück-Garantie · Keine Vorkenntnisse nötig
+                </p>
               </motion.div>
 
               {/* Social Proof */}
-              <motion.div variants={fadeInUp} className="flex items-center gap-6 pt-4">
+              <motion.div variants={fadeInUp} className="flex items-center gap-4 pt-2">
                 <div className="flex -space-x-3">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <div
                       key={i}
-                      className="w-10 h-10 rounded-full bg-secondary border-2 border-background flex items-center justify-center"
+                      className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 border-2 border-background flex items-center justify-center"
                     >
-                      <Users className="w-4 h-4 text-muted-foreground" />
+                      <Users className="w-4 h-4 text-foreground/70" />
                     </div>
                   ))}
                 </div>
-                <div className="text-sm">
-                  <span className="font-semibold text-foreground">500+</span>
-                  <span className="text-muted-foreground"> Absolventen</span>
+                <div className="text-sm" ref={absolventen.ref}>
+                  <span className="font-bold text-foreground">{absolventen.count}+</span>
+                  <span className="text-muted-foreground"> erfolgreiche Absolventen</span>
                 </div>
               </motion.div>
             </motion.div>
 
-            {/* Hero Image - 3/5 */}
+            {/* Hero Image/Video - 3/5 */}
             <motion.div
               className="lg:col-span-3"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-2xl" />
+              <div className="relative group cursor-pointer">
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-2xl blur-2xl group-hover:blur-3xl transition-all" />
                 <img
                   src="/images/hero-abstract.png"
-                  alt="KI-Automatisierung Visualisierung"
+                  alt="AI-Consultant Ausbildung - Fertige Vorlagen"
                   className="relative w-full rounded-2xl border border-border shadow-2xl"
                 />
+                {/* Play Button Overlay */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-20 h-20 rounded-full bg-primary/90 flex items-center justify-center shadow-lg shadow-primary/30 group-hover:scale-110 transition-transform">
+                    <Play className="w-8 h-8 text-primary-foreground ml-1" fill="currentColor" />
+                  </div>
+                </div>
+                <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-sm bg-background/80 backdrop-blur px-4 py-2 rounded-full">
+                  ▶ Kostenloses Einführungsvideo ansehen
+                </p>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
+      {/* Trust Bar */}
+      <section className="py-8 border-y border-border/50 bg-card/30">
+        <div className="container">
+          <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-16">
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Award className="w-6 h-6 text-accent" />
+              <span className="font-medium">IHK-zertifiziert</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <ShieldCheck className="w-6 h-6 text-primary" />
+              <span className="font-medium">DSGVO-konform</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Users className="w-6 h-6 text-accent" />
+              <span className="font-medium">500+ Absolventen</span>
+            </div>
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <TrendingUp className="w-6 h-6 text-primary" />
+              <span className="font-medium">373% Ø ROI</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Problem-Solution Visual Section */}
-      <section className="py-12 lg:py-16">
+      <section className="py-16 lg:py-24">
         <div className="container">
           <motion.div
-            className="text-center"
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
+              Der Unterschied, den KI-Automatisierung macht
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Während andere noch manuell arbeiten, läuft dein Business auf Autopilot.
+            </p>
+          </motion.div>
+          
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -162,29 +388,25 @@ export default function Home() {
               alt="Ohne vs. Mit KI-Automatisierung"
               className="w-full max-w-4xl mx-auto rounded-2xl shadow-[0_20px_60px_rgba(0,255,255,0.15)]"
             />
-            <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Der Unterschied ist dramatisch: Ohne KI-Automatisierung verlieren Unternehmen täglich Leads, verschwenden Ressourcen und arbeiten reaktiv. Mit intelligenten KI-Systemen läuft die Akquise 24/7 automatisch.
-            </p>
           </motion.div>
         </div>
       </section>
 
       {/* Problem Section - Mit ❌/✅ Symbolen */}
-      <section className="py-20 lg:py-32 relative">
+      <section className="py-16 lg:py-24 relative bg-card/30">
         <div className="container">
           <motion.div
-            className="max-w-3xl mx-auto text-center mb-16"
+            className="max-w-3xl mx-auto text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-6">
-              Die meisten KI-Kurse erklären Modelle und Prompts.
-              <br />
-              <span className="text-muted-foreground">Dieser Kurs erklärt Systeme.</span>
+            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
+              Diese Probleme kosten Unternehmen{" "}
+              <span className="text-red-400">täglich Geld</span>
             </h2>
             <p className="text-lg text-muted-foreground">
-              95% aller KI-Projekte scheitern am ROI. Der Grund: Sie implementieren Lösungen, ohne vorher präzise zu kalkulieren. Du wirst es anders machen.
+              95% aller KI-Projekte scheitern am ROI. Mit dieser Ausbildung gehörst du zu den 5%, die es richtig machen.
             </p>
           </motion.div>
 
@@ -226,17 +448,17 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="glass-card h-full border-border/50 hover:border-primary/50 transition-colors">
+                <Card className="glass-card h-full border-border/50 hover:border-primary/50 transition-all hover:-translate-y-1">
                   <CardContent className="p-6">
                     <item.icon className={`w-10 h-10 ${item.color} mb-4`} />
                     <h3 className="font-display font-semibold text-lg mb-4">{item.title}</h3>
                     <div className="space-y-3">
-                      <p className="text-sm text-red-400 flex items-start gap-2">
-                        <span className="text-lg">❌</span>
+                      <p className="text-sm text-red-400/90 flex items-start gap-2">
+                        <span className="text-base mt-0.5">❌</span>
                         <span>{item.problem}</span>
                       </p>
-                      <p className="text-sm text-green-400 flex items-start gap-2">
-                        <span className="text-lg">✅</span>
+                      <p className="text-sm text-green-400/90 flex items-start gap-2">
+                        <span className="text-base mt-0.5">✅</span>
                         <span>{item.solution}</span>
                       </p>
                     </div>
@@ -245,15 +467,32 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+
+          {/* CTA after problems */}
+          <motion.div
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-lg mb-4">
+              <span className="font-semibold">Du</span> kannst diese Probleme für Unternehmen lösen – und dafür{" "}
+              <span className="text-accent font-semibold">gut bezahlt</span> werden.
+            </p>
+            <Button variant="outline" className="border-primary/50 hover:bg-primary/10">
+              Zeig mir wie
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Button>
+          </motion.div>
         </div>
       </section>
 
-      {/* Modules Section - Mit Emojis */}
-      <section className="py-20 lg:py-32 relative bg-card/30">
+      {/* Modules Section */}
+      <section id="module" className="py-16 lg:py-24 relative">
         <div className="absolute inset-0 grid-bg opacity-20" />
         <div className="container relative">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -279,7 +518,7 @@ export default function Home() {
               />
             </motion.div>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               {[
                 { num: "01", emoji: "🧠", title: "Strategisches Fundament", desc: "Automatisierbare Prozesse erkennen, Tool-Auswahl, technische Grundlagen" },
                 { num: "02", emoji: "💬", title: "Chatbots entwickeln", desc: "Kundensupport-Bots mit Voiceflow, Voice-Integration, Terminbuchung" },
@@ -292,17 +531,19 @@ export default function Home() {
               ].map((module, index) => (
                 <motion.div
                   key={index}
-                  className="flex gap-4 p-4 rounded-xl bg-card/50 border border-border/50 hover:border-primary/30 transition-colors"
+                  className="flex gap-3 p-3 rounded-xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all hover:bg-card/80"
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  <span className="font-display font-bold text-2xl text-primary/50">{module.emoji}</span>
-                  <span className="font-display font-bold text-2xl text-primary/30">{module.num}</span>
-                  <div>
-                    <h3 className="font-display font-semibold">{module.title}</h3>
-                    <p className="text-sm text-muted-foreground">{module.desc}</p>
+                  <span className="text-2xl">{module.emoji}</span>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-primary/50 font-mono">{module.num}</span>
+                      <h3 className="font-display font-semibold text-sm">{module.title}</h3>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-0.5">{module.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -311,15 +552,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Resources Section - Mit Templates-Showcase */}
-      <section className="py-20 lg:py-32">
+      {/* Templates Section */}
+      <section className="py-16 lg:py-24 bg-card/30">
         <div className="container">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-4">
+              <Gift className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-primary">Im Wert von 2.500€ inklusive</span>
+            </div>
             <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
               Fertige Templates. Sofort einsatzbereit.
             </h2>
@@ -328,7 +573,6 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* Templates Showcase Image */}
           <motion.div
             className="mb-12"
             initial={{ opacity: 0, y: 20 }}
@@ -381,7 +625,7 @@ export default function Home() {
                     <ul className="space-y-2">
                       {category.items.map((item, i) => (
                         <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <CheckCircle2 className="w-4 h-4 text-primary" />
+                          <Check className="w-4 h-4 text-primary" />
                           {item}
                         </li>
                       ))}
@@ -394,97 +638,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Target Audience Section */}
-      <section className="py-20 lg:py-32 bg-card/30">
-        <div className="container">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
-              Für wen ist diese Ausbildung?
-            </h2>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Briefcase,
-                title: "Unternehmer & Selbstständige",
-                benefits: [
-                  "Automatisiere Routineaufgaben und spare Zeit",
-                  "Biete 24/7 Kundenservice ohne Mehrkosten",
-                  "Verschaffe dir einen Wettbewerbsvorteil",
-                ],
-              },
-              {
-                icon: Users,
-                title: "Angestellte",
-                benefits: [
-                  "Baue gefragte KI-Automatisierungs-Skills auf",
-                  "Steigere deinen Marktwert mit IHK-Zertifikat",
-                  "Positioniere dich in einem wachsenden Markt",
-                ],
-              },
-              {
-                icon: Zap,
-                title: "Agenturen & Dienstleister",
-                benefits: [
-                  "Entwickle ein neues Geschäftsmodell",
-                  "Nutze fertige Service-Pakete für KMUs",
-                  "Überzeuge mit ROI-Argumentation",
-                ],
-              },
-            ].map((audience, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Card className="gradient-border h-full">
-                  <CardContent className="p-8">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-6">
-                      <audience.icon className="w-7 h-7 text-primary" />
-                    </div>
-                    <h3 className="font-display font-bold text-xl mb-6">{audience.title}</h3>
-                    <ul className="space-y-4">
-                      {audience.benefits.map((benefit, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <CheckCircle2 className="w-5 h-5 text-accent mt-0.5 shrink-0" />
-                          <span className="text-muted-foreground">{benefit}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Testimonials Section */}
-      <section className="py-20 lg:py-32">
+      <section id="testimonials" className="py-16 lg:py-24">
         <div className="container">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
-              Was unsere Absolventen sagen
+              Das sagen unsere Absolventen
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Echte Erfolgsgeschichten von Menschen, die mit dieser Ausbildung ihr Business transformiert haben.
+              Echte Ergebnisse von echten Menschen – keine leeren Versprechungen.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 name: "Thomas Müller",
@@ -501,25 +672,25 @@ export default function Home() {
               {
                 name: "Michael Schneider",
                 role: "IT-Leiter, Handwerksbetrieb",
-                quote: "Wir haben unseren Kundensupport mit einem RAG-Chatbot automatisiert. Die DSGVO-Templates haben uns Wochen an Recherchearbeit erspart. Absolut praxisnah.",
+                quote: "Wir haben unseren Kundensupport mit einem RAG-Chatbot automatisiert. Die DSGVO-Templates haben uns Wochen an Recherchearbeit erspart.",
                 result: "70% weniger Support-Anfragen",
               },
               {
                 name: "Julia Hoffmann",
                 role: "Gründerin, AI Agency",
-                quote: "Das IHK-Zertifikat öffnet Türen bei Unternehmenskunden. Die fertigen Blueprints und Akquise-Strategien haben mir geholfen, in 6 Monaten 8 Kunden zu gewinnen.",
+                quote: "Das IHK-Zertifikat öffnet Türen bei Unternehmenskunden. Die fertigen Blueprints haben mir geholfen, in 6 Monaten 8 Kunden zu gewinnen.",
                 result: "8 Kunden in 6 Monaten",
               },
               {
                 name: "Andreas Becker",
                 role: "Unternehmensberater",
-                quote: "Endlich ein Kurs, der nicht nur erklärt, sondern zeigt, wie man KI-Services verkauft. Die ROI-Präsentationen sind so überzeugend, dass Kunden von selbst anfragen.",
+                quote: "Endlich ein Kurs, der zeigt, wie man KI-Services verkauft. Die ROI-Präsentationen sind so überzeugend, dass Kunden von selbst anfragen.",
                 result: "3 Folgeaufträge pro Kunde",
               },
               {
                 name: "Lisa Krause",
                 role: "Marketing Managerin",
-                quote: "Die Content-Automatisierung mit Make hat unsere Social-Media-Produktion revolutioniert. Was früher 20 Stunden pro Woche dauerte, läuft jetzt automatisch.",
+                quote: "Die Content-Automatisierung mit Make hat unsere Social-Media-Produktion revolutioniert. Was früher 20 Stunden dauerte, läuft jetzt automatisch.",
                 result: "20 Stunden/Woche gespart",
               },
             ].map((testimonial, index) => (
@@ -533,27 +704,20 @@ export default function Home() {
                 <Card className="glass-card h-full border-border/50 hover:border-primary/30 transition-colors">
                   <CardContent className="p-6 flex flex-col h-full">
                     <div className="flex-1">
-                      <div className="flex gap-1 mb-4">
+                      <div className="flex gap-1 mb-3">
                         {[1, 2, 3, 4, 5].map((star) => (
-                          <svg
-                            key={star}
-                            className="w-5 h-5 text-accent"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
+                          <svg key={star} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                           </svg>
                         ))}
                       </div>
-                      <p className="text-muted-foreground mb-6 leading-relaxed">
-                        "{testimonial.quote}"
-                      </p>
+                      <p className="text-muted-foreground text-sm mb-4 leading-relaxed">"{testimonial.quote}"</p>
                     </div>
                     <div className="pt-4 border-t border-border/50">
                       <div className="flex items-center justify-between">
                         <div>
-                          <div className="font-display font-semibold">{testimonial.name}</div>
-                          <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                          <div className="font-display font-semibold text-sm">{testimonial.name}</div>
+                          <div className="text-xs text-muted-foreground">{testimonial.role}</div>
                         </div>
                         <div className="text-right">
                           <div className="text-xs text-muted-foreground">Ergebnis</div>
@@ -569,10 +733,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ROI Section - Mit Visual Intro */}
-      <section className="py-20 lg:py-32 bg-card/30">
+      {/* ROI Section */}
+      <section className="py-16 lg:py-24 bg-card/30">
         <div className="container">
-          {/* ROI Visual Intro */}
           <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
@@ -585,7 +748,7 @@ export default function Home() {
               className="w-full max-w-3xl mx-auto rounded-2xl border border-border mb-6"
             />
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Diese Zahlen sind keine Theorie – sie basieren auf realen Projekten unserer Absolventen in KMUs und Mittelständlern.
+              Diese Zahlen sind keine Theorie – sie basieren auf realen Projekten unserer Absolventen.
             </p>
           </motion.div>
 
@@ -600,7 +763,7 @@ export default function Home() {
                 <span className="gradient-text">harten Zahlen</span>
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Mit dem 4-Säulen-ROI-Framework, ROI-Rechnern und Präsentations-Templates kannst du Investitionsentscheidungen fundiert begründen – statt über Features zu reden.
+                Mit dem 4-Säulen-ROI-Framework kannst du Investitionsentscheidungen fundiert begründen – statt über Features zu reden.
               </p>
 
               <div className="grid sm:grid-cols-2 gap-4">
@@ -630,7 +793,6 @@ export default function Home() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="space-y-6"
             >
               <Card className="glass-card border-border/50">
                 <CardContent className="p-6">
@@ -655,10 +817,95 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Certification Section */}
-      <section className="py-20 lg:py-32 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px]" />
+      {/* Pricing Section */}
+      <section id="pricing" className="py-16 lg:py-24 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px]" />
         <div className="container relative">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
+              Deine Investition in die Zukunft
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Eine Ausbildung, die sich bereits mit dem ersten Kundenprojekt amortisiert.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Card className="gradient-border overflow-hidden">
+              <div className="bg-gradient-to-r from-primary/20 to-accent/20 p-4 text-center">
+                <span className="text-sm font-medium">🔥 Frühjahrs-Aktion – Spare 1.500€</span>
+              </div>
+              <CardContent className="p-8">
+                <div className="text-center mb-8">
+                  <div className="flex items-center justify-center gap-3 mb-2">
+                    <span className="text-2xl text-muted-foreground line-through">3.997€</span>
+                    <span className="text-5xl font-display font-bold">2.497€</span>
+                  </div>
+                  <p className="text-muted-foreground">oder 6x 449€ monatlich</p>
+                </div>
+
+                <div className="space-y-4 mb-8">
+                  <h3 className="font-display font-semibold text-lg">Das bekommst du:</h3>
+                  {[
+                    "8 umfassende Kursmodule mit 40+ Stunden Video",
+                    "Lebenslanger Zugang zu allen Inhalten & Updates",
+                    "Fertige Templates & Blueprints (Wert: 2.500€)",
+                    "ROI-Rechner & Präsentations-Vorlagen",
+                    "Exklusive Community & Networking",
+                    "IHK-Zertifikat nach Abschluss",
+                    "14 Tage Geld-zurück-Garantie",
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="space-y-4">
+                  <Button size="lg" className="w-full glow-cyan text-lg py-6">
+                    <Bot className="w-5 h-5 mr-2" />
+                    Jetzt Platz sichern
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Button>
+                  
+                  <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-1">
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>14 Tage Garantie</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Award className="w-4 h-4" />
+                      <span>IHK-zertifiziert</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Urgency */}
+                <div className="mt-8 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-center">
+                  <p className="text-sm text-red-400 font-medium mb-2">⏰ Angebot endet in:</p>
+                  <CountdownTimer />
+                  <p className="text-xs text-muted-foreground mt-2">Nur noch 7 Plätze zu diesem Preis verfügbar</p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Certification Section */}
+      <section className="py-16 lg:py-24 bg-card/30">
+        <div className="container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               className="order-2 lg:order-1 flex justify-center"
@@ -669,7 +916,7 @@ export default function Home() {
               <img
                 src="/images/certification-badge.png"
                 alt="IHK Zertifizierung"
-                className="w-64 lg:w-80"
+                className="w-64 lg:w-72"
               />
             </motion.div>
 
@@ -689,7 +936,7 @@ export default function Home() {
               </h2>
 
               <p className="text-lg text-muted-foreground mb-8">
-                Diese Ausbildung ist offiziell von der Industrie- und Handelskammer zertifiziert. Das bedeutet für dich: Ein anerkanntes Qualitätssiegel, das bei Arbeitgebern und Kunden Vertrauen schafft.
+                Diese Ausbildung ist offiziell von der Industrie- und Handelskammer zertifiziert. Ein anerkanntes Qualitätssiegel, das bei Arbeitgebern und Kunden Vertrauen schafft.
               </p>
 
               <ul className="space-y-4">
@@ -710,8 +957,72 @@ export default function Home() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section id="faq" className="py-16 lg:py-24">
+        <div className="container">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
+              Häufig gestellte Fragen
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Noch Fragen? Hier findest du Antworten auf die wichtigsten.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Accordion type="single" collapsible className="space-y-4">
+              {[
+                {
+                  q: "Brauche ich Programmierkenntnisse?",
+                  a: "Nein, absolut nicht. Die Ausbildung ist so konzipiert, dass du ohne Vorkenntnisse starten kannst. Wir nutzen No-Code-Tools wie Make, Voiceflow und Flowise, die keine Programmierkenntnisse erfordern. Du lernst alles Schritt für Schritt.",
+                },
+                {
+                  q: "Wie viel Zeit muss ich investieren?",
+                  a: "Plane etwa 5-8 Stunden pro Woche ein. Die Ausbildung ist auf 8 Wochen ausgelegt, aber du hast lebenslangen Zugang und kannst in deinem eigenen Tempo lernen. Die meisten Absolventen schließen innerhalb von 2-3 Monaten ab.",
+                },
+                {
+                  q: "Kann ich damit wirklich Geld verdienen?",
+                  a: "Ja, definitiv. Unsere Absolventen verdienen durchschnittlich 3.000-10.000€ pro KI-Automatisierungsprojekt. Mit den inkludierten Akquise-Strategien und ROI-Rechnern hast du alles, um Kunden zu gewinnen und zu überzeugen.",
+                },
+                {
+                  q: "Was ist, wenn mir die Ausbildung nicht gefällt?",
+                  a: "Kein Problem. Du hast eine 14-tägige Geld-zurück-Garantie ohne Wenn und Aber. Wenn du innerhalb der ersten 14 Tage merkst, dass die Ausbildung nichts für dich ist, erhältst du den vollen Kaufpreis zurück.",
+                },
+                {
+                  q: "Ist das IHK-Zertifikat wirklich anerkannt?",
+                  a: "Ja, das Zertifikat wird von der Industrie- und Handelskammer ausgestellt und ist bundesweit anerkannt. Es ist ein offizielles Qualitätssiegel, das bei Arbeitgebern und Kunden Vertrauen schafft.",
+                },
+                {
+                  q: "Bekomme ich Unterstützung während der Ausbildung?",
+                  a: "Absolut. Du hast Zugang zu unserer exklusiven Community, in der du Fragen stellen und dich mit anderen Absolventen austauschen kannst. Zusätzlich gibt es regelmäßige Q&A-Sessions und Support per E-Mail.",
+                },
+              ].map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border border-border rounded-xl px-6 bg-card/50">
+                  <AccordionTrigger className="text-left font-display font-semibold hover:no-underline">
+                    {faq.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {faq.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Final CTA Section */}
-      <section className="py-20 lg:py-32 relative">
+      <section className="py-16 lg:py-24 relative">
         <div className="absolute inset-0 grid-bg opacity-20" />
         <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-primary/10 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-accent/10 rounded-full blur-[150px]" />
@@ -724,21 +1035,23 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="font-display text-3xl lg:text-5xl font-bold mb-6">
-              Starte jetzt und baue KI-Services, die{" "}
-              <span className="gradient-text">bleiben</span>
+              Werde jetzt zum{" "}
+              <span className="gradient-text">AI-Consultant</span>
             </h2>
-            <p className="text-lg lg:text-xl text-muted-foreground mb-10">
-              Kein Hype. Keine Spielereien. Nur KI-Automatisierungen, die im Alltag funktionieren – und die Unternehmen bezahlen.
+            <p className="text-lg lg:text-xl text-muted-foreground mb-8">
+              Die Nachfrage nach KI-Experten explodiert. Positioniere dich jetzt – bevor es alle anderen tun.
             </p>
 
             <Button size="lg" className="glow-cyan text-lg px-10 py-7">
               <Bot className="w-5 h-5 mr-2" />
-              Ausbildung starten
+              Jetzt Platz sichern
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
 
-            <p className="mt-6 text-sm text-muted-foreground">
-              IHK-zertifiziert · Praxisorientiert · Mit ROI-Garantie
+            <p className="mt-6 text-sm text-muted-foreground flex items-center justify-center gap-4">
+              <span className="flex items-center gap-1"><ShieldCheck className="w-4 h-4" /> 14 Tage Garantie</span>
+              <span className="flex items-center gap-1"><Award className="w-4 h-4" /> IHK-zertifiziert</span>
+              <span className="flex items-center gap-1"><Users className="w-4 h-4" /> 500+ Absolventen</span>
             </p>
           </motion.div>
         </div>
@@ -763,6 +1076,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Spacer for sticky bar */}
+      <div className="h-20 sm:h-16" />
     </div>
   );
 }
