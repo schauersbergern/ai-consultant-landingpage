@@ -27,7 +27,6 @@ import {
   Award,
   BarChart3,
   Bot,
-  Brain,
   Briefcase,
   Check,
   CheckCircle2,
@@ -167,7 +166,7 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
         <div className="container flex items-center justify-between h-16">
           <div className="flex items-center gap-2">
-            <Brain className="w-8 h-8 text-primary" />
+            <img src="/images/logo-ap.png" alt="AI Practitioner Logo" className="w-10 h-10" />
             <span className="font-display font-bold text-lg">AI Practitioner</span>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm">
@@ -1531,7 +1530,7 @@ export default function Home() {
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-2">
-              <Brain className="w-6 h-6 text-primary" />
+              <img src="/images/logo-ap.png" alt="AI Practitioner Logo" className="w-8 h-8" />
               <span className="font-display font-semibold">AI Practitioner Ausbildung</span>
             </div>
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
