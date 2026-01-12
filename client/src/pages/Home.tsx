@@ -157,7 +157,7 @@ export default function Home() {
   }, []);
 
   // Animated counters
-  const absolventen = useCounter(500, 2000);
+  const absolventen = useCounter(50, 2000);
   const roiCounter = useCounter(373, 1500);
   const ersparnisCounter = useCounter(52000, 2000);
 
@@ -193,9 +193,9 @@ export default function Home() {
           <div className="hidden sm:block">
             <span className="text-sm text-muted-foreground">AI-Consultant Ausbildung</span>
             <div className="flex items-center gap-2">
-              <span className="text-lg font-bold">2.497€</span>
-              <span className="text-sm text-muted-foreground line-through">3.997€</span>
-              <span className="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded">-38%</span>
+              <span className="text-lg font-bold">4.997€</span>
+              <span className="text-sm text-muted-foreground line-through">6.500€</span>
+              <span className="text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded">-23%</span>
             </div>
           </div>
           <div className="flex items-center gap-3 flex-1 sm:flex-none justify-end">
@@ -229,7 +229,7 @@ export default function Home() {
               <div className="flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-red-400" />
                 <span className="font-semibold text-red-400">Frühjahrs-Aktion:</span>
-                <span className="text-foreground">1.500€ Rabatt + Bonus-Paket</span>
+                <span className="text-foreground">1.503€ Rabatt + Bonus-Paket</span>
               </div>
               <CountdownTimer />
             </div>
@@ -351,7 +351,7 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-2 text-muted-foreground">
               <Users className="w-6 h-6 text-accent" />
-              <span className="font-medium">500+ Absolventen</span>
+              <span className="font-medium">50+ Absolventen</span>
             </div>
             <div className="flex items-center gap-2 text-muted-foreground">
               <TrendingUp className="w-6 h-6 text-primary" />
@@ -843,15 +843,15 @@ export default function Home() {
           >
             <Card className="gradient-border overflow-hidden">
               <div className="bg-gradient-to-r from-primary/20 to-accent/20 p-4 text-center">
-                <span className="text-sm font-medium">🔥 Frühjahrs-Aktion – Spare 1.500€</span>
+                <span className="text-sm font-medium">🔥 Frühjahrs-Aktion – Spare 1.503€</span>
               </div>
               <CardContent className="p-6">
                 <div className="text-center mb-6">
                   <div className="flex items-center justify-center gap-3 mb-2">
-                    <span className="text-2xl text-muted-foreground line-through">3.997€</span>
-                    <span className="text-5xl font-display font-bold">2.497€</span>
+                    <span className="text-2xl text-muted-foreground line-through">6.500€</span>
+                    <span className="text-5xl font-display font-bold">4.997€</span>
                   </div>
-                  <p className="text-muted-foreground">oder 6x 449€ monatlich</p>
+                  <p className="text-muted-foreground">oder 6x 899€ monatlich</p>
                 </div>
 
                 <div className="space-y-3 mb-6">
@@ -1051,7 +1051,7 @@ export default function Home() {
             <p className="mt-6 text-sm text-muted-foreground flex items-center justify-center gap-4">
               <span className="flex items-center gap-1"><ShieldCheck className="w-4 h-4" /> 14 Tage Garantie</span>
               <span className="flex items-center gap-1"><Award className="w-4 h-4" /> IHK-zertifiziert</span>
-              <span className="flex items-center gap-1"><Users className="w-4 h-4" /> 500+ Absolventen</span>
+              <span className="flex items-center gap-1"><Users className="w-4 h-4" /> 50+ Absolventen</span>
             </p>
           </motion.div>
         </div>
