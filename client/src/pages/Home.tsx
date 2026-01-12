@@ -785,8 +785,95 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Trainer Section */}
+      <section id="trainer" className="py-12 lg:py-16 bg-card/30">
+        <div className="container">
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
+              Deine Trainer
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Gemeinsam betreuen sie jede Kohorte mit Live-Sessions, technischem Sparring und direktem Feedback zu den Projektaufgaben.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Nikolaus Schauersberger */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              <Card className="glass-card border-border/50 hover:border-primary/30 transition-all h-full">
+                <CardContent className="p-6">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-2 border-primary/30">
+                      <img
+                        src="/images/nikolaus-schauersberger.jpg"
+                        alt="Nikolaus Schauersberger"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <h3 className="font-display text-xl font-bold mb-1">Nikolaus Schauersberger</h3>
+                    <p className="text-primary text-sm font-medium mb-3">Technische Leitung & Produzent</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      Seit 15 Jahren Software-Experte und Anforderungsmanager in Großprojekten. 
+                      Nikolaus bringt tiefgreifendes technisches Know-how und praktische Erfahrung 
+                      aus Enterprise-Umgebungen in die Ausbildung ein.
+                    </p>
+                    <div className="flex gap-2 mt-4">
+                      <span className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full">Enterprise Software</span>
+                      <span className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full">KI-Automation</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* Markus Habermehl */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <Card className="glass-card border-border/50 hover:border-primary/30 transition-all h-full">
+                <CardContent className="p-6">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-2 border-primary/30">
+                      <img
+                        src="/images/markus-habermehl.jpg"
+                        alt="Markus Habermehl"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <h3 className="font-display text-xl font-bold mb-1">Markus Habermehl</h3>
+                    <p className="text-primary text-sm font-medium mb-3">Didaktische Leitung</p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      Gründer des größten KI-Clubs im DACH-Raum und Automatisierungsexperte. 
+                      Markus sorgt dafür, dass komplexe Inhalte verständlich und praxisnah 
+                      vermittelt werden.
+                    </p>
+                    <div className="flex gap-2 mt-4">
+                      <span className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full">KI-Club DACH</span>
+                      <span className="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full">Automatisierung</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* ROI Section */}
-      <section className="py-12 lg:py-16 bg-card/30">
+      <section className="py-12 lg:py-16">
         <div className="container">
           <motion.div
             className="text-center mb-8"
