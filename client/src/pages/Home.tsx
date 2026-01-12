@@ -362,10 +362,10 @@ export default function Home() {
       </section>
 
       {/* Problem-Solution Visual Section */}
-      <section className="py-16 lg:py-24">
+      <section className="py-10 lg:py-14">
         <div className="container">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -393,10 +393,10 @@ export default function Home() {
       </section>
 
       {/* Problem Section - Mit ❌/✅ Symbolen */}
-      <section className="py-16 lg:py-24 relative bg-card/30">
+      <section className="py-12 lg:py-16 relative bg-card/30">
         <div className="container">
           <motion.div
-            className="max-w-3xl mx-auto text-center mb-12"
+            className="max-w-3xl mx-auto text-center mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -488,11 +488,11 @@ export default function Home() {
       </section>
 
       {/* Modules Section */}
-      <section id="module" className="py-16 lg:py-24 relative">
+      <section id="module" className="py-12 lg:py-16 relative">
         <div className="absolute inset-0 grid-bg opacity-20" />
         <div className="container relative">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -505,7 +505,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <div className="grid lg:grid-cols-2 gap-6 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -518,7 +518,7 @@ export default function Home() {
               />
             </motion.div>
 
-            <div className="space-y-3">
+            <div className="space-y-2">
               {[
                 { num: "01", emoji: "🧠", title: "Strategisches Fundament", desc: "Automatisierbare Prozesse erkennen, Tool-Auswahl, technische Grundlagen" },
                 { num: "02", emoji: "💬", title: "Chatbots entwickeln", desc: "Kundensupport-Bots mit Voiceflow, Voice-Integration, Terminbuchung" },
@@ -531,7 +531,7 @@ export default function Home() {
               ].map((module, index) => (
                 <motion.div
                   key={index}
-                  className="flex gap-3 p-3 rounded-xl bg-card/50 border border-border/50 hover:border-primary/30 transition-all hover:bg-card/80"
+                  className="flex gap-2.5 p-2.5 rounded-lg bg-card/50 border border-border/50 hover:border-primary/30 transition-all hover:bg-card/80"
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -553,10 +553,10 @@ export default function Home() {
       </section>
 
       {/* Templates Section */}
-      <section className="py-16 lg:py-24 bg-card/30">
+      <section className="py-12 lg:py-16 bg-card/30">
         <div className="container">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -574,7 +574,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            className="mb-12"
+            className="mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -639,10 +639,10 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-16 lg:py-24">
+      <section id="testimonials" className="py-12 lg:py-16">
         <div className="container">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -702,7 +702,7 @@ export default function Home() {
                 transition={{ delay: index * 0.1 }}
               >
                 <Card className="glass-card h-full border-border/50 hover:border-primary/30 transition-colors">
-                  <CardContent className="p-6 flex flex-col h-full">
+                  <CardContent className="p-5 flex flex-col h-full">
                     <div className="flex-1">
                       <div className="flex gap-1 mb-3">
                         {[1, 2, 3, 4, 5].map((star) => (
@@ -711,9 +711,9 @@ export default function Home() {
                           </svg>
                         ))}
                       </div>
-                      <p className="text-muted-foreground text-sm mb-4 leading-relaxed">"{testimonial.quote}"</p>
+                      <p className="text-muted-foreground text-sm mb-3 leading-relaxed">"{testimonial.quote}"</p>
                     </div>
-                    <div className="pt-4 border-t border-border/50">
+                    <div className="pt-3 border-t border-border/50">
                       <div className="flex items-center justify-between">
                         <div>
                           <div className="font-display font-semibold text-sm">{testimonial.name}</div>
@@ -734,10 +734,10 @@ export default function Home() {
       </section>
 
       {/* ROI Section */}
-      <section className="py-16 lg:py-24 bg-card/30">
+      <section className="py-12 lg:py-16 bg-card/30">
         <div className="container">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -818,11 +818,11 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-16 lg:py-24 relative overflow-hidden">
+      <section id="pricing" className="py-12 lg:py-16 relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px]" />
         <div className="container relative">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -845,8 +845,8 @@ export default function Home() {
               <div className="bg-gradient-to-r from-primary/20 to-accent/20 p-4 text-center">
                 <span className="text-sm font-medium">🔥 Frühjahrs-Aktion – Spare 1.500€</span>
               </div>
-              <CardContent className="p-8">
-                <div className="text-center mb-8">
+              <CardContent className="p-6">
+                <div className="text-center mb-6">
                   <div className="flex items-center justify-center gap-3 mb-2">
                     <span className="text-2xl text-muted-foreground line-through">3.997€</span>
                     <span className="text-5xl font-display font-bold">2.497€</span>
@@ -854,8 +854,8 @@ export default function Home() {
                   <p className="text-muted-foreground">oder 6x 449€ monatlich</p>
                 </div>
 
-                <div className="space-y-4 mb-8">
-                  <h3 className="font-display font-semibold text-lg">Das bekommst du:</h3>
+                <div className="space-y-3 mb-6">
+                  <h3 className="font-display font-semibold text-base">Das bekommst du:</h3>
                   {[
                     "8 umfassende Kursmodule mit 40+ Stunden Video",
                     "Lebenslanger Zugang zu allen Inhalten & Updates",
@@ -892,7 +892,7 @@ export default function Home() {
                 </div>
 
                 {/* Urgency */}
-                <div className="mt-8 p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-center">
+                <div className="mt-6 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-center">
                   <p className="text-sm text-red-400 font-medium mb-2">⏰ Angebot endet in:</p>
                   <CountdownTimer />
                   <p className="text-xs text-muted-foreground mt-2">Nur noch 7 Plätze zu diesem Preis verfügbar</p>
@@ -904,9 +904,9 @@ export default function Home() {
       </section>
 
       {/* Certification Section */}
-      <section className="py-16 lg:py-24 bg-card/30">
+      <section className="py-12 lg:py-16 bg-card/30">
         <div className="container">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             <motion.div
               className="order-2 lg:order-1 flex justify-center"
               initial={{ opacity: 0, scale: 0.9 }}
@@ -916,7 +916,7 @@ export default function Home() {
               <img
                 src="/images/certification-badge.png"
                 alt="IHK Zertifizierung"
-                className="w-64 lg:w-72"
+                className="w-80 lg:w-96"
               />
             </motion.div>
 
@@ -926,16 +926,16 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/30 mb-4">
                 <Award className="w-4 h-4 text-accent" />
                 <span className="text-sm font-medium text-accent">Offiziell anerkannt</span>
               </div>
 
-              <h2 className="font-display text-3xl lg:text-4xl font-bold mb-6">
+              <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
                 IHK-zertifizierte Qualifikation
               </h2>
 
-              <p className="text-lg text-muted-foreground mb-8">
+              <p className="text-lg text-muted-foreground mb-6">
                 Diese Ausbildung ist offiziell von der Industrie- und Handelskammer zertifiziert. Ein anerkanntes Qualitätssiegel, das bei Arbeitgebern und Kunden Vertrauen schafft.
               </p>
 
@@ -958,10 +958,10 @@ export default function Home() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-16 lg:py-24">
+      <section id="faq" className="py-12 lg:py-16">
         <div className="container">
           <motion.div
-            className="text-center mb-12"
+            className="text-center mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -980,7 +980,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <Accordion type="single" collapsible className="space-y-4">
+            <Accordion type="single" collapsible className="space-y-3">
               {[
                 {
                   q: "Brauche ich Programmierkenntnisse?",
@@ -1022,7 +1022,7 @@ export default function Home() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-16 lg:py-24 relative">
+      <section className="py-12 lg:py-16 relative">
         <div className="absolute inset-0 grid-bg opacity-20" />
         <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-primary/10 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-accent/10 rounded-full blur-[150px]" />
@@ -1034,11 +1034,11 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-display text-3xl lg:text-5xl font-bold mb-6">
+            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
               Werde jetzt zum{" "}
               <span className="gradient-text">AI-Consultant</span>
             </h2>
-            <p className="text-lg lg:text-xl text-muted-foreground mb-8">
+            <p className="text-lg text-muted-foreground mb-6">
               Die Nachfrage nach KI-Experten explodiert. Positioniere dich jetzt – bevor es alle anderen tun.
             </p>
 
@@ -1058,7 +1058,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-border">
+      <footer className="py-8 border-t border-border">
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-2">
