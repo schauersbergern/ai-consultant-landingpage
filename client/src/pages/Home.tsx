@@ -289,15 +289,21 @@ export default function Home() {
                 </p>
               </motion.div>
 
-              {/* Social Proof */}
+              {/* Social Proof with Real Photos */}
               <motion.div variants={fadeInUp} className="flex items-center gap-4 pt-2">
                 <div className="flex -space-x-3">
-                  {[1, 2, 3, 4, 5].map((i) => (
+                  {[
+                    "/images/rene-koch.jpg",
+                    "/images/katharina-jakob.jpg",
+                    "/images/nicole-schauerte.jpg",
+                    "/images/andrea-sprengart.jpg",
+                    "/images/claudia-augustin.jpg",
+                  ].map((img, i) => (
                     <div
                       key={i}
-                      className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 border-2 border-background flex items-center justify-center"
+                      className="w-10 h-10 rounded-full border-2 border-background overflow-hidden"
                     >
-                      <Users className="w-4 h-4 text-foreground/70" />
+                      <img src={img} alt="Absolvent" className="w-full h-full object-cover" />
                     </div>
                   ))}
                 </div>
@@ -334,6 +340,71 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
+
+          {/* Benefit Boxes */}
+          <motion.div
+            className="grid md:grid-cols-3 gap-4 mt-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            {[
+              {
+                icon: Clock,
+                title: "10+ Stunden/Woche sparen",
+                description: "Konzentriere dich auf strategische Arbeit, nicht auf Routinen",
+                color: "text-primary",
+              },
+              {
+                icon: TrendingUp,
+                title: "Neue Einnahmequelle",
+                description: "Verdiene 3-5x mehr durch KI-Services als Berater",
+                color: "text-accent",
+              },
+              {
+                icon: Shield,
+                title: "Professionelle Systeme",
+                description: "Baue Automationen, die zuverlässig funktionieren",
+                color: "text-primary",
+              },
+            ].map((benefit, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-4 p-4 rounded-xl bg-card/50 border border-border/50"
+              >
+                <div className={`p-2 rounded-lg bg-card ${benefit.color}`}>
+                  <benefit.icon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-display font-semibold text-sm mb-1">{benefit.title}</h3>
+                  <p className="text-xs text-muted-foreground">{benefit.description}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Mini Testimonials */}
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 mt-6 justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-card/30 border border-border/30">
+              <img src="/images/rene-koch.jpg" alt="René Koch" className="w-10 h-10 rounded-full object-cover" />
+              <div>
+                <p className="text-sm italic text-muted-foreground">"Der erste KI-Kurs mit echter Praxis."</p>
+                <p className="text-xs text-foreground font-medium">René, IT-Consultant</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-card/30 border border-border/30">
+              <img src="/images/andrea-sprengart.jpg" alt="Andrea Sprengart" className="w-10 h-10 rounded-full object-cover" />
+              <div>
+                <p className="text-sm italic text-muted-foreground">"Endlich verstehe ich Automationen – ohne Technik-Hintergrund."</p>
+                <p className="text-xs text-foreground font-medium">Andrea, Business Coach</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -361,8 +432,262 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Branchen Social Proof Section */}
+      <section className="py-12 lg:py-16">
+        <div className="container">
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
+              Gelernt und genutzt von Fachkräften aus{" "}
+              <span className="gradient-text">6 Branchen</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Der AI-Consultant wurde erfolgreich mit 50+ Teilnehmern aus sechs verschiedenen Branchen durchlaufen – von Informatikern über Consultants bis hin zu Coaches und Finanzexperten.
+            </p>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-8 mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="text-center">
+              <div className="font-display text-4xl lg:text-5xl font-bold text-primary">120+</div>
+              <div className="text-sm text-muted-foreground">Automationen umgesetzt</div>
+            </div>
+            <div className="text-center">
+              <div className="font-display text-4xl lg:text-5xl font-bold text-accent">6</div>
+              <div className="text-sm text-muted-foreground">Branchen vertreten</div>
+            </div>
+            <div className="text-center">
+              <div className="font-display text-4xl lg:text-5xl font-bold text-primary">50+</div>
+              <div className="text-sm text-muted-foreground">Absolventen</div>
+            </div>
+          </motion.div>
+
+          {/* Branchen Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              {
+                title: "IT & Consulting",
+                icon: Bot,
+                items: ["CRM-Integrationen", "Lead-Workflows", "API-Automationen"],
+                color: "border-primary/30 hover:border-primary/50",
+              },
+              {
+                title: "Bildung",
+                icon: FileText,
+                items: ["Automatisierte Unterrichtszusammenfassungen", "Zoom-Transkripte für 100+ Schüler"],
+                color: "border-accent/30 hover:border-accent/50",
+              },
+              {
+                title: "Finance",
+                icon: Shield,
+                items: ["DSGVO-konforme Dokumentenautomation", "Sichere Kundendaten-Workflows"],
+                color: "border-primary/30 hover:border-primary/50",
+              },
+              {
+                title: "Marketing & Content",
+                icon: Sparkles,
+                items: ["Planung + Produktion automatisiert", "Wöchentlich mehrere Stunden eingespart"],
+                color: "border-accent/30 hover:border-accent/50",
+              },
+              {
+                title: "Coaching",
+                icon: Users,
+                items: ["Business-Prozesse automatisiert", "400€ pro Monat Toolkosten eliminiert"],
+                color: "border-primary/30 hover:border-primary/50",
+              },
+              {
+                title: "HR & Vertrieb",
+                icon: Briefcase,
+                items: ["Lead-Automation", "Dokumentengenerierung"],
+                color: "border-accent/30 hover:border-accent/50",
+              },
+            ].map((branche, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <Card className={`glass-card h-full border ${branche.color} transition-all`}>
+                  <CardContent className="p-5">
+                    <div className="flex items-center gap-3 mb-3">
+                      <branche.icon className="w-5 h-5 text-primary" />
+                      <h3 className="font-display font-semibold">{branche.title}</h3>
+                    </div>
+                    <ul className="space-y-2">
+                      {branche.items.map((item, j) => (
+                        <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <Check className="w-4 h-4 text-green-400 shrink-0 mt-0.5" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Old Way vs New Way Section */}
+      <section className="py-12 lg:py-16 bg-card/30">
+        <div className="container">
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
+              Schluss mit dem Automations-Chaos
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* Old Way */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <Card className="glass-card border-red-500/30 h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+                      <span className="text-xl">❌</span>
+                    </div>
+                    <h3 className="font-display text-xl font-bold text-red-400">Der alte Weg</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">Die Falle des "No-Code-Klickers"</p>
+                  <ul className="space-y-3">
+                    {[
+                      "No-Code-Frankenstein-Prozesse",
+                      "Isoliertes Trial-and-Error",
+                      "Keine Struktur, kein System",
+                      "Stunden verschwendet mit YouTube-Tutorials",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-red-400/80">
+                        <span className="mt-0.5">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            {/* New Way */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <Card className="glass-card border-green-500/30 h-full">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                      <span className="text-xl">✅</span>
+                    </div>
+                    <h3 className="font-display text-xl font-bold text-green-400">Der neue Weg</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">Die Methode des KI-Automations-Profis</p>
+                  <ul className="space-y-3">
+                    {[
+                      "Robuste Systeme durch saubere Datenstrukturen",
+                      "Fehlerresistente Workflows",
+                      "Modulare, wartbare KI-Agenten",
+                      "Lernen in einer starken, betreuten Community",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-green-400/80">
+                        <Check className="w-4 h-4 shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3 Steps Section */}
+      <section className="py-12 lg:py-16">
+        <div className="container">
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="font-display text-3xl lg:text-4xl font-bold mb-4">
+              In 3 Schritten zum KI-Automations-Profi
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {[
+              {
+                step: "1",
+                title: "Strategisches Fundament legen",
+                description: "Du lernst die technischen und strategischen Grundlagen, um Automationspotenziale zu erkennen und die richtigen Tools auszuwählen.",
+                icon: Target,
+              },
+              {
+                step: "2",
+                title: "Praxisnahe Umsetzung",
+                description: "Du baust praxisrelevante Automationen, Chatbots und KI-Agenten mit Tools wie Flowise, VoiceFlow, Make, N8N und Manus.",
+                icon: Zap,
+              },
+              {
+                step: "3",
+                title: "Verkaufen und Skalieren",
+                description: "Du lernst, deine neuen Fähigkeiten in profitable Dienstleistungen zu verwandeln und dein Geschäft erfolgreich am Markt zu etablieren.",
+                icon: TrendingUp,
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.15 }}
+                className="relative"
+              >
+                <Card className="glass-card h-full border-border/50 hover:border-primary/30 transition-all">
+                  <CardContent className="p-6 text-center">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-4">
+                      <span className="font-display text-2xl font-bold text-primary-foreground">{item.step}</span>
+                    </div>
+                    <item.icon className="w-8 h-8 text-primary mx-auto mb-3" />
+                    <h3 className="font-display font-semibold text-lg mb-3">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
+                  </CardContent>
+                </Card>
+                {i < 2 && (
+                  <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
+                    <ArrowRight className="w-6 h-6 text-primary/50" />
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Problem-Solution Visual Section */}
-      <section className="py-10 lg:py-14">
+      <section className="py-10 lg:py-14 bg-card/30">
         <div className="container">
           <motion.div
             className="text-center mb-8"
@@ -662,18 +987,21 @@ export default function Home() {
                 name: "René Koch",
                 role: "Dipl.-Ing. & IT-Consultant",
                 videoId: "uGUrBdPuCBA",
+                photo: "/images/rene-koch.jpg",
                 quote: "Endlich ein Kurs mit echtem Praxisbezug statt nur Theorie. Durch die Live-Sessions und die Community habe ich fertige Automationen und Chatbot-Konzepte entwickelt, die ich direkt bei meinen Kunden einsetzen kann.",
               },
               {
                 name: "Katharina Jakob",
                 role: "Gründerin",
                 videoId: "Ar2GXCjUdLg",
+                photo: "/images/katharina-jakob.jpg",
                 quote: "Ich habe mehrere KI-Weiterbildungen durchlaufen, aber diese war mit Abstand die praxisnächste. Man erhält direkt umsetzbare Schritte und versteht endlich das Warum hinter einer guten, skalierbaren Automation.",
               },
               {
                 name: "Nicole Schauerte",
                 role: "Social Media Management",
                 videoId: "lbr3TQ7zqdo",
+                photo: "/images/nicole-schauerte.jpg",
                 quote: "Ich spare jede Woche mehrere Stunden durch eine Automation, die meine Content-Planung übernimmt. Diese Zeit nutze ich für kreative Entscheidungen – eine enorme Hilfe, die meinen Arbeitsalltag spürbar erleichtert.",
               },
             ].map((testimonial, index) => (
@@ -700,8 +1028,8 @@ export default function Home() {
                     </p>
                     <div className="flex items-center justify-between pt-3 border-t border-border/50">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold text-sm">
-                          {testimonial.name.split(' ').map(n => n.charAt(0)).join('')}
+                        <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/30">
+                          <img src={testimonial.photo} alt={testimonial.name} className="w-full h-full object-cover" />
                         </div>
                         <div>
                           <div className="font-display font-semibold text-sm">{testimonial.name}</div>
@@ -729,12 +1057,14 @@ export default function Home() {
                 name: "Carsten",
                 role: "Lehrer",
                 videoId: "sHiImBIc8Tk",
+                photo: "/images/carsten-mueller.jpg",
                 quote: "Mir fehlten die technischen Grundlagen. Im Kurs war mein Aha-Erlebnis, wie einfach man Tools über Schnittstellen verknüpfen kann. Jetzt automatisiere ich Unterrichtsmaterialien für meine Schüler – das war ein echter Augenöffner.",
               },
               {
                 name: "Claudia Augustin",
                 role: "Finanzcoach & Hypnose-Expertin",
                 videoId: "m-xKE0NjK8w",
+                photo: "/images/claudia-augustin.jpg",
                 quote: "Ich baue mein Coaching-Business von Beginn an automatisiert auf. Der Kurs hat mir die Sicherheit gegeben, das DSGVO-konform umzusetzen – ein entscheidender Faktor, wenn man mit sensiblen Kundendaten arbeitet.",
               },
             ].map((testimonial, index) => (
@@ -761,8 +1091,8 @@ export default function Home() {
                     </p>
                     <div className="flex items-center justify-between pt-3 border-t border-border/50">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold text-sm">
-                          {testimonial.name.split(' ').map(n => n.charAt(0)).join('')}
+                        <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/30">
+                          <img src={testimonial.photo} alt={testimonial.name} className="w-full h-full object-cover" />
                         </div>
                         <div>
                           <div className="font-display font-semibold text-sm">{testimonial.name}</div>
