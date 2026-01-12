@@ -906,9 +906,9 @@ export default function Home() {
       {/* Certification Section */}
       <section className="py-12 lg:py-16 bg-card/30">
         <div className="container">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
             <motion.div
-              className="order-2 lg:order-1 flex justify-center"
+              className="order-2 lg:order-1 flex justify-center lg:justify-start"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -916,7 +916,7 @@ export default function Home() {
               <img
                 src="/images/certification-badge.png"
                 alt="IHK Zertifizierung"
-                className="w-80 lg:w-96"
+                className="w-full max-w-md lg:max-w-none lg:w-full lg:h-auto lg:min-h-[420px] object-contain"
               />
             </motion.div>
 
