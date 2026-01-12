@@ -4,6 +4,13 @@
  * - Tiefes Anthrazit mit Electric Cyan und Amber Akzenten
  * - Glasmorphism-Karten, Glow-Effekte
  * - Plus Jakarta Sans für Headlines, Inter für Body
+ * 
+ * MAXIMUM-Variante implementiert:
+ * - Neue Bilder (hero, modules, roi, certification)
+ * - Problem-Illustration + Templates-Vorschau
+ * - ❌/✅ Symbole bei Problem-Karten
+ * - Emojis bei Modulen
+ * - ROI-Visual-Intro
  */
 
 import { Button } from "@/components/ui/button";
@@ -141,7 +148,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Problem Section */}
+      {/* Problem-Solution Visual Section */}
+      <section className="py-12 lg:py-16">
+        <div className="container">
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <img
+              src="/images/problem-solution.png"
+              alt="Ohne vs. Mit KI-Automatisierung"
+              className="w-full max-w-4xl mx-auto rounded-2xl shadow-[0_20px_60px_rgba(0,255,255,0.15)]"
+            />
+            <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
+              Der Unterschied ist dramatisch: Ohne KI-Automatisierung verlieren Unternehmen täglich Leads, verschwenden Ressourcen und arbeiten reaktiv. Mit intelligenten KI-Systemen läuft die Akquise 24/7 automatisch.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Problem Section - Mit ❌/✅ Symbolen */}
       <section className="py-20 lg:py-32 relative">
         <div className="container">
           <motion.div
@@ -165,25 +193,29 @@ export default function Home() {
               {
                 icon: Clock,
                 title: "Speed-to-Lead",
-                description: "50% aller Leads gehen verloren, weil nicht in 5 Minuten geantwortet wird.",
+                problem: "50% aller Leads gehen verloren, weil nicht in 5 Minuten geantwortet wird.",
+                solution: "KI-Chatbots antworten in Sekunden – 24/7, auch um 2 Uhr nachts.",
                 color: "text-primary",
               },
               {
                 icon: MessageSquare,
                 title: "Nach-Feierabend-Lücke",
-                description: "16 Stunden täglich 'geschlossen' für Neukunden. Verlorene Anfragen.",
+                problem: "16 Stunden täglich 'geschlossen' für Neukunden. Verlorene Anfragen.",
+                solution: "Automatische Qualifizierung und Terminbuchung rund um die Uhr.",
                 color: "text-accent",
               },
               {
                 icon: Target,
                 title: "Immer-gleiche-Fragen",
-                description: "Enormer Zeitverlust durch manuelle Beantwortung repetitiver Anfragen.",
+                problem: "Enormer Zeitverlust durch manuelle Beantwortung repetitiver Anfragen.",
+                solution: "RAG-Systeme beantworten 80% der Fragen sofort und korrekt.",
                 color: "text-primary",
               },
               {
                 icon: TrendingUp,
                 title: "Verpasste Anrufe",
-                description: "Jeder verpasste Anruf könnte ein lukrativer Auftrag gewesen sein.",
+                problem: "Jeder verpasste Anruf könnte ein lukrativer Auftrag gewesen sein.",
+                solution: "Voice-Bots nehmen jeden Anruf an und leiten qualifiziert weiter.",
                 color: "text-accent",
               },
             ].map((item, index) => (
@@ -197,8 +229,17 @@ export default function Home() {
                 <Card className="glass-card h-full border-border/50 hover:border-primary/50 transition-colors">
                   <CardContent className="p-6">
                     <item.icon className={`w-10 h-10 ${item.color} mb-4`} />
-                    <h3 className="font-display font-semibold text-lg mb-2">{item.title}</h3>
-                    <p className="text-muted-foreground text-sm">{item.description}</p>
+                    <h3 className="font-display font-semibold text-lg mb-4">{item.title}</h3>
+                    <div className="space-y-3">
+                      <p className="text-sm text-red-400 flex items-start gap-2">
+                        <span className="text-lg">❌</span>
+                        <span>{item.problem}</span>
+                      </p>
+                      <p className="text-sm text-green-400 flex items-start gap-2">
+                        <span className="text-lg">✅</span>
+                        <span>{item.solution}</span>
+                      </p>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -207,7 +248,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Modules Section */}
+      {/* Modules Section - Mit Emojis */}
       <section className="py-20 lg:py-32 relative bg-card/30">
         <div className="absolute inset-0 grid-bg opacity-20" />
         <div className="container relative">
@@ -240,14 +281,14 @@ export default function Home() {
 
             <div className="space-y-4">
               {[
-                { num: "01", title: "Strategisches Fundament", desc: "Automatisierbare Prozesse erkennen, Tool-Auswahl, technische Grundlagen" },
-                { num: "02", title: "Chatbots entwickeln", desc: "Kundensupport-Bots mit Voiceflow, Voice-Integration, Terminbuchung" },
-                { num: "03", title: "RAG-Systeme", desc: "Eigene Daten in KI integrieren, Flowise, datenschutzkonforme Lösungen" },
-                { num: "04", title: "Automatisierungen mit Make", desc: "Buchhaltung, Content-Produktion, WhatsApp-Automatisierung" },
-                { num: "05", title: "KI-Agenten", desc: "Agenten mit Make und Manus, Tool-Anbindung, autonome Workflows" },
-                { num: "06", title: "Akquise-Maschine", desc: "Content-Marketing, ManyChat, Outreach-Strategien für KMUs" },
-                { num: "07", title: "ROI & Business", desc: "4-Säulen-Framework, Präsentationstechniken, kontinuierliche Optimierung" },
-                { num: "08", title: "N8N & Compliance", desc: "Self-Hosting, DSGVO, AI-Act, datenschutzkonforme Implementierung" },
+                { num: "01", emoji: "🧠", title: "Strategisches Fundament", desc: "Automatisierbare Prozesse erkennen, Tool-Auswahl, technische Grundlagen" },
+                { num: "02", emoji: "💬", title: "Chatbots entwickeln", desc: "Kundensupport-Bots mit Voiceflow, Voice-Integration, Terminbuchung" },
+                { num: "03", emoji: "🗄️", title: "RAG-Systeme", desc: "Eigene Daten in KI integrieren, Flowise, datenschutzkonforme Lösungen" },
+                { num: "04", emoji: "⚙️", title: "Automatisierungen mit Make", desc: "Buchhaltung, Content-Produktion, WhatsApp-Automatisierung" },
+                { num: "05", emoji: "🤖", title: "KI-Agenten", desc: "Agenten mit Make und Manus, Tool-Anbindung, autonome Workflows" },
+                { num: "06", emoji: "🎯", title: "Akquise-Maschine", desc: "Content-Marketing, ManyChat, Outreach-Strategien für KMUs" },
+                { num: "07", emoji: "💰", title: "ROI & Business", desc: "4-Säulen-Framework, Präsentationstechniken, kontinuierliche Optimierung" },
+                { num: "08", emoji: "🔒", title: "N8N & Compliance", desc: "Self-Hosting, DSGVO, AI-Act, datenschutzkonforme Implementierung" },
               ].map((module, index) => (
                 <motion.div
                   key={index}
@@ -257,7 +298,8 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  <span className="font-display font-bold text-2xl text-primary/50">{module.num}</span>
+                  <span className="font-display font-bold text-2xl text-primary/50">{module.emoji}</span>
+                  <span className="font-display font-bold text-2xl text-primary/30">{module.num}</span>
                   <div>
                     <h3 className="font-display font-semibold">{module.title}</h3>
                     <p className="text-sm text-muted-foreground">{module.desc}</p>
@@ -269,7 +311,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Resources Section */}
+      {/* Resources Section - Mit Templates-Showcase */}
       <section className="py-20 lg:py-32">
         <div className="container">
           <motion.div
@@ -284,6 +326,20 @@ export default function Home() {
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Keine Demo-Setups, sondern real eingesetzte Vorlagen aus produktiven Projekten.
             </p>
+          </motion.div>
+
+          {/* Templates Showcase Image */}
+          <motion.div
+            className="mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <img
+              src="/images/templates-showcase.png"
+              alt="Fertige Templates und Blueprints"
+              className="w-full max-w-4xl mx-auto rounded-2xl border border-border"
+            />
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -513,9 +569,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ROI Section */}
+      {/* ROI Section - Mit Visual Intro */}
       <section className="py-20 lg:py-32 bg-card/30">
         <div className="container">
+          {/* ROI Visual Intro */}
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <img
+              src="/images/roi-chart.png"
+              alt="ROI-Wachstum durch KI-Automatisierung"
+              className="w-full max-w-3xl mx-auto rounded-2xl border border-border mb-6"
+            />
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Diese Zahlen sind keine Theorie – sie basieren auf realen Projekten unserer Absolventen in KMUs und Mittelständlern.
+            </p>
+          </motion.div>
+
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -557,19 +630,33 @@ export default function Home() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              className="space-y-6"
             >
-              <img
-                src="/images/roi-chart.png"
-                alt="ROI Visualisierung"
-                className="w-full rounded-2xl border border-border"
-              />
+              <Card className="glass-card border-border/50">
+                <CardContent className="p-6">
+                  <h3 className="font-display font-semibold text-lg mb-4">Das 4-Säulen-ROI-Framework</h3>
+                  <ul className="space-y-3">
+                    {[
+                      "Zeitersparnis quantifizieren",
+                      "Umsatzsteigerung berechnen",
+                      "Fehlerreduktion messen",
+                      "Skalierbarkeit demonstrieren",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-center gap-3 text-muted-foreground">
+                        <CheckCircle2 className="w-5 h-5 text-primary" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Certification Section */}
-      <section className="py-20 lg:py-32 bg-card/30 relative overflow-hidden">
+      <section className="py-20 lg:py-32 relative overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px]" />
         <div className="container relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
