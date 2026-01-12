@@ -638,11 +638,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Video Testimonials Section */}
       <section id="testimonials" className="py-12 lg:py-16">
         <div className="container">
           <motion.div
-            className="text-center mb-8"
+            className="text-center mb-10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -651,47 +651,24 @@ export default function Home() {
               Das sagen unsere Absolventen
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Echte Ergebnisse von echten Menschen – keine leeren Versprechungen.
+              Echte Video-Testimonials von echten Menschen – keine leeren Versprechungen.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Featured Video Testimonials */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {[
               {
-                name: "Thomas Müller",
-                role: "Geschäftsführer, Digital Solutions GmbH",
-                quote: "Nach der Ausbildung habe ich innerhalb von 3 Monaten mein erstes KI-Automatisierungsprojekt für einen Mittelständler umgesetzt. Der ROI-Rechner war Gold wert – der Kunde hat sofort unterschrieben.",
-                result: "45.000€ Projektumsatz",
+                name: "René",
+                videoId: "uGUrBdPuCBA",
               },
               {
-                name: "Sarah Weber",
-                role: "Freelance Marketing Consultant",
-                quote: "Die Kombination aus technischem Know-how und Business-Fokus ist einzigartig. Ich biete jetzt KI-Chatbots als Premium-Service an und habe meine Stundensätze verdoppelt.",
-                result: "Stundensatz von 80€ auf 160€",
+                name: "Katharina",
+                videoId: "Ar2GXCjUdLg",
               },
               {
-                name: "Michael Schneider",
-                role: "IT-Leiter, Handwerksbetrieb",
-                quote: "Wir haben unseren Kundensupport mit einem RAG-Chatbot automatisiert. Die DSGVO-Templates haben uns Wochen an Recherchearbeit erspart.",
-                result: "70% weniger Support-Anfragen",
-              },
-              {
-                name: "Julia Hoffmann",
-                role: "Gründerin, AI Agency",
-                quote: "Das IHK-Zertifikat öffnet Türen bei Unternehmenskunden. Die fertigen Blueprints haben mir geholfen, in 6 Monaten 8 Kunden zu gewinnen.",
-                result: "8 Kunden in 6 Monaten",
-              },
-              {
-                name: "Andreas Becker",
-                role: "Unternehmensberater",
-                quote: "Endlich ein Kurs, der zeigt, wie man KI-Services verkauft. Die ROI-Präsentationen sind so überzeugend, dass Kunden von selbst anfragen.",
-                result: "3 Folgeaufträge pro Kunde",
-              },
-              {
-                name: "Lisa Krause",
-                role: "Marketing Managerin",
-                quote: "Die Content-Automatisierung mit Make hat unsere Social-Media-Produktion revolutioniert. Was früher 20 Stunden dauerte, läuft jetzt automatisch.",
-                result: "20 Stunden/Woche gespart",
+                name: "Nicole",
+                videoId: "lbr3TQ7zqdo",
               },
             ].map((testimonial, index) => (
               <motion.div
@@ -701,28 +678,87 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="glass-card h-full border-border/50 hover:border-primary/30 transition-colors">
-                  <CardContent className="p-5 flex flex-col h-full">
-                    <div className="flex-1">
-                      <div className="flex gap-1 mb-3">
+                <Card className="glass-card overflow-hidden border-border/50 hover:border-primary/30 transition-all group">
+                  <div className="aspect-video relative">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${testimonial.videoId}?rel=0`}
+                      title={`Testimonial ${testimonial.name}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                  </div>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold">
+                          {testimonial.name.charAt(0)}
+                        </div>
+                        <div>
+                          <div className="font-display font-semibold">{testimonial.name}</div>
+                          <div className="text-xs text-muted-foreground">AI Practitioner Absolvent</div>
+                        </div>
+                      </div>
+                      <div className="flex gap-0.5">
                         {[1, 2, 3, 4, 5].map((star) => (
                           <svg key={star} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                           </svg>
                         ))}
                       </div>
-                      <p className="text-muted-foreground text-sm mb-3 leading-relaxed">"{testimonial.quote}"</p>
                     </div>
-                    <div className="pt-3 border-t border-border/50">
-                      <div className="flex items-center justify-between">
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Second Row of Video Testimonials */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {[
+              {
+                name: "Carsten",
+                videoId: "sHiImBIc8Tk",
+              },
+              {
+                name: "Claudia",
+                videoId: "m-xKE0NjK8w",
+              },
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: (index + 3) * 0.1 }}
+              >
+                <Card className="glass-card overflow-hidden border-border/50 hover:border-primary/30 transition-all group">
+                  <div className="aspect-video relative">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${testimonial.videoId}?rel=0`}
+                      title={`Testimonial ${testimonial.name}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                  </div>
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-primary-foreground font-bold">
+                          {testimonial.name.charAt(0)}
+                        </div>
                         <div>
-                          <div className="font-display font-semibold text-sm">{testimonial.name}</div>
-                          <div className="text-xs text-muted-foreground">{testimonial.role}</div>
+                          <div className="font-display font-semibold">{testimonial.name}</div>
+                          <div className="text-xs text-muted-foreground">AI Practitioner Absolvent</div>
                         </div>
-                        <div className="text-right">
-                          <div className="text-xs text-muted-foreground">Ergebnis</div>
-                          <div className="text-sm font-semibold text-accent">{testimonial.result}</div>
-                        </div>
+                      </div>
+                      <div className="flex gap-0.5">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <svg key={star} className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
                       </div>
                     </div>
                   </CardContent>
