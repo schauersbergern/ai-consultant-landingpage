@@ -1,17 +1,17 @@
 /**
- * AI Practitioner Landingpage - APPLE DESIGN STYLE
+ * AI Practitioner Landingpage - APPLE GLASMORPHISM DESIGN
  * 
  * Design-Philosophie:
- * - Minimalistisches, helles Design mit viel Whitespace
- * - Klare, große Typografie (San Francisco Font-Familie)
- * - Subtile Animationen und Übergänge
- * - Fokus auf Bilder und Inhalte, nicht auf UI-Elemente
- * - Einfache, elegante Buttons
- * - Großzügige Abstände zwischen Sektionen
+ * - Glasmorphismus mit frosted glass Effekten
+ * - Shiny, luxuriöse Optiken
+ * - Durchsichtige, elegante Elemente
+ * - Premium Animationen und Übergänge
+ * - Minimalistische, aber opulente Ästhetik
  */
 
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import "@/glass.css";
 import {
   ArrowRight,
   Award,
@@ -22,8 +22,13 @@ import {
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 z-50">
+      {/* Navigation - Glasmorphism */}
+      <nav className="fixed top-0 w-full z-50 border-b border-white/20" style={{
+        background: 'rgba(255, 255, 255, 0.7)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
+      }}>
         <div className="container flex items-center justify-between py-4">
           <div className="flex items-center gap-2">
             <img src="/logo.png" alt="AI Practitioner" className="w-8 h-8" />
@@ -40,21 +45,24 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-32 pb-20 px-4 section-premium">
         <div className="container max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 mb-8">
+            <motion.div
+              className="badge-glass mb-8 justify-center"
+              whileHover={{ scale: 1.05 }}
+            >
               <Award className="w-4 h-4 text-blue-600" />
               <span className="text-sm font-medium text-gray-700">IHK-zertifiziert</span>
-            </div>
+            </motion.div>
 
             <h1 className="text-5xl md:text-6xl font-semibold mb-6 leading-tight">
               Werde der KI-Experte,<br />
-              <span className="text-blue-600">den jedes Unternehmen sucht</span>
+              <span className="shiny-text">den jedes Unternehmen sucht</span>
             </h1>
 
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
@@ -62,39 +70,49 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Button className="btn-apple px-8 py-4 text-lg">
-                Ausbildung starten
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-              <Button className="btn-apple-secondary px-8 py-4 text-lg">
-                <Play className="w-5 h-5 mr-2" />
-                Video ansehen
-              </Button>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button className="btn-apple px-8 py-4 text-lg">
+                  Ausbildung starten
+                  <ArrowRight className="w-5 h-5 ml-2" />
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button className="btn-apple-secondary px-8 py-4 text-lg">
+                  <Play className="w-5 h-5 mr-2" />
+                  Video ansehen
+                </Button>
+              </motion.div>
             </div>
 
             <p className="text-sm text-gray-500">50+ erfolgreiche Absolventen • 14-Tage Geld-zurück-Garantie</p>
           </motion.div>
         </div>
 
-        {/* Hero Image */}
+        {/* Hero Image with Float Animation */}
         <motion.div
-          className="container mt-16"
+          className="container mt-16 float"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <img
-            src="/images/hero-abstract.png"
+            src="/images/hero-glass.png"
             alt="AI Practitioner Ausbildung"
-            className="w-full rounded-2xl shadow-lg"
+            className="hero-image w-full"
           />
         </motion.div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-20 px-4 bg-gray-50">
+      {/* Benefits Section - Glass Cards */}
+      <section className="py-20 px-4 bg-gradient-to-b from-white to-gray-50">
         <div className="container">
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 icon: "⏱️",
@@ -118,9 +136,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center"
+                className="card-glass text-center"
               >
-                <div className="text-4xl mb-4">{benefit.icon}</div>
+                <div className="text-5xl mb-4">{benefit.icon}</div>
                 <h3 className="text-xl font-semibold mb-3">{benefit.title}</h3>
                 <p className="text-gray-600">{benefit.description}</p>
               </motion.div>
@@ -146,7 +164,20 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="rounded-3xl overflow-hidden"
+          >
+            <img
+              src="/images/modules-glass.png"
+              alt="8 Module der Ausbildung"
+              className="w-full shadow-2xl"
+            />
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6 mt-12">
             {[
               { num: "01", title: "KI-Grundlagen", desc: "ChatGPT, Prompting, AI-Systeme verstehen" },
               { num: "02", title: "Chatbots bauen", desc: "Intelligente Bots mit Voiceflow & ManyChat" },
@@ -163,10 +194,10 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="flex gap-6 p-6 rounded-xl hover:bg-gray-50 transition"
+                className="card-glass flex gap-6"
               >
-                <div className="text-3xl font-semibold text-gray-300">{module.num}</div>
-                <div>
+                <div className="text-3xl font-semibold text-blue-600">{module.num}</div>
+                <div className="text-left">
                   <h3 className="text-lg font-semibold mb-2">{module.title}</h3>
                   <p className="text-gray-600">{module.desc}</p>
                 </div>
@@ -177,7 +208,7 @@ export default function Home() {
       </section>
 
       {/* Success Stories */}
-      <section id="success" className="py-20 px-4 bg-gray-50">
+      <section id="success" className="py-20 px-4 section-premium">
         <div className="container">
           <motion.div
             className="text-center mb-16"
@@ -214,9 +245,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="rounded-xl overflow-hidden"
+                className="card-glass"
               >
-                <div className="aspect-video bg-gray-200 mb-4">
+                <div className="aspect-video bg-gradient-to-br from-blue-100 to-blue-50 mb-6 rounded-xl overflow-hidden">
                   <iframe
                     width="100%"
                     height="100%"
@@ -229,7 +260,7 @@ export default function Home() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">{story.name}</h3>
-                  <p className="text-gray-600 text-sm mb-3">{story.role}</p>
+                  <p className="text-blue-600 text-sm mb-3 font-medium">{story.role}</p>
                   <p className="text-gray-700 italic">"{story.quote}"</p>
                 </div>
               </motion.div>
@@ -238,8 +269,26 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Stats Section */}
+      <section className="py-20 px-4 bg-white">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="rounded-3xl overflow-hidden shadow-2xl"
+          >
+            <img
+              src="/images/success-glass.png"
+              alt="Erfolgsstatistiken"
+              className="w-full"
+            />
+          </motion.div>
+        </div>
+      </section>
+
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 px-4">
+      <section id="pricing" className="py-20 px-4 section-premium">
         <div className="container max-w-2xl">
           <motion.div
             className="text-center mb-16"
@@ -259,36 +308,62 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-gray-50 rounded-2xl p-8 text-center"
+            className="card-glass text-center glow"
           >
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="rounded-2xl overflow-hidden mb-8 shadow-xl"
+            >
+              <img
+                src="/images/pricing-glass.png"
+                alt="Premium Pricing"
+                className="w-full"
+              />
+            </motion.div>
+
             <div className="mb-6">
               <p className="text-gray-600 text-sm mb-2">Regulärer Preis</p>
-              <p className="text-4xl font-semibold line-through text-gray-400">6.500€</p>
+              <p className="text-3xl font-semibold line-through text-gray-400">6.500€</p>
             </div>
 
             <div className="mb-8">
-              <div className="inline-block bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4">
+              <motion.div
+                className="inline-block bg-gradient-to-r from-blue-600 to-blue-500 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 shadow-lg"
+                whileHover={{ scale: 1.05 }}
+              >
                 Frühjahrsrabatt: 23%
-              </div>
+              </motion.div>
               <p className="text-5xl font-semibold text-blue-600 mb-2">4.997€</p>
               <p className="text-gray-600">oder 6x 899€/Monat</p>
             </div>
 
-            <Button className="btn-apple px-8 py-4 text-lg w-full mb-6">
-              Jetzt buchen
-            </Button>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button className="btn-apple px-8 py-4 text-lg w-full mb-6">
+                Jetzt buchen
+              </Button>
+            </motion.div>
 
-            <p className="text-sm text-gray-600 mb-6">
-              ✓ 14-Tage Geld-zurück-Garantie<br />
-              ✓ Lebenslanger Zugang<br />
-              ✓ Alle Updates inklusive
+            <div className="divider-premium my-6"></div>
+
+            <p className="text-sm text-gray-600">
+              <CheckCircle2 className="w-4 h-4 inline mr-2 text-green-600" />
+              14-Tage Geld-zurück-Garantie<br />
+              <CheckCircle2 className="w-4 h-4 inline mr-2 text-green-600" />
+              Lebenslanger Zugang<br />
+              <CheckCircle2 className="w-4 h-4 inline mr-2 text-green-600" />
+              Alle Updates inklusive
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 px-4 bg-gray-50">
+      <section id="faq" className="py-20 px-4 bg-white">
         <div className="container max-w-2xl">
           <motion.div
             className="text-center mb-16"
@@ -326,7 +401,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-white rounded-xl p-6 border border-gray-200"
+                className="card-glass"
               >
                 <h3 className="font-semibold mb-3">{faq.q}</h3>
                 <p className="text-gray-600">{faq.a}</p>
@@ -337,7 +412,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 section-premium">
         <div className="container max-w-3xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -350,16 +425,26 @@ export default function Home() {
             <p className="text-xl text-gray-600 mb-8">
               Schließe dich 50+ erfolgreichen Absolventen an und werde der KI-Experte, den jedes Unternehmen sucht.
             </p>
-            <Button className="btn-apple px-8 py-4 text-lg">
-              Ausbildung sichern
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button className="btn-apple px-8 py-4 text-lg">
+                Ausbildung sichern
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 py-8 px-4">
+      <footer className="border-t border-white/20 py-8 px-4" style={{
+        background: 'rgba(255, 255, 255, 0.7)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
+      }}>
         <div className="container flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
             <img src="/logo.png" alt="AI Practitioner" className="w-6 h-6" />

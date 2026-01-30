@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "./glass.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -187,24 +188,5 @@
     }
   }
   
-  /* Apple-style button */
-  .btn-apple {
-    @apply px-8 py-3 rounded-full font-medium transition-all duration-200;
-    background-color: var(--primary);
-    color: var(--primary-foreground);
-  }
-  
-  .btn-apple:hover {
-    @apply opacity-80;
-  }
-  
-  .btn-apple-secondary {
-    @apply px-8 py-3 rounded-full font-medium transition-all duration-200 border border-border;
-    background-color: transparent;
-    color: var(--foreground);
-  }
-  
-  .btn-apple-secondary:hover {
-    @apply bg-secondary;
-  }
+
 }

@@ -1,0 +1,174 @@
+/* Glasmorphism Effects */
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+.glass-dark {
+  background: rgba(29, 29, 31, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Premium Shiny Button */
+.btn-apple {
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.3s;
+  background: linear-gradient(135deg, #0071e3 0%, #0056b3 100%);
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 113, 227, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-apple::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-apple:hover::before {
+  left: 100%;
+}
+
+.btn-apple:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 113, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-apple:active {
+  transform: scale(0.95);
+}
+
+/* Glass Button */
+.btn-apple-secondary {
+  padding: 0.75rem 2rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.3s;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #1d1d1f;
+  cursor: pointer;
+}
+
+.btn-apple-secondary:hover {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15);
+}
+
+/* Premium Card with Glass Effect */
+.card-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card-glass:hover {
+  box-shadow: 0 20px 50px rgba(31, 38, 135, 0.2);
+  transform: translateY(-4px);
+}
+
+/* Badge Glass */
+.badge-glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Hero Image with Premium Styling */
+.hero-image {
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 1px rgba(0, 113, 227, 0.3);
+}
+
+/* Shiny Text Effect */
+.shiny-text {
+  background: linear-gradient(90deg, #1d1d1f 0%, #0071e3 50%, #1d1d1f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Premium Section Background */
+.section-premium {
+  background: linear-gradient(135deg, #ffffff 0%, #f5f5f7 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-premium::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 113, 227, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glow Effect */
+.glow {
+  box-shadow: 0 0 20px rgba(0, 113, 227, 0.3), 0 0 40px rgba(0, 113, 227, 0.1);
+}
+
+/* Premium Divider */
+.divider-premium {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 113, 227, 0.2), transparent);
+}
