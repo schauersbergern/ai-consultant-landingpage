@@ -19,18 +19,80 @@ import {
   Play,
 } from "lucide-react";
 import { useAuth } from "@/_core/hooks/useAuth";
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 export default function Home() {
   // The userAuth hooks provides authentication state
   // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
   let { user, loading, error, isAuthenticated, logout } = useAuth();
 
+  const [showCheckout, setShowCheckout] = useState(false);
+
   useEffect(() => {
     document.title = "KI-Ausbildung mit IHK-Zertifikat | AI Practitioner";
   }, []);
 
+  // Load ThriveCart script when checkout modal opens
+  useEffect(() => {
+    if (showCheckout) {
+      // Check if script already loaded
+      const existingScript = document.getElementById("tc-ki-club-41-3RQOBP");
+      if (!existingScript) {
+        const script = document.createElement("script");
+        script.src = "//tinder.thrivecart.com/embed/v2/thrivecart.js";
+        script.id = "tc-ki-club-41-3RQOBP";
+        script.async = true;
+        document.body.appendChild(script);
+      } else {
+        // Re-trigger ThriveCart rendering
+        if ((window as any).ThriveCart) {
+          (window as any).ThriveCart.renderEmbeds();
+        }
+      }
+      // Prevent background scrolling
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showCheckout]);
+
+  const openCheckout = useCallback(() => {
+    setShowCheckout(true);
+    // Track Facebook Pixel event
+    if ((window as any).fbq) {
+      (window as any).fbq("track", "InitiateCheckout");
+    }
+  }, []);
+
   return (
+    <>
+    {/* ThriveCart Checkout Modal */}
+    {showCheckout && (
+      <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowCheckout(false)}>
+        <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl mx-4" onClick={(e) => e.stopPropagation()}>
+          <button
+            onClick={() => setShowCheckout(false)}
+            className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition text-gray-600 hover:text-gray-900"
+            aria-label="Schließen"
+          >
+            ✕
+          </button>
+          <div className="p-6 pt-12">
+            <div
+              className="tc-v2-embeddable-target"
+              data-thrivecart-account="ki-club"
+              data-thrivecart-tpl="v2"
+              data-thrivecart-product="41"
+              data-thrivecart-embeddable="tc-ki-club-41-3RQOBP"
+            ></div>
+          </div>
+        </div>
+      </div>
+    )}
+
     <div className="min-h-screen bg-white text-gray-900">
       {/* Navigation - Glasmorphism */}
       <nav className="fixed top-0 w-full z-50 border-b border-white/20" style={{
@@ -51,7 +113,7 @@ export default function Home() {
             <a href="#faq" className="text-gray-600 hover:text-gray-900 transition">FAQ</a>
             <a href="/blog" className="text-gray-600 hover:text-gray-900 transition">Blog</a>
           </div>
-          <Button className="btn-apple">Jetzt sichern</Button>
+          <Button className="btn-apple" onClick={openCheckout}>Jetzt sichern</Button>
         </div>
       </nav>
 
@@ -85,7 +147,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button className="btn-apple px-8 py-4 text-lg">
+                <Button className="btn-apple px-8 py-4 text-lg" onClick={openCheckout}>
                   Ausbildung starten
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
@@ -343,7 +405,7 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button className="btn-apple px-8 py-4 text-lg w-full mb-6">
+              <Button className="btn-apple px-8 py-4 text-lg w-full mb-6" onClick={openCheckout}>
                 Jetzt buchen
               </Button>
             </motion.div>
@@ -429,7 +491,7 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button className="btn-apple px-8 py-4 text-lg">
+              <Button className="btn-apple px-8 py-4 text-lg" onClick={openCheckout}>
                 Ausbildung sichern
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
@@ -463,5 +525,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
+    </>
   );
 }

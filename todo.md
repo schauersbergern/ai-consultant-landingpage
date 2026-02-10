@@ -102,3 +102,5 @@
 - [x] Datenschutz-Seite erstellen
 - [x] JSON-LD Structured Data für Blog-Artikel implementieren
 - [x] SEO-Titel der Startseite auf 30-60 Zeichen optimieren (50 Zeichen)
+- [x] Facebook Pixel (ID: 1138180751401674) in die Webseite einbauen
+- [x] ThriveCart-Checkout Pop-Up hinter alle CTA-Buttons legen (nicht Video ansehen)
