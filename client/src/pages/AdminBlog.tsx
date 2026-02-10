@@ -2,7 +2,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, Plus, Edit2, Trash2, Eye, EyeOff, Clock } from "lucide-react";
+import { Loader2, Plus, Edit2, Trash2, Eye, EyeOff, Clock, Upload, ExternalLink } from "lucide-react";
 import { useLocation } from "wouter";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
@@ -57,13 +57,29 @@ export default function AdminBlog() {
               <h1 className="text-3xl font-semibold">Blog-Verwaltung</h1>
               <p className="text-gray-600 mt-1">Verwalte deine Blog-Artikel</p>
             </div>
-            <Button
-              onClick={() => navigate("/admin/blog/new")}
-              className="btn-apple"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Neuer Artikel
-            </Button>
+            <div className="flex gap-3">
+              <Button
+                variant="outline"
+                onClick={() => navigate("/blog")}
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Blog ansehen
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => navigate("/admin/blog/import")}
+              >
+                <Upload className="w-4 h-4 mr-2" />
+                Importieren
+              </Button>
+              <Button
+                onClick={() => navigate("/admin/blog/new")}
+                className="btn-apple"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Neuer Artikel
+              </Button>
+            </div>
           </div>
         </div>
       </div>

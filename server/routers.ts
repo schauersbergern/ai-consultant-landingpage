@@ -144,6 +144,43 @@ export const appRouter = router({
         }
         return deleteBlogArticle(input);
       }),
+
+    // Admin: Bulk import articles
+    bulkImport: protectedProcedure
+      .input(z.array(z.object({
+        title: z.string().min(1),
+        slug: z.string().min(1),
+        content: z.string().min(1),
+        excerpt: z.string().optional(),
+        featuredImage: z.string().optional(),
+        status: z.enum(['draft', 'published', 'scheduled']).default('draft'),
+        category: z.string().optional(),
+        tags: z.string().optional(),
+        seoTitle: z.string().optional(),
+        seoDescription: z.string().optional(),
+      })))
+      .mutation(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'admin') {
+          throw new TRPCError({
+            code: 'FORBIDDEN',
+            message: 'Only admins can import articles',
+          });
+        }
+        const results = [];
+        for (const article of input) {
+          try {
+            await createBlogArticle({
+              ...article,
+              authorId: ctx.user.id,
+              publishedAt: article.status === 'published' ? new Date() : undefined,
+            });
+            results.push({ slug: article.slug, success: true });
+          } catch (error: any) {
+            results.push({ slug: article.slug, success: false, error: error.message || 'Unknown error' });
+          }
+        }
+        return results;
+      }),
   }),
 });
 

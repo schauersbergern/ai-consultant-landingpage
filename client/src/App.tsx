@@ -9,9 +9,9 @@ import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
 import AdminBlog from "./pages/AdminBlog";
 import AdminBlogEditor from "./pages/AdminBlogEditor";
+import AdminBlogImport from "./pages/AdminBlogImport";
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path={"/"} component={Home} />
@@ -19,6 +19,7 @@ function Router() {
       <Route path={"/blog/:slug"} component={({ slug }: any) => <BlogArticle slug={slug} />} />
       <Route path={"/admin/blog"} component={AdminBlog} />
       <Route path={"/admin/blog/new"} component={() => <AdminBlogEditor />} />
+      <Route path={"/admin/blog/import"} component={AdminBlogImport} />
       <Route path={"/admin/blog/:id/edit"} component={({ id }: any) => <AdminBlogEditor id={id} />} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
@@ -26,17 +27,11 @@ function Router() {
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
 function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider
         defaultTheme="light"
-        // switchable
       >
         <TooltipProvider>
           <Toaster />

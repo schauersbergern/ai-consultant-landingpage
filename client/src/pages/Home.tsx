@@ -44,6 +44,7 @@ export default function Home() {
             <a href="#success" className="text-gray-600 hover:text-gray-900 transition">Erfolge</a>
             <a href="#pricing" className="text-gray-600 hover:text-gray-900 transition">Investition</a>
             <a href="#faq" className="text-gray-600 hover:text-gray-900 transition">FAQ</a>
+            <a href="/blog" className="text-gray-600 hover:text-gray-900 transition">Blog</a>
           </div>
           <Button className="btn-apple">Jetzt sichern</Button>
         </div>
@@ -439,13 +440,18 @@ export default function Home() {
         WebkitBackdropFilter: 'blur(10px)',
         boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
       }}>
-        <div className="container flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center gap-2 mb-4 md:mb-0">
+        <div className="container flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-2">
             <img src="/logo.png" alt="AI Practitioner" className="w-6 h-6" />
             <span className="font-semibold">AI Practitioner</span>
           </div>
+          <div className="flex items-center gap-6">
+            <a href="/blog" className="text-gray-600 hover:text-gray-900 transition text-sm">Blog</a>
+            <a href="#modules" className="text-gray-600 hover:text-gray-900 transition text-sm">Module</a>
+            <a href="#faq" className="text-gray-600 hover:text-gray-900 transition text-sm">FAQ</a>
+          </div>
           <p className="text-gray-600 text-sm">
-            © 2024 AI Practitioner. Alle Rechte vorbehalten.
+            © 2025 AI Practitioner. Alle Rechte vorbehalten.
           </p>
         </div>
       </footer>

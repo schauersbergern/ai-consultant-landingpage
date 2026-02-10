@@ -1,13 +1,16 @@
 import { trpc } from "@/lib/trpc";
+import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, ArrowRight, Calendar, User } from "lucide-react";
+import { Loader2, ArrowRight, Calendar, User, Settings } from "lucide-react";
 import { useLocation } from "wouter";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 
 export default function Blog() {
   const [, navigate] = useLocation();
+  const { user } = useAuth();
+  const isAdmin = user?.role === "admin";
   const { data: articles, isLoading, error } = trpc.blog.listPublished.useQuery({
     limit: 12,
   });
@@ -36,6 +39,35 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full z-50 border-b border-white/20" style={{
+        background: 'rgba(255, 255, 255, 0.7)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
+      }}>
+        <div className="container flex items-center justify-between py-4">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/XjvoXOCMszZFXAGc.png" alt="AI Practitioner" className="w-8 h-8" />
+            <span className="font-semibold text-lg">AI Practitioner</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <a href="/" className="text-gray-600 hover:text-gray-900 transition hidden md:inline">Startseite</a>
+            <a href="/blog" className="text-gray-900 font-medium transition">Blog</a>
+            {isAdmin && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => navigate("/admin/blog")}
+              >
+                <Settings className="w-4 h-4 mr-2" />
+                Admin
+              </Button>
+            )}
+          </div>
+        </div>
+      </nav>
+
       {/* Header */}
       <div className="pt-32 pb-16 px-4 section-premium">
         <div className="container max-w-4xl mx-auto text-center">

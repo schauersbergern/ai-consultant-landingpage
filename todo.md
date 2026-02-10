@@ -85,3 +85,10 @@
 - Admin-Authentifizierung ist über das bestehende Manus OAuth-System integriert
 - Alle Tests bestehen erfolgreich
 - Das Design folgt dem Apple-Glasmorphismus-Stil der Landingpage
+
+## Neue Anforderungen
+
+- [x] Blog-Link in Hauptnavigation integrieren
+- [x] Blog-Link im Footer hinzufügen
+- [x] Bulk-Import-Funktion für Blog-Artikel (JSON/CSV Upload)
+- [x] Admin-Navigation verbessern (Admin-Link für eingeloggte Admins)
