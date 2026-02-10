@@ -36,6 +36,13 @@ async function startServer() {
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
 
+  // robots.txt
+  app.get("/robots.txt", (req, res) => {
+    const baseUrl = "https://aipractitioner.manus.space";
+    res.set("Content-Type", "text/plain");
+    res.send(`User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nSitemap: ${baseUrl}/sitemap.xml`);
+  });
+
   // Dynamic Sitemap.xml
   app.get("/sitemap.xml", async (req, res) => {
     try {

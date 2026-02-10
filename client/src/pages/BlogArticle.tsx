@@ -99,7 +99,7 @@ export default function BlogArticle() {
       document.head.appendChild(script);
     }
     return () => {
-      document.title = "KI Ausbildung mit IHK-Zertifikat | AI Practitioner in 12 Wochen";
+      document.title = "KI-Automatisierungsexperte (IHK) | Weiterbildung mit Zertifikat 2026";
       const jsonLdScript = document.querySelector('script[type="application/ld+json"][data-blog-article]');
       if (jsonLdScript) jsonLdScript.remove();
     };

@@ -28,7 +28,7 @@ export default function Blog() {
     };
   }, []);
   const { data: articles, isLoading, error } = trpc.blog.listPublished.useQuery({
-    limit: 12,
+    limit: 20,
   });
 
   if (isLoading) {

@@ -30,7 +30,7 @@ export default function Home() {
   const [showCheckout, setShowCheckout] = useState(false);
 
   useEffect(() => {
-    document.title = "KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner";
+    document.title = "KI-Automatisierungsexperte (IHK) | Weiterbildung mit Zertifikat 2026";
 
     // Schema.org Course Schema
     const courseSchema = {
@@ -57,7 +57,7 @@ export default function Home() {
       },
       "offers": {
         "@type": "Offer",
-        "price": "6500",
+        "price": "4797",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock",
         "url": "https://aipractitioner.manus.space"
@@ -84,7 +84,7 @@ export default function Home() {
         { "@type": "Question", "name": "Für wen ist die KI-Weiterbildung geeignet?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung richtet sich an Berater, Freelancer, Unternehmer und Angestellte, die KI-Automatisierung als neue Kompetenz oder Einnahmequelle aufbauen möchten. Vorkenntnisse sind nicht erforderlich." } },
         { "@type": "Question", "name": "Gibt es eine Geld-zurück-Garantie?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du hast eine 14-Tage Geld-zurück-Garantie. Wenn die Ausbildung nicht deinen Erwartungen entspricht, erhältst du den vollen Betrag zurück – ohne Wenn und Aber." } },
         { "@type": "Question", "name": "Kann ich die KI-Ausbildung neben dem Beruf absolvieren?", "acceptedAnswer": { "@type": "Answer", "text": "Absolut. Die Weiterbildung ist berufsbegleitend konzipiert. Mit ca. 10 Stunden pro Woche und lebenslangem Zugang kannst du flexibel lernen und die Module in deinem eigenen Tempo durcharbeiten." } },
-        { "@type": "Question", "name": "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung zum KI-Automatisierungsexperten kostet 6.500€ als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates." } },
+        { "@type": "Question", "name": "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung zum KI-Automatisierungsexperten kostet 4.797€ zzgl. MwSt. als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates." } },
         { "@type": "Question", "name": "Welche Tools lerne ich in der Ausbildung?", "acceptedAnswer": { "@type": "Answer", "text": "Du arbeitest mit den führenden KI-Automatisierungstools: ChatGPT, Make, n8n, Zapier, Voiceflow, ManyChat und Flowise. Damit deckst du das gesamte Spektrum von Chatbots über Prozessautomatisierung bis hin zu RAG-Systemen ab." } },
         { "@type": "Question", "name": "Erhalte ich nach Abschluss Unterstützung?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du erhältst lebenslangen Zugang zu allen Kursinhalten und Updates. Zusätzlich profitierst du von der Community der Absolventen für Austausch und Networking." } }
       ]
@@ -276,6 +276,38 @@ export default function Home() {
             className="hero-image w-full"
           />
         </motion.div>
+      </section>
+
+      {/* Intro Content Section - SEO Keywords */}
+      <section className="py-16 px-4 bg-white">
+        <div className="container max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-center">
+              Warum KI-Automatisierung die gefragteste Kompetenz 2026 ist
+            </h2>
+            <div className="prose prose-lg max-w-none text-gray-700 space-y-6">
+              <p>
+                Der Bedarf an <strong>KI-Experten</strong> wächst rasant: Über 50.000 Stellen im DACH-Raum bleiben unbesetzt, weil qualifizierte Fachkräfte fehlen, die <strong>KI-Automatisierung lernen</strong> und praktisch umsetzen können. Unternehmen jeder Größe – vom Startup bis zum Mittelstand – suchen nach Profis, die Geschäftsprozesse mit künstlicher Intelligenz effizienter gestalten.
+              </p>
+              <p>
+                Die <strong>KI-Weiterbildung</strong> zum KI-Automatisierungsexperten (IHK) schließt genau diese Lücke. In 13 Wochen und 61 Unterrichtseinheiten lernst du, wie du mit professionellen No-Code-Tools wie <strong>Make</strong>, <strong>n8n</strong>, Voiceflow und Flowise echte Automatisierungslösungen baust. Du brauchst keine Programmierkenntnisse – der <strong>KI-Kurs</strong> ist für Quereinsteiger, Berater, Freelancer und Unternehmer konzipiert.
+              </p>
+              <p>
+                Was diese Ausbildung einzigartig macht: Es ist der einzige <strong>KI-Kurs</strong> in Deutschland mit einem offiziellen <strong>KI-Zertifikat der IHK</strong>. Das bedeutet bundesweite Anerkennung und nachweisbare Kompetenz. Als <strong>KI-Manager (IHK)</strong> positionierst du dich als vertrauenswürdiger Experte für <strong>KI für KMU</strong> und Unternehmen.
+              </p>
+              <p>
+                Die Ausbildung deckt das gesamte Spektrum ab: Du lernst, wie du einen <strong>Chatbot erstellst</strong>, <strong>RAG-Systeme</strong> mit eigenen Unternehmensdaten aufbaust, <strong>Prozesse automatisierst</strong> mit <strong>Make-Automatisierung</strong> und n8n-Workflows, und KI-Agenten entwickelst. Absolventen der Pilotkohorte haben über 120 Automatisierungsprojekte umgesetzt und sparen durchschnittlich 10+ Stunden pro Woche.
+              </p>
+              <p>
+                Ob du <strong>KI-Experte werden</strong> möchtest, eine neue Einnahmequelle suchst oder dein Unternehmen mit KI-Automatisierung voranbringen willst – diese Weiterbildung gibt dir alle Werkzeuge und das Wissen, um sofort loszulegen. Erfahre mehr in unserem <a href="/blog" className="text-blue-600 hover:text-blue-800 underline">Blog über KI-Automatisierung</a>.
+              </p>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Benefits Section - Glass Cards */}
@@ -491,7 +523,7 @@ export default function Home() {
             >
               <img
                 src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/yQabxfmvZgaRyokf.png"
-                alt="KI Weiterbildung IHK Zertifikat Premium Member 6500 Euro"
+                alt="KI Weiterbildung IHK Zertifikat Kosten und Preise"
                 className="w-full"
               />
             </motion.div>
@@ -505,9 +537,9 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                6.500€
+                4.797€
               </motion.p>
-              <p className="text-gray-500 text-lg">Einmalige Zahlung – kein Abo</p>
+              <p className="text-gray-500 text-lg">zzgl. MwSt. – Einmalige Zahlung, kein Abo</p>
             </div>
 
             {/* CTA Button */}
@@ -597,7 +629,7 @@ export default function Home() {
               },
               {
                 q: "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?",
-                a: "Die Ausbildung zum KI-Automatisierungsexperten kostet 6.500€ als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates."
+                a: "Die Ausbildung zum KI-Automatisierungsexperten kostet 4.797€ zzgl. MwSt. als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates."
               },
               {
                 q: "Welche Tools lerne ich in der Ausbildung?",

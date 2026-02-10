@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     
     <!-- Primary Meta Tags -->
-    <title>KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner</title>
-    <meta name="title" content="KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner" />
-    <meta name="description" content="In 13 Wochen zum IHK-zertifizierten KI-Experten. Chatbots, RAG-Systeme, Make & n8n praxisnah lernen. 120+ Projekte umgesetzt, 95% Zufriedenheit." />
-    <meta name="keywords" content="ki weiterbildung, ki zertifikat ihk, ki automatisierung lernen, ki experte werden, ki kurs, chatbot erstellen" />
+    <title>KI-Automatisierungsexperte (IHK) | Weiterbildung mit Zertifikat 2026</title>
+    <meta name="title" content="KI-Automatisierungsexperte (IHK) | Weiterbildung mit Zertifikat 2026" />
+    <meta name="description" content="In 13 Wochen zum IHK-zertifizierten KI-Experten. Chatbots, RAG-Systeme, Make & n8n praxisnah lernen. 120+ Projekte umgesetzt, 95% Zufriedenheit. Jetzt KI-Automatisierung lernen!" />
+    <meta name="keywords" content="ki manager ihk, ki weiterbildung, ki automatisierung lernen, ki zertifikat ihk, ki kurs, prozesse automatisieren, chatbot erstellen, make automatisierung, ki fuer kmu, ki experte werden, rag system, n8n tutorial" />
     <meta name="author" content="AI Practitioner" />
     <meta name="creator" content="AI Practitioner" />
     <meta name="publisher" content="AI Practitioner" />
@@ -17,6 +17,8 @@
     <meta name="language" content="de" />
     <meta name="revisit-after" content="7 days" />
     <link rel="canonical" href="https://aipractitioner.manus.space" />
+    <link rel="alternate" hreflang="de" href="https://aipractitioner.manus.space" />
+    <link rel="alternate" hreflang="x-default" href="https://aipractitioner.manus.space" />
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -28,8 +30,8 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://aipractitioner.manus.space" />
-    <meta property="og:title" content="KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner" />
-    <meta property="og:description" content="In 13 Wochen zum IHK-zertifizierten KI-Experten. Chatbots, RAG-Systeme, Make & n8n praxisnah lernen. 120+ Projekte umgesetzt, 95% Zufriedenheit." />
+    <meta property="og:title" content="KI-Automatisierungsexperte (IHK) | Weiterbildung mit Zertifikat 2026" />
+    <meta property="og:description" content="In 13 Wochen zum IHK-zertifizierten KI-Experten. Chatbots, RAG-Systeme, Make & n8n praxisnah lernen. 120+ Projekte umgesetzt, 95% Zufriedenheit. Jetzt KI-Automatisierung lernen!" />
     <meta property="og:image" content="https://aipractitioner.manus.space/images/hero-glass.png" />
     <meta property="og:locale" content="de_DE" />
     <meta property="og:site_name" content="AI Practitioner" />
@@ -37,8 +39,8 @@
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://aipractitioner.manus.space" />
-    <meta name="twitter:title" content="KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner" />
-    <meta name="twitter:description" content="In 13 Wochen zum IHK-zertifizierten KI-Experten. Chatbots, RAG-Systeme, Make & n8n praxisnah lernen. 120+ Projekte umgesetzt, 95% Zufriedenheit." />
+    <meta name="twitter:title" content="KI-Automatisierungsexperte (IHK) | Weiterbildung mit Zertifikat 2026" />
+    <meta name="twitter:description" content="In 13 Wochen zum IHK-zertifizierten KI-Experten. Chatbots, RAG-Systeme, Make & n8n praxisnah lernen. 120+ Projekte umgesetzt, 95% Zufriedenheit. Jetzt KI-Automatisierung lernen!" />
     <meta name="twitter:image" content="https://aipractitioner.manus.space/images/hero-glass.png" />
     
     <!-- Structured Data / Schema.org -->
@@ -61,7 +63,7 @@
       },
       "offers": {
         "@type": "Offer",
-        "price": "6500",
+        "price": "4797",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock",
         "url": "https://aipractitioner.manus.space"
@@ -101,15 +103,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
     
-    <!-- Schema.org Structured Data wird dynamisch in Home.tsx geladen (Course, FAQPage, Organization) -->
+    <!-- Schema.org Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AI Practitioner",
+      "url": "https://aipractitioner.manus.space",
+      "logo": "https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/XjvoXOCMszZFXAGc.png",
+      "description": "IHK-zertifizierte KI-Weiterbildung zum KI-Automatisierungsexperten. Praxisnahe Ausbildung mit Chatbots, RAG-Systemen, Make und n8n.",
+      "sameAs": [
+        "https://ai-practitioner.com"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": "German"
+      }
+    }
+    </script>
   </head>
 
   <body>
-    <!-- Meta Pixel noscript fallback -->
+    <div id="root"></div>
+    <!-- Meta Pixel noscript fallback (placed after root to avoid parse5 errors) -->
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1138180751401674&ev=PageView&noscript=1"
     /></noscript>
-    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script
       defer

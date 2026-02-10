@@ -1,0 +1,9 @@
+{
+  "query": "SELECT slug FROM blog_articles WHERE slug IN ('ki-zertifikat-ihk', 'ki-kurs-online', 'n8n-tutorial-automatisierung');",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 37qau46u154uM4C.48befe471eba --database b8NfgMGTwkTWijLEpyKPTW --execute SELECT slug FROM blog_articles WHERE slug IN ('ki-zertifikat-ihk', 'ki-kurs-online', 'n8n-tutorial-automatisierung');",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 99
+}

@@ -136,3 +136,67 @@
 - [x] SEO-Titel auf 53 Zeichen gekürzt ("KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner")
 - [x] Keywords auf 6 fokussierte reduziert
 - [x] tRPC-Fehler beheben: Server gibt HTML statt JSON zurück (behoben - API funktioniert korrekt)
+
+## SEO Audit v2 - Alle Maßnahmen
+
+### Inhaltliche Fehler korrigieren (SOFORT)
+- [x] Kursdauer von 12 auf 13 Wochen korrigieren
+- [x] Module von 8 auf 7 korrigieren
+- [x] Preis von 6.500€ auf 4.797€ zzgl. MwSt. korrigieren
+- [x] Absolventen von 50+ auf 40+ (Pilotkohorte) korrigieren
+- [x] Flowise-Zuordnung: Von Modul 5 (KI-Agenten) zu Modul 3 (RAG-Systeme) korrigieren
+- [x] Wochenaufwand von 5-8 auf ~10 Stunden/Woche korrigieren
+
+### Meta Tags optimieren
+- [x] Meta Title ändern: "KI-Automatisierungsexperte (IHK) | Weiterbildung mit Zertifikat 2026"
+- [x] Meta Description setzen mit CTA "Jetzt KI-Automatisierung lernen!"
+
+### Heading-Struktur optimieren
+- [x] H1 ändern: "KI-Automatisierungsexperte (IHK): Praxisnahe Weiterbildung mit Zertifikat"
+- [x] H2 Module: "7 Praxis-Module: Von Chatbots bis KI-Agenten"
+- [x] H2 Erfolge: "Erfahrungen: Was Absolventen der KI-Weiterbildung berichten"
+- [x] H2 Pricing: "Kosten & Investition: KI-Ausbildung mit IHK-Zertifikat"
+- [x] H2 FAQ: "Häufige Fragen zur KI-Weiterbildung"
+- [x] H2 CTA: "Jetzt KI-Automatisierungsexperte werden"
+
+### Bild-Alt-Tags optimieren
+- [x] Logo Alt: "KI Automatisierungsexperte IHK Zertifikat Logo"
+- [x] Hero Alt: "KI Automatisierung Weiterbildung Kursplattform mit IHK Zertifikat"
+- [x] Icon Zeit Alt: "Zeitersparnis durch KI Automatisierung 10 Stunden pro Woche"
+- [x] Icon Geld Alt: "Einnahmen als KI Automatisierungsexperte 3000 bis 10000 Euro pro Projekt"
+- [x] Icon System Alt: "Professionelle KI Automatisierungssysteme mit Make und n8n"
+- [x] Module Alt: "7 Module der KI Automatisierung Weiterbildung Übersicht"
+- [x] Statistiken Alt: "Erfolgsstatistiken KI Kurs 120 Projekte 95 Prozent Zufriedenheit"
+- [x] Pricing Alt: "KI Weiterbildung IHK Zertifikat Kosten und Preise"
+
+### Content & Keywords
+- [x] Landing Page Content auf 1.200+ Wörter erweitern (neuer SEO-Intro-Absatz)
+- [x] Alle 12 Ziel-Keywords in den Content einbauen
+- [x] Keyword "ki manager ihk" einbauen
+- [x] Keyword "ki weiterbildung" einbauen
+- [x] Keyword "ki automatisierung lernen" einbauen
+- [x] Keyword "ki zertifikat ihk" einbauen
+- [x] Keyword "ki kurs" einbauen
+- [x] Keyword "prozesse automatisieren" einbauen
+- [x] Keyword "chatbot erstellen" erweitern
+- [x] Keyword "make automatisierung" erweitern
+- [x] Keyword "ki fuer kmu" einbauen
+- [x] Keyword "ki experte werden" als Phrase einbauen
+- [x] Keyword "rag system" einbauen
+- [x] Keyword "n8n tutorial" einbauen
+
+### Fehlende Blog-Artikel für Keywords schreiben
+- [x] Prüfen welche Keywords bereits durch Artikel abgedeckt sind
+- [x] 3 neue Artikel geschrieben: ki-zertifikat-ihk, ki-kurs-online, n8n-tutorial-automatisierung
+- [x] Interne Verlinkung zwischen Blog und Landingpage
+
+### Technisches SEO
+- [x] Schema.org JSON-LD aktualisieren (Course, FAQPage, Organization)
+- [x] Open Graph Tags vollständig setzen
+- [x] hreflang="de" und x-default korrekt setzen
+- [x] Sitemap.xml mit allen 19 Seiten (inkl. 3 neue Artikel)
+- [x] Canonical Tags prüfen und setzen
+- [x] robots.txt mit Sitemap-Verweis erstellt
+- [x] Schema.org Organization in index.html hinzugefügt
+- [x] Preis in Schema.org auf 4797 aktualisiert
+- [x] Blog-Limit auf 20 erhöht um alle Artikel anzuzeigen
