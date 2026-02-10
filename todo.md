@@ -135,3 +135,4 @@
 - [x] Ratenzahlung entfernt ("Einmalige Zahlung – kein Abo")
 - [x] SEO-Titel auf 53 Zeichen gekürzt ("KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner")
 - [x] Keywords auf 6 fokussierte reduziert
+- [x] tRPC-Fehler beheben: Server gibt HTML statt JSON zurück (behoben - API funktioniert korrekt)
