@@ -101,3 +101,4 @@
 - [x] Impressum-Seite erstellen
 - [x] Datenschutz-Seite erstellen
 - [x] JSON-LD Structured Data für Blog-Artikel implementieren
+- [x] SEO-Titel der Startseite auf 30-60 Zeichen optimieren (50 Zeichen)
