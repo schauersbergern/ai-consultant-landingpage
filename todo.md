@@ -104,3 +104,7 @@
 - [x] SEO-Titel der Startseite auf 30-60 Zeichen optimieren (50 Zeichen)
 - [x] Facebook Pixel (ID: 1138180751401674) in die Webseite einbauen
 - [x] ThriveCart-Checkout Pop-Up hinter alle CTA-Buttons legen (nicht Video ansehen)
+- [x] Cookie-Consent-Banner für DSGVO-Konformität implementieren
+- [x] Facebook Pixel mit Consent-Logik verknüpfen (nur nach Zustimmung laden)
+- [x] Purchase-Event für Facebook Pixel nach erfolgreicher ThriveCart-Zahlung einrichten
+- [x] Danke-Seite (/danke, /thank-you) mit Purchase-Event erstellt

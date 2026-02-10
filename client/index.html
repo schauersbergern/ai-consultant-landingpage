@@ -90,8 +90,9 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1138180751401674');
-    fbq('track', 'PageView');
+    // DSGVO: Pixel SDK laden, aber NICHT initialisieren.
+    // Init + PageView erfolgt erst nach Cookie-Consent via CookieConsent.tsx
+    fbq('consent', 'revoke');
     </script>
     <!-- End Meta Pixel Code -->
     

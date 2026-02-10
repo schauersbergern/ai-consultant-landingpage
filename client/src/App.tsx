@@ -12,6 +12,8 @@ import AdminBlogEditor from "./pages/AdminBlogEditor";
 import AdminBlogImport from "./pages/AdminBlogImport";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
+import ThankYou from "./pages/ThankYou";
+import CookieConsent from "./components/CookieConsent";
 
 function Router() {
   return (
@@ -25,6 +27,8 @@ function Router() {
       <Route path={"/admin/blog/:id/edit"} component={({ id }: any) => <AdminBlogEditor id={id} />} />
       <Route path={"/impressum"} component={Impressum} />
       <Route path={"/datenschutz"} component={Datenschutz} />
+      <Route path={"/danke"} component={ThankYou} />
+      <Route path={"/thank-you"} component={ThankYou} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
@@ -40,6 +44,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <CookieConsent />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

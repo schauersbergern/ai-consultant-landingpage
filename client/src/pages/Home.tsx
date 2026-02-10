@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useEffect, useState, useCallback } from "react";
+import { isTrackingAllowed } from "@/components/CookieConsent";
 
 export default function Home() {
   // The userAuth hooks provides authentication state
@@ -61,8 +62,8 @@ export default function Home() {
 
   const openCheckout = useCallback(() => {
     setShowCheckout(true);
-    // Track Facebook Pixel event
-    if ((window as any).fbq) {
+    // Track Facebook Pixel event (only if consent given)
+    if (isTrackingAllowed() && (window as any).fbq) {
       (window as any).fbq("track", "InitiateCheckout");
     }
   }, []);
