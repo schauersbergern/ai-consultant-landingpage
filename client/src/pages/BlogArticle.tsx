@@ -56,9 +56,52 @@ export default function BlogArticle() {
         }
         tag.setAttribute("content", content);
       });
+
+      // JSON-LD Structured Data (Article Schema)
+      const existingJsonLd = document.querySelector('script[type="application/ld+json"][data-blog-article]');
+      if (existingJsonLd) existingJsonLd.remove();
+
+      const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": article.seoTitle || article.title,
+        "description": article.seoDescription || article.excerpt || "",
+        "url": window.location.href,
+        "datePublished": article.publishedAt ? new Date(article.publishedAt).toISOString() : undefined,
+        "dateModified": article.updatedAt ? new Date(article.updatedAt).toISOString() : (article.publishedAt ? new Date(article.publishedAt).toISOString() : undefined),
+        "author": {
+          "@type": "Organization",
+          "name": "AI Practitioner",
+          "url": window.location.origin
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "AI Practitioner",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/XjvoXOCMszZFXAGc.png"
+          }
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": window.location.href
+        },
+        ...(article.featuredImage ? { "image": article.featuredImage } : {}),
+        ...(article.category ? { "articleSection": article.category } : {}),
+        ...(article.tags ? { "keywords": article.tags } : {}),
+        "inLanguage": "de-DE"
+      };
+
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.setAttribute("data-blog-article", "true");
+      script.textContent = JSON.stringify(jsonLd);
+      document.head.appendChild(script);
     }
     return () => {
       document.title = "KI Ausbildung mit IHK-Zertifikat | AI Practitioner in 12 Wochen";
+      const jsonLdScript = document.querySelector('script[type="application/ld+json"][data-blog-article]');
+      if (jsonLdScript) jsonLdScript.remove();
     };
   }, [article]);
 

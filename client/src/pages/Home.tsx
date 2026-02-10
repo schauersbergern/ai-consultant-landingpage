@@ -445,13 +445,15 @@ export default function Home() {
             <img src="/logo.png" alt="AI Practitioner" className="w-6 h-6" />
             <span className="font-semibold">AI Practitioner</span>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 flex-wrap justify-center">
             <a href="/blog" className="text-gray-600 hover:text-gray-900 transition text-sm">Blog</a>
             <a href="#modules" className="text-gray-600 hover:text-gray-900 transition text-sm">Module</a>
             <a href="#faq" className="text-gray-600 hover:text-gray-900 transition text-sm">FAQ</a>
+            <a href="/impressum" className="text-gray-600 hover:text-gray-900 transition text-sm">Impressum</a>
+            <a href="/datenschutz" className="text-gray-600 hover:text-gray-900 transition text-sm">Datenschutz</a>
           </div>
           <p className="text-gray-600 text-sm">
-            © 2025 AI Practitioner. Alle Rechte vorbehalten.
+            © 2026 AI Practitioner. Alle Rechte vorbehalten.
           </p>
         </div>
       </footer>

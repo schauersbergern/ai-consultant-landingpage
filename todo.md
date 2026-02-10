@@ -96,3 +96,8 @@
 - [x] Meta-Titel und Meta-Beschreibung gemäß Anweisungen in jedem Artikel setzen
 - [x] Umlaute in allen Artikeln korrigiert
 - [x] Markdown-Rendering für Blog-Artikel implementiert (react-markdown)
+- [x] Titelbilder für alle 12 Blogartikel generieren
+- [x] Titelbilder in Datenbank und Blog-Komponenten integrieren
+- [x] Impressum-Seite erstellen
+- [x] Datenschutz-Seite erstellen
+- [x] JSON-LD Structured Data für Blog-Artikel implementieren

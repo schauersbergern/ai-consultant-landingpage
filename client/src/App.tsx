@@ -10,6 +10,8 @@ import BlogArticle from "./pages/BlogArticle";
 import AdminBlog from "./pages/AdminBlog";
 import AdminBlogEditor from "./pages/AdminBlogEditor";
 import AdminBlogImport from "./pages/AdminBlogImport";
+import Impressum from "./pages/Impressum";
+import Datenschutz from "./pages/Datenschutz";
 
 function Router() {
   return (
@@ -21,6 +23,8 @@ function Router() {
       <Route path={"/admin/blog/new"} component={() => <AdminBlogEditor />} />
       <Route path={"/admin/blog/import"} component={AdminBlogImport} />
       <Route path={"/admin/blog/:id/edit"} component={({ id }: any) => <AdminBlogEditor id={id} />} />
+      <Route path={"/impressum"} component={Impressum} />
+      <Route path={"/datenschutz"} component={Datenschutz} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

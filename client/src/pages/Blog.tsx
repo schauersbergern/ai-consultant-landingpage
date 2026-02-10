@@ -92,15 +92,19 @@ export default function Blog() {
                   onClick={() => navigate(`/blog/${article.slug}`)}
                 >
                   {/* Featured Image */}
-                  {article.featuredImage && (
-                    <div className="h-48 overflow-hidden bg-gradient-to-br from-blue-100 to-blue-50">
+                  <div className="h-48 overflow-hidden bg-gradient-to-br from-blue-100 to-blue-50">
+                    {article.featuredImage ? (
                       <img
                         src={article.featuredImage}
                         alt={article.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
-                    </div>
-                  )}
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <span className="text-4xl font-bold text-blue-200">AI</span>
+                      </div>
+                    )}
+                  </div>
 
                   <CardHeader>
                     {article.category && (
