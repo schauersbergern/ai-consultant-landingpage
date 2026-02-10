@@ -129,3 +129,4 @@
 - [x] FAQ auf 12 Fragen erweitert (SEO-optimiert)
 - [x] Content-Keywords eingebaut (ki manager ihk, ki weiterbildung, ki kurs, etc.)
 - [x] FAQPage-Schema mit allen 12 Fragen synchronisiert
+- [x] Google Search Console Verifizierungsdatei eingebunden
