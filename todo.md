@@ -9,6 +9,7 @@
 - [x] Module-Übersicht (12 Wochen Ausbildung)
 - [x] Success Stories mit YouTube Video-Testimonials
 - [x] Pricing-Sektion mit Rabatt-Anzeige
+- [x] Preis aktualisiert: 6.500€ (Rabatt entfernt, Ratenzahlung 6x 1.083€/Monat)
 - [x] FAQ-Sektion (12 Fragen)
 - [x] CTA-Sektionen
 - [x] Premium Logo im Glasmorphismus-Stil

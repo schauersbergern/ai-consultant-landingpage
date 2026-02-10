@@ -328,20 +328,9 @@ export default function Home() {
               />
             </motion.div>
 
-            <div className="mb-6">
-              <p className="text-gray-600 text-sm mb-2">Regulärer Preis</p>
-              <p className="text-3xl font-semibold line-through text-gray-400">6.500€</p>
-            </div>
-
             <div className="mb-8">
-              <motion.div
-                className="inline-block bg-gradient-to-r from-blue-600 to-blue-500 text-white px-4 py-1 rounded-full text-sm font-semibold mb-4 shadow-lg"
-                whileHover={{ scale: 1.05 }}
-              >
-                Frühjahrsrabatt: 23%
-              </motion.div>
-              <p className="text-5xl font-semibold text-blue-600 mb-2">4.997€</p>
-              <p className="text-gray-600">oder 6x 899€/Monat</p>
+              <p className="text-5xl font-semibold text-blue-600 mb-2">6.500€</p>
+              <p className="text-gray-600">oder 6x 1.083€/Monat</p>
             </div>
 
             <motion.div
