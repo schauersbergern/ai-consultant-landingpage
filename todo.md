@@ -203,3 +203,10 @@
 
 ## Bugfixes
 - [x] Footer-Logo broken image reparieren (CDN-URL statt /logo.png)
+
+## SEO-Fixes & Impressum Update
+- [x] Keywords von 12 auf 6 fokussierte reduziert
+- [x] Meta Title auf 53 Zeichen gekürzt
+- [x] Meta Description auf 118 Zeichen gekürzt
+- [x] Impressum von ki-club.org übernommen (Pundamilia Marketing OÜ)
+- [x] Datenschutzerklärung von ki-club.org vollständig übernommen (Purple Zebra Consulting)

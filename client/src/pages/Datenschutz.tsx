@@ -32,200 +32,220 @@ export default function Datenschutz() {
             Zur Startseite
           </Button>
 
-          <h1 className="text-4xl font-semibold mb-8">Datenschutzerkl&auml;rung</h1>
+          <h1 className="text-4xl font-semibold mb-8">Datenschutzerklärung</h1>
 
           <div className="prose prose-lg max-w-none text-gray-700 space-y-8">
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Datenschutz auf einen Blick</h2>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Allgemeine Hinweise</h3>
               <p>
-                Die folgenden Hinweise geben einen einfachen Ueberblick darueber, was mit Ihren personenbezogenen Daten
-                passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie
-                persoenlich identifiziert werden koennen.
-              </p>
-
-              <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Datenerfassung auf dieser Website</h3>
-              <p>
-                <strong>Wer ist verantwortlich fuer die Datenerfassung auf dieser Website?</strong><br />
-                Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten
-                koennen Sie dem Abschnitt &bdquo;Hinweis zur verantwortlichen Stelle&ldquo; in dieser Datenschutzerklaerung entnehmen.
+                Wir freuen uns sehr über Ihr Interesse an unserem Unternehmen. Datenschutz hat einen besonders hohen Stellenwert für die Geschäftsleitung der Purple Zebra Consulting. Eine Nutzung der Internetseiten der Purple Zebra Consulting ist grundsätzlich ohne jede Angabe personenbezogener Daten möglich. Sofern eine betroffene Person besondere Services unseres Unternehmens über unsere Internetseite in Anspruch nehmen möchte, könnte jedoch eine Verarbeitung personenbezogener Daten erforderlich werden. Ist die Verarbeitung personenbezogener Daten erforderlich und besteht für eine solche Verarbeitung keine gesetzliche Grundlage, holen wir generell eine Einwilligung der betroffenen Person ein.
               </p>
               <p>
-                <strong>Wie erfassen wir Ihre Daten?</strong><br />
-                Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann es sich z.B. um
-                Daten handeln, die Sie in ein Kontaktformular eingeben. Andere Daten werden automatisch oder nach Ihrer
-                Einwilligung beim Besuch der Website durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten
-                (z.B. Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs).
+                Die Verarbeitung personenbezogener Daten, beispielsweise des Namens, der Anschrift, E-Mail-Adresse oder Telefonnummer einer betroffenen Person, erfolgt stets im Einklang mit der Datenschutz-Grundverordnung und in Übereinstimmung mit den für die Purple Zebra Consulting geltenden landesspezifischen Datenschutzbestimmungen. Mittels dieser Datenschutzerklärung möchte unser Unternehmen die Öffentlichkeit über Art, Umfang und Zweck der von uns erhobenen, genutzten und verarbeiteten personenbezogenen Daten informieren. Ferner werden betroffene Personen mittels dieser Datenschutzerklärung über die ihnen zustehenden Rechte aufgeklärt.
               </p>
               <p>
-                <strong>Wofuer nutzen wir Ihre Daten?</strong><br />
-                Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewaehrleisten. Andere
-                Daten koennen zur Analyse Ihres Nutzerverhaltens verwendet werden.
-              </p>
-              <p>
-                <strong>Welche Rechte haben Sie bezueglich Ihrer Daten?</strong><br />
-                Sie haben jederzeit das Recht, unentgeltlich Auskunft ueber Herkunft, Empfaenger und Zweck Ihrer
-                gespeicherten personenbezogenen Daten zu erhalten. Sie haben ausserdem ein Recht, die Berichtigung oder
-                Loeschung dieser Daten zu verlangen.
+                Die Purple Zebra Consulting hat als für die Verarbeitung Verantwortlicher zahlreiche technische und organisatorische Maßnahmen umgesetzt, um einen möglichst lückenlosen Schutz der über diese Internetseite verarbeiteten personenbezogenen Daten sicherzustellen. Dennoch können Internetbasierte Datenübertragungen grundsätzlich Sicherheitslücken aufweisen, sodass ein absoluter Schutz nicht gewährleistet werden kann. Aus diesem Grund steht es jeder betroffenen Person frei, personenbezogene Daten auch auf alternativen Wegen, beispielsweise telefonisch, an uns zu übermitteln.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Hosting</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Begriffsbestimmungen</h2>
               <p>
-                Wir hosten die Inhalte unserer Website bei folgendem Anbieter:
+                Die Datenschutzerklärung der Purple Zebra Consulting beruht auf den Begrifflichkeiten, die durch den Europäischen Richtlinien- und Verordnungsgeber beim Erlass der Datenschutz-Grundverordnung (DS-GVO) verwendet wurden. Unsere Datenschutzerklärung soll sowohl für die Öffentlichkeit als auch für unsere Kunden und Geschäftspartner einfach lesbar und verständlich sein. Um dies zu gewährleisten, möchten wir vorab die verwendeten Begrifflichkeiten erläutern.
               </p>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-4">Externes Hosting</h3>
+              <p>Wir verwenden in dieser Datenschutzerklärung unter anderem die folgenden Begriffe:</p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li><strong>Personenbezogene Daten:</strong> Personenbezogene Daten sind alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen.</li>
+                <li><strong>Betroffene Person:</strong> Betroffene Person ist jede identifizierte oder identifizierbare natürliche Person, deren personenbezogene Daten von dem für die Verarbeitung Verantwortlichen verarbeitet werden.</li>
+                <li><strong>Verarbeitung:</strong> Verarbeitung ist jeder mit oder ohne Hilfe automatisierter Verfahren ausgeführte Vorgang oder jede solche Vorgangsreihe im Zusammenhang mit personenbezogenen Daten.</li>
+                <li><strong>Einschränkung der Verarbeitung:</strong> Einschränkung der Verarbeitung ist die Markierung gespeicherter personenbezogener Daten mit dem Ziel, ihre künftige Verarbeitung einzuschränken.</li>
+                <li><strong>Profiling:</strong> Profiling ist jede Art der automatisierten Verarbeitung personenbezogener Daten, die darin besteht, dass diese personenbezogenen Daten verwendet werden, um bestimmte persönliche Aspekte zu bewerten.</li>
+                <li><strong>Pseudonymisierung:</strong> Pseudonymisierung ist die Verarbeitung personenbezogener Daten in einer Weise, auf welche die personenbezogenen Daten ohne Hinzuziehung zusätzlicher Informationen nicht mehr einer spezifischen betroffenen Person zugeordnet werden können.</li>
+                <li><strong>Verantwortlicher:</strong> Verantwortlicher ist die natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.</li>
+                <li><strong>Auftragsverarbeiter:</strong> Auftragsverarbeiter ist eine natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, die personenbezogene Daten im Auftrag des Verantwortlichen verarbeitet.</li>
+                <li><strong>Empfänger:</strong> Empfänger ist eine natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, der personenbezogene Daten offengelegt werden.</li>
+                <li><strong>Dritter:</strong> Dritter ist eine natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle außer der betroffenen Person, dem Verantwortlichen, dem Auftragsverarbeiter und den Personen, die unter der unmittelbaren Verantwortung des Verantwortlichen oder des Auftragsverarbeiters befugt sind, die personenbezogenen Daten zu verarbeiten.</li>
+                <li><strong>Einwilligung:</strong> Einwilligung ist jede von der betroffenen Person freiwillig für den bestimmten Fall in informierter Weise und unmissverständlich abgegebene Willensbekundung.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Name und Anschrift des für die Verarbeitung Verantwortlichen</h2>
               <p>
-                Diese Website wird extern gehostet. Die personenbezogenen Daten, die auf dieser Website erfasst werden,
-                werden auf den Servern des Hosters gespeichert. Hierbei kann es sich v.a. um IP-Adressen,
-                Kontaktanfragen, Meta- und Kommunikationsdaten, Vertragsdaten, Kontaktdaten, Namen, Websitezugriffe
-                und sonstige Daten, die ueber eine Website generiert werden, handeln.
+                Verantwortlicher im Sinne der Datenschutz-Grundverordnung, sonstiger in den Mitgliedstaaten der Europäischen Union geltenden Datenschutzgesetze und anderer Bestimmungen mit datenschutzrechtlichem Charakter ist die:
               </p>
               <p>
-                Das externe Hosting erfolgt zum Zwecke der Vertragserfuellung gegenueber unseren potenziellen und
-                bestehenden Kunden (Art. 6 Abs. 1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und
-                effizienten Bereitstellung unseres Online-Angebots durch einen professionellen Anbieter (Art. 6 Abs. 1
-                lit. f DSGVO).
+                <strong>Purple Zebra Consulting</strong><br />
+                Keemia 4<br />
+                10616 Tallinn<br />
+                Estland
+              </p>
+              <p>
+                E-Mail: management@purplezebraconsulting.com<br />
+                Website: www.purplezebraconsulting.com
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. Allgemeine Hinweise und Pflichtinformationen</h2>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Datenschutz</h3>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. Cookies</h2>
               <p>
-                Die Betreiber dieser Seiten nehmen den Schutz Ihrer persoenlichen Daten sehr ernst. Wir behandeln Ihre
-                personenbezogenen Daten vertraulich und entsprechend den gesetzlichen Datenschutzvorschriften sowie
-                dieser Datenschutzerklaerung.
+                Die Internetseiten der Purple Zebra Consulting verwenden Cookies. Cookies sind Textdateien, welche über einen Internetbrowser auf einem Computersystem abgelegt und gespeichert werden.
               </p>
               <p>
-                Wir weisen darauf hin, dass die Datenuebertragung im Internet (z.B. bei der Kommunikation per E-Mail)
-                Sicherheitsluecken aufweisen kann. Ein lueckenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht
-                moeglich.
-              </p>
-
-              <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Hinweis zur verantwortlichen Stelle</h3>
-              <p>
-                Die verantwortliche Stelle fuer die Datenverarbeitung auf dieser Website ist:
+                Zahlreiche Internetseiten und Server verwenden Cookies. Viele Cookies enthalten eine sogenannte Cookie-ID. Eine Cookie-ID ist eine eindeutige Kennung des Cookies. Sie besteht aus einer Zeichenfolge, durch welche Internetseiten und Server dem konkreten Internetbrowser zugeordnet werden können, in dem das Cookie gespeichert wurde. Dies ermöglicht es den besuchten Internetseiten und Servern, den individuellen Browser der betroffenen Person von anderen Internetbrowsern, die andere Cookies enthalten, zu unterscheiden.
               </p>
               <p>
-                [Name des Unternehmens / Einzelunternehmers]<br />
-                [Vor- und Nachname]<br />
-                [Strasse und Hausnummer]<br />
-                [PLZ und Ort]
+                Durch den Einsatz von Cookies kann die Purple Zebra Consulting den Nutzern dieser Internetseite nutzerfreundlichere Services bereitstellen, die ohne die Cookie-Setzung nicht möglich wären.
               </p>
               <p>
-                Telefon: [Telefonnummer]<br />
-                E-Mail: [E-Mail-Adresse]
-              </p>
-
-              <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Speicherdauer</h3>
-              <p>
-                Soweit innerhalb dieser Datenschutzerklaerung keine speziellere Speicherdauer genannt wurde, verbleiben
-                Ihre personenbezogenen Daten bei uns, bis der Zweck fuer die Datenverarbeitung entfaellt. Wenn Sie ein
-                berechtigtes Loeschersuchen geltend machen oder eine Einwilligung zur Datenverarbeitung widerrufen,
-                werden Ihre Daten geloescht, sofern wir keine anderen rechtlich zulaessigen Gruende fuer die Speicherung
-                Ihrer personenbezogenen Daten haben.
-              </p>
-
-              <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Widerruf Ihrer Einwilligung zur Datenverarbeitung</h3>
-              <p>
-                Viele Datenverarbeitungsvorgaenge sind nur mit Ihrer ausdruecklichen Einwilligung moeglich. Sie koennen eine
-                bereits erteilte Einwilligung jederzeit widerrufen. Die Rechtmaessigkeit der bis zum Widerruf erfolgten
-                Datenverarbeitung bleibt vom Widerruf unberuehrt.
-              </p>
-
-              <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Recht auf Datenuebertragbarkeit</h3>
-              <p>
-                Sie haben das Recht, Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfuellung eines Vertrags
-                automatisiert verarbeiten, an sich oder an einen Dritten in einem gaengigen, maschinenlesbaren Format
-                aushaendigen zu lassen.
-              </p>
-
-              <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Auskunft, Loeschung und Berichtigung</h3>
-              <p>
-                Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf unentgeltliche
-                Auskunft ueber Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfaenger und den Zweck
-                der Datenverarbeitung und ggf. ein Recht auf Berichtigung oder Loeschung dieser Daten.
+                Die betroffene Person kann die Setzung von Cookies durch unsere Internetseite jederzeit mittels einer entsprechenden Einstellung des genutzten Internetbrowsers verhindern und damit der Setzung von Cookies dauerhaft widersprechen. Ferner können bereits gesetzte Cookies jederzeit über einen Internetbrowser oder andere Softwareprogramme gelöscht werden. Deaktiviert die betroffene Person die Setzung von Cookies in dem genutzten Internetbrowser, sind unter Umständen nicht alle Funktionen unserer Internetseite vollumfänglich nutzbar.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Datenerfassung auf dieser Website</h2>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Cookies</h3>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Erfassung von allgemeinen Daten und Informationen</h2>
               <p>
-                Unsere Internetseiten verwenden so genannte Cookies. Cookies sind kleine Datenpakete und richten auf
-                Ihrem Endgeraet keinen Schaden an. Sie werden entweder voruebergehend fuer die Dauer einer Sitzung
-                (Session-Cookies) oder dauerhaft (permanente Cookies) auf Ihrem Endgeraet gespeichert.
+                Die Internetseite der Purple Zebra Consulting erfasst mit jedem Aufruf der Internetseite durch eine betroffene Person oder ein automatisiertes System eine Reihe von allgemeinen Daten und Informationen. Diese allgemeinen Daten und Informationen werden in den Logfiles des Servers gespeichert. Erfasst werden können die (1) verwendeten Browsertypen und Versionen, (2) das vom zugreifenden System verwendete Betriebssystem, (3) die Internetseite, von welcher ein zugreifendes System auf unsere Internetseite gelangt (sogenannte Referrer), (4) die Unterwebseiten, (5) das Datum und die Uhrzeit eines Zugriffs auf die Internetseite, (6) eine Internet-Protokoll-Adresse (IP-Adresse), (7) der Internet-Service-Provider des zugreifenden Systems und (8) sonstige ähnliche Daten und Informationen, die der Gefahrenabwehr im Falle von Angriffen auf unsere informationstechnologischen Systeme dienen.
               </p>
               <p>
-                Cookies, die zur Durchfuehrung des elektronischen Kommunikationsvorgangs, zur Bereitstellung bestimmter,
-                von Ihnen erwuenschter Funktionen oder zur Optimierung der Website erforderlich sind, werden auf
-                Grundlage von Art. 6 Abs. 1 lit. f DSGVO gespeichert, sofern keine andere Rechtsgrundlage angegeben wird.
-              </p>
-
-              <h3 className="text-xl font-semibold text-gray-900 mb-3 mt-6">Server-Log-Dateien</h3>
-              <p>
-                Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien,
-                die Ihr Browser automatisch an uns uebermittelt. Dies sind: Browsertyp und Browserversion, verwendetes
-                Betriebssystem, Referrer URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage und
-                IP-Adresse.
+                Bei der Nutzung dieser allgemeinen Daten und Informationen zieht die Purple Zebra Consulting keine Rückschlüsse auf die betroffene Person. Diese Informationen werden vielmehr benötigt, um (1) die Inhalte unserer Internetseite korrekt auszuliefern, (2) die Inhalte unserer Internetseite sowie die Werbung für diese zu optimieren, (3) die dauerhafte Funktionsfähigkeit unserer informationstechnologischen Systeme und der Technik unserer Internetseite zu gewährleisten sowie (4) um Strafverfolgungsbehörden im Falle eines Cyberangriffes die zur Strafverfolgung notwendigen Informationen bereitzustellen.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Analyse-Tools und Werbung</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Registrierung auf unserer Internetseite</h2>
               <p>
-                Auf dieser Website werden derzeit keine Analyse-Tools oder Werbetracker eingesetzt. Sollte sich dies
-                aendern, wird diese Datenschutzerklaerung entsprechend aktualisiert.
+                Die betroffene Person hat die Möglichkeit, sich auf der Internetseite des für die Verarbeitung Verantwortlichen unter Angabe von personenbezogenen Daten zu registrieren. Welche personenbezogenen Daten dabei an den für die Verarbeitung Verantwortlichen übermittelt werden, ergibt sich aus der jeweiligen Eingabemaske, die für die Registrierung verwendet wird. Die von der betroffenen Person eingegebenen personenbezogenen Daten werden ausschließlich für die interne Verwendung bei dem für die Verarbeitung Verantwortlichen und für eigene Zwecke erhoben und gespeichert.
+              </p>
+              <p>
+                Der für die Verarbeitung Verantwortliche erteilt jeder betroffenen Person jederzeit auf Anfrage Auskunft darüber, welche personenbezogenen Daten über die betroffene Person gespeichert sind. Ferner berichtigt oder löscht der für die Verarbeitung Verantwortliche personenbezogene Daten auf Wunsch oder Hinweis der betroffenen Person, soweit dem keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">6. Newsletter</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">6. Abonnement unseres Newsletters</h2>
               <p>
-                Wenn Sie den auf der Website angebotenen Newsletter beziehen moechten, benoetigen wir von Ihnen eine
-                E-Mail-Adresse sowie Informationen, welche uns die Ueberpruefung gestatten, dass Sie der Inhaber der
-                angegebenen E-Mail-Adresse sind und mit dem Empfang des Newsletters einverstanden sind.
+                Auf der Internetseite der Purple Zebra Consulting wird den Benutzern die Möglichkeit eingeräumt, den Newsletter unseres Unternehmens zu abonnieren. Die Purple Zebra Consulting informiert ihre Kunden und Geschäftspartner in regelmäßigen Abständen im Wege eines Newsletters über Angebote des Unternehmens.
               </p>
               <p>
-                Die Verarbeitung der in das Newsletteranmeldeformular eingegebenen Daten erfolgt ausschliesslich auf
-                Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Die erteilte Einwilligung zur Speicherung der
-                Daten, der E-Mail-Adresse sowie deren Nutzung zum Versand des Newsletters koennen Sie jederzeit
-                widerrufen.
+                Die im Rahmen einer Anmeldung zum Newsletter erhobenen personenbezogenen Daten werden ausschließlich zum Versand unseres Newsletters verwendet. Das Abonnement unseres Newsletters kann durch die betroffene Person jederzeit gekündigt werden. Die Einwilligung in die Speicherung personenbezogener Daten, die die betroffene Person uns für den Newsletterversand erteilt hat, kann jederzeit widerrufen werden.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Plugins und Tools</h2>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">YouTube mit erweitertem Datenschutz</h3>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Newsletter-Tracking</h2>
               <p>
-                Diese Website bindet Videos der Website YouTube ein. Betreiber der Seiten ist die Google Ireland Limited
-                (Google), Gordon House, Barrow Street, Dublin 4, Irland.
+                Die Newsletter der Purple Zebra Consulting enthalten sogenannte Zählpixel. Ein Zählpixel ist eine Miniaturgrafik, die in solche E-Mails eingebettet wird, welche im HTML-Format versendet werden, um eine Logdatei-Aufzeichnung und eine Logdatei-Analyse zu ermöglichen. Dadurch kann eine statistische Auswertung des Erfolges oder Misserfolges von Online-Marketing-Kampagnen durchgeführt werden.
               </p>
               <p>
-                Wir nutzen YouTube im erweiterten Datenschutzmodus. Dieser Modus bewirkt laut YouTube, dass YouTube
-                keine Informationen ueber die Besucher auf dieser Website speichert, bevor diese sich das Video ansehen.
-              </p>
-              <p>
-                Weitere Informationen ueber Datenschutz bei YouTube finden Sie in deren Datenschutzerklaerung unter:{" "}
-                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                  https://policies.google.com/privacy
-                </a>
+                Solche über die in den Newslettern enthaltenen Zählpixel erhobenen personenbezogenen Daten werden von dem für die Verarbeitung Verantwortlichen gespeichert und ausgewertet, um den Newsletterversand zu optimieren und den Inhalt zukünftiger Newsletter noch besser den Interessen der betroffenen Person anzupassen. Diese personenbezogenen Daten werden nicht an Dritte weitergegeben.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Aenderung dieser Datenschutzerklaerung</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Kontaktmöglichkeit über die Internetseite</h2>
               <p>
-                Wir behalten uns vor, diese Datenschutzerklaerung anzupassen, damit sie stets den aktuellen rechtlichen
-                Anforderungen entspricht oder um Aenderungen unserer Leistungen in der Datenschutzerklaerung umzusetzen.
+                Die Internetseite der Purple Zebra Consulting enthält aufgrund von gesetzlichen Vorschriften Angaben, die eine schnelle elektronische Kontaktaufnahme zu unserem Unternehmen sowie eine unmittelbare Kommunikation mit uns ermöglichen. Sofern eine betroffene Person per E-Mail oder über ein Kontaktformular den Kontakt mit dem für die Verarbeitung Verantwortlichen aufnimmt, werden die von der betroffenen Person übermittelten personenbezogenen Daten automatisch gespeichert. Es erfolgt keine Weitergabe dieser personenbezogenen Daten an Dritte.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">9. Kommentarfunktion im Blog auf der Internetseite</h2>
+              <p>
+                Die Purple Zebra Consulting bietet den Nutzern auf einem Blog, der sich auf der Internetseite des für die Verarbeitung Verantwortlichen befindet, die Möglichkeit, individuelle Kommentare zu einzelnen Blog-Beiträgen zu hinterlassen.
+              </p>
+              <p>
+                Hinterlässt eine betroffene Person einen Kommentar in dem auf dieser Internetseite veröffentlichten Blog, werden neben den von der betroffenen Person hinterlassenen Kommentaren auch Angaben zum Zeitpunkt der Kommentareingabe sowie zu dem von der betroffenen Person gewählten Nutzernamen (Pseudonym) gespeichert und veröffentlicht. Ferner wird die vom Internet-Service-Provider (ISP) der betroffenen Person vergebene IP-Adresse mitprotokolliert. Diese Speicherung der IP-Adresse erfolgt aus Sicherheitsgründen.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. Abonnement von Kommentaren im Blog auf der Internetseite</h2>
+              <p>
+                Die im Blog der Purple Zebra Consulting abgegebenen Kommentare können grundsätzlich von Dritten abonniert werden. Insbesondere besteht die Möglichkeit, dass ein Kommentator die seinem Kommentar nachfolgenden Kommentare zu einem bestimmten Blog-Beitrag abonniert.
+              </p>
+              <p>
+                Sofern sich eine betroffene Person für die Option entscheidet, Kommentare zu abonnieren, versendet der für die Verarbeitung Verantwortliche eine automatische Bestätigungsmail, um im Double-Opt-In-Verfahren zu überprüfen, ob sich wirklich der Inhaber der angegebenen E-Mail-Adresse für diese Option entschieden hat. Die Option zum Abonnement von Kommentaren kann jederzeit beendet werden.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">11. Routinemäßige Löschung und Sperrung von personenbezogenen Daten</h2>
+              <p>
+                Der für die Verarbeitung Verantwortliche verarbeitet und speichert personenbezogene Daten der betroffenen Person nur für den Zeitraum, der zur Erreichung des Speicherungszwecks erforderlich ist oder sofern dies durch den Europäischen Richtlinien- und Verordnungsgeber oder einen anderen Gesetzgeber in Gesetzen oder Vorschriften, welchen der für die Verarbeitung Verantwortliche unterliegt, vorgesehen wurde.
+              </p>
+              <p>
+                Entfällt der Speicherungszweck oder läuft eine vom Europäischen Richtlinien- und Verordnungsgeber oder einem anderen zuständigen Gesetzgeber vorgeschriebene Speicherfrist ab, werden die personenbezogenen Daten routinemäßig und entsprechend den gesetzlichen Vorschriften gesperrt oder gelöscht.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">12. Rechte der betroffenen Person</h2>
+              <ul className="list-disc pl-6 space-y-3">
+                <li><strong>Recht auf Bestätigung:</strong> Jede betroffene Person hat das Recht, von dem für die Verarbeitung Verantwortlichen eine Bestätigung darüber zu verlangen, ob sie betreffende personenbezogene Daten verarbeitet werden.</li>
+                <li><strong>Recht auf Auskunft:</strong> Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, jederzeit von dem für die Verarbeitung Verantwortlichen unentgeltliche Auskunft über die zu seiner Person gespeicherten personenbezogenen Daten und eine Kopie dieser Auskunft zu erhalten.</li>
+                <li><strong>Recht auf Berichtigung:</strong> Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, die unverzügliche Berichtigung sie betreffender unrichtiger personenbezogener Daten zu verlangen.</li>
+                <li><strong>Recht auf Löschung (Recht auf Vergessen werden):</strong> Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, von dem Verantwortlichen zu verlangen, dass die sie betreffenden personenbezogenen Daten unverzüglich gelöscht werden, sofern einer der gesetzlichen Gründe zutrifft.</li>
+                <li><strong>Recht auf Einschränkung der Verarbeitung:</strong> Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, von dem Verantwortlichen die Einschränkung der Verarbeitung zu verlangen, wenn eine der gesetzlichen Voraussetzungen gegeben ist.</li>
+                <li><strong>Recht auf Datenübertragbarkeit:</strong> Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, die sie betreffenden personenbezogenen Daten in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten.</li>
+                <li><strong>Recht auf Widerspruch:</strong> Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, aus Gründen, die sich aus ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung sie betreffender personenbezogener Daten Widerspruch einzulegen.</li>
+                <li><strong>Automatisierte Entscheidungen im Einzelfall einschließlich Profiling:</strong> Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, nicht einer ausschließlich auf einer automatisierten Verarbeitung beruhenden Entscheidung unterworfen zu werden.</li>
+                <li><strong>Recht auf Widerruf einer datenschutzrechtlichen Einwilligung:</strong> Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, eine Einwilligung zur Verarbeitung personenbezogener Daten jederzeit zu widerrufen.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">13. Datenschutz bei Bewerbungen und im Bewerbungsverfahren</h2>
+              <p>
+                Der für die Verarbeitung Verantwortliche erhebt und verarbeitet die personenbezogenen Daten von Bewerbern zum Zwecke der Abwicklung des Bewerbungsverfahrens. Die Verarbeitung kann auch auf elektronischem Wege erfolgen. Wird von dem für die Verarbeitung Verantwortlichen kein Anstellungsvertrag mit dem Bewerber geschlossen, so werden die Bewerbungsunterlagen zwei Monate nach Bekanntgabe der Absageentscheidung automatisch gelöscht, sofern einer Löschung keine sonstigen berechtigten Interessen des für die Verarbeitung Verantwortlichen entgegenstehen.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">14. Rechtsgrundlage der Verarbeitung</h2>
+              <p>
+                Art. 6 I lit. a DS-GVO dient unserem Unternehmen als Rechtsgrundlage für Verarbeitungsvorgänge, bei denen wir eine Einwilligung für einen bestimmten Verarbeitungszweck einholen. Ist die Verarbeitung personenbezogener Daten zur Erfüllung eines Vertrags, dessen Vertragspartei die betroffene Person ist, erforderlich, so beruht die Verarbeitung auf Art. 6 I lit. b DS-GVO. Unterliegt unser Unternehmen einer rechtlichen Verpflichtung durch welche eine Verarbeitung von personenbezogenen Daten erforderlich wird, so basiert die Verarbeitung auf Art. 6 I lit. c DS-GVO. Letztlich könnten Verarbeitungsvorgänge auf Art. 6 I lit. f DS-GVO beruhen.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">15. Berechtigte Interessen an der Verarbeitung</h2>
+              <p>
+                Basiert die Verarbeitung personenbezogener Daten auf Artikel 6 I lit. f DS-GVO ist unser berechtigtes Interesse die Durchführung unserer Geschäftstätigkeit zugunsten des Wohlergehens all unserer Mitarbeiter und unserer Anteilseigner.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">16. Dauer, für die die personenbezogenen Daten gespeichert werden</h2>
+              <p>
+                Das Kriterium für die Dauer der Speicherung von personenbezogenen Daten ist die jeweilige gesetzliche Aufbewahrungsfrist. Nach Ablauf der Frist werden die entsprechenden Daten routinemäßig gelöscht, sofern sie nicht mehr zur Vertragserfüllung oder Vertragsanbahnung erforderlich sind.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">17. Gesetzliche oder vertragliche Vorschriften zur Bereitstellung der personenbezogenen Daten</h2>
+              <p>
+                Wir klären Sie darüber auf, dass die Bereitstellung personenbezogener Daten zum Teil gesetzlich vorgeschrieben ist (z.B. Steuervorschriften) oder sich auch aus vertraglichen Regelungen (z.B. Angaben zum Vertragspartner) ergeben kann. Mitunter kann es zu einem Vertragsschluss erforderlich sein, dass eine betroffene Person uns personenbezogene Daten zur Verfügung stellt, die in der Folge durch uns verarbeitet werden müssen.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">18. Bestehen einer automatisierten Entscheidungsfindung</h2>
+              <p>
+                Als verantwortungsbewusstes Unternehmen verzichten wir auf eine automatische Entscheidungsfindung oder ein Profiling.
               </p>
             </section>
 
             <section className="mt-12 pt-8 border-t border-gray-200">
               <p className="text-sm text-gray-500">
-                Stand: Februar 2026
+                Diese Datenschutzerklärung wurde durch den Datenschutzerklärungs-Generator der DGD Deutsche Gesellschaft für Datenschutz GmbH, die als{" "}
+                <a href="https://dg-datenschutz.de/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                  Externer Datenschutzbeauftragter Hamburg
+                </a>{" "}
+                tätig ist, in Kooperation mit dem{" "}
+                <a href="https://www.wbs-law.de/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                  Kölner IT- und Datenschutz Anwalt Christian Solmecke
+                </a>{" "}
+                erstellt.
               </p>
             </section>
           </div>
