@@ -30,7 +30,7 @@ export default function Home() {
   const [showCheckout, setShowCheckout] = useState(false);
 
   useEffect(() => {
-    document.title = "KI-Automatisierungsexperte (IHK) | Weiterbildung mit Zertifikat 2026";
+    document.title = "KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner";
 
     // Schema.org Course Schema
     const courseSchema = {
