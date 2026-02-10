@@ -130,3 +130,6 @@
 - [x] Content-Keywords eingebaut (ki manager ihk, ki weiterbildung, ki kurs, etc.)
 - [x] FAQPage-Schema mit allen 12 Fragen synchronisiert
 - [x] Google Search Console Verifizierungsdatei eingebunden
+- [x] Pricing-Bild korrigieren (neues Bild mit 6.500€ generiert und eingesetzt)
+- [x] Pricing-Bereich visuell ansprechender gestalten (Gradient-Text, Benefits-Grid, größerer CTA)
+- [x] Ratenzahlung entfernt ("Einmalige Zahlung – kein Abo")

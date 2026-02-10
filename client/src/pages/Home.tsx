@@ -84,7 +84,7 @@ export default function Home() {
         { "@type": "Question", "name": "Für wen ist die KI-Weiterbildung geeignet?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung richtet sich an Berater, Freelancer, Unternehmer und Angestellte, die KI-Automatisierung als neue Kompetenz oder Einnahmequelle aufbauen möchten. Vorkenntnisse sind nicht erforderlich." } },
         { "@type": "Question", "name": "Gibt es eine Geld-zurück-Garantie?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du hast eine 14-Tage Geld-zurück-Garantie. Wenn die Ausbildung nicht deinen Erwartungen entspricht, erhältst du den vollen Betrag zurück – ohne Wenn und Aber." } },
         { "@type": "Question", "name": "Kann ich die KI-Ausbildung neben dem Beruf absolvieren?", "acceptedAnswer": { "@type": "Answer", "text": "Absolut. Die Weiterbildung ist berufsbegleitend konzipiert. Mit ca. 10 Stunden pro Woche und lebenslangem Zugang kannst du flexibel lernen und die Module in deinem eigenen Tempo durcharbeiten." } },
-        { "@type": "Question", "name": "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung zum KI-Automatisierungsexperten kostet 6.500€ (einmalig) oder 6x 1.083€/Monat als Ratenzahlung. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates." } },
+        { "@type": "Question", "name": "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung zum KI-Automatisierungsexperten kostet 6.500€ als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates." } },
         { "@type": "Question", "name": "Welche Tools lerne ich in der Ausbildung?", "acceptedAnswer": { "@type": "Answer", "text": "Du arbeitest mit den führenden KI-Automatisierungstools: ChatGPT, Make, n8n, Zapier, Voiceflow, ManyChat und Flowise. Damit deckst du das gesamte Spektrum von Chatbots über Prozessautomatisierung bis hin zu RAG-Systemen ab." } },
         { "@type": "Question", "name": "Erhalte ich nach Abschluss Unterstützung?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du erhältst lebenslangen Zugang zu allen Kursinhalten und Updates. Zusätzlich profitierst du von der Community der Absolventen für Austausch und Networking." } }
       ]
@@ -459,8 +459,8 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 px-4 section-premium">
-        <div className="container max-w-2xl">
+      <section id="pricing" className="py-24 px-4 section-premium">
+        <div className="container max-w-3xl">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -471,7 +471,7 @@ export default function Home() {
               Kosten & Investition: KI-Ausbildung mit IHK-Zertifikat
             </h2>
             <p className="text-xl text-gray-600">
-              Einmalige Zahlung oder flexible Ratenzahlung
+              Einmalige Investition in deine Zukunft
             </p>
           </motion.div>
 
@@ -479,45 +479,66 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="card-glass text-center glow"
+            className="card-glass text-center glow overflow-hidden"
           >
+            {/* Premium Pricing Image */}
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="rounded-2xl overflow-hidden mb-8 shadow-xl"
+              transition={{ duration: 0.6 }}
+              className="rounded-2xl overflow-hidden mb-10 shadow-xl mx-auto max-w-md"
             >
               <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/gMrfgNKGYGRdAKCR.png"
-                alt="KI Weiterbildung IHK Zertifikat Kosten und Preise"
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/yQabxfmvZgaRyokf.png"
+                alt="KI Weiterbildung IHK Zertifikat Premium Member 6500 Euro"
                 className="w-full"
               />
             </motion.div>
 
-            <div className="mb-8">
-              <p className="text-5xl font-semibold text-blue-600 mb-2">6.500€</p>
-              <p className="text-gray-600">oder 6x 1.083€/Monat</p>
+            {/* Price Display */}
+            <div className="mb-10">
+              <motion.p
+                className="text-6xl font-bold bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent mb-3"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                6.500€
+              </motion.p>
+              <p className="text-gray-500 text-lg">Einmalige Zahlung – kein Abo</p>
             </div>
 
+            {/* CTA Button */}
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              className="mb-8"
             >
-              <Button className="btn-apple px-8 py-4 text-lg w-full mb-6" onClick={openCheckout}>
+              <Button className="btn-apple px-10 py-5 text-lg w-full max-w-sm mx-auto" onClick={openCheckout}>
                 Jetzt buchen
+                <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </motion.div>
 
-            <div className="divider-premium my-6"></div>
+            <div className="divider-premium my-8"></div>
 
-            <p className="text-sm text-gray-600">
-              <CheckCircle2 className="w-4 h-4 inline mr-2 text-green-600" />
-              14-Tage Geld-zurück-Garantie<br />
-              <CheckCircle2 className="w-4 h-4 inline mr-2 text-green-600" />
-              Lebenslanger Zugang<br />
-              <CheckCircle2 className="w-4 h-4 inline mr-2 text-green-600" />
-              Alle Updates inklusive
-            </p>
+            {/* Benefits Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-gray-600">
+              <div className="flex items-center justify-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                <span>14-Tage Geld-zurück-Garantie</span>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                <span>Lebenslanger Zugang</span>
+              </div>
+              <div className="flex items-center justify-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                <span>Alle Updates inklusive</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -576,7 +597,7 @@ export default function Home() {
               },
               {
                 q: "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?",
-                a: "Die Ausbildung zum KI-Automatisierungsexperten kostet 6.500€ (einmalig) oder 6x 1.083€/Monat als Ratenzahlung. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates."
+                a: "Die Ausbildung zum KI-Automatisierungsexperten kostet 6.500€ als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates."
               },
               {
                 q: "Welche Tools lerne ich in der Ausbildung?",
