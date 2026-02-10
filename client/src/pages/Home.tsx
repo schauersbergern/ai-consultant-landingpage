@@ -692,7 +692,7 @@ export default function Home() {
       }}>
         <div className="container flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="KI Automatisierungsexperte IHK Zertifikat Logo" className="w-6 h-6" />
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/XjvoXOCMszZFXAGc.png" alt="KI Automatisierungsexperte IHK Zertifikat Logo" className="w-6 h-6" />
             <span className="font-semibold">AI Practitioner</span>
           </div>
           <div className="flex items-center gap-6 flex-wrap justify-center">

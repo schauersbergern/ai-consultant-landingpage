@@ -200,3 +200,6 @@
 - [x] Schema.org Organization in index.html hinzugefügt
 - [x] Preis in Schema.org auf 4797 aktualisiert
 - [x] Blog-Limit auf 20 erhöht um alle Artikel anzuzeigen
+
+## Bugfixes
+- [x] Footer-Logo broken image reparieren (CDN-URL statt /logo.png)
