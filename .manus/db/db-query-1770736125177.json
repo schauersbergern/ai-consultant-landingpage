@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE blog_articles SET content = REPLACE(content, 'regelmässig', 'regelmäßig'), seoDescription = REPLACE(seoDescription, 'regelmässig', 'regelmäßig') WHERE content LIKE '%regelmässig%' OR seoDescription LIKE '%regelmässig%';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 37qau46u154uM4C.48befe471eba --database b8NfgMGTwkTWijLEpyKPTW --execute UPDATE blog_articles SET content = REPLACE(content, 'regelmässig', 'regelmäßig'), seoDescription = REPLACE(seoDescription, 'regelmässig', 'regelmäßig') WHERE content LIKE '%regelmässig%' OR seoDescription LIKE '%regelmässig%';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 73
+}

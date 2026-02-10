@@ -16,7 +16,7 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Home} />
       <Route path={"/blog"} component={Blog} />
-      <Route path={"/blog/:slug"} component={({ slug }: any) => <BlogArticle slug={slug} />} />
+      <Route path={"/blog/:slug"} component={BlogArticle} />
       <Route path={"/admin/blog"} component={AdminBlog} />
       <Route path={"/admin/blog/new"} component={() => <AdminBlogEditor />} />
       <Route path={"/admin/blog/import"} component={AdminBlogImport} />

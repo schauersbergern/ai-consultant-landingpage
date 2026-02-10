@@ -1,0 +1,106 @@
+{
+  "query": "SELECT id, title, slug, status, seoTitle, LEFT(seoDescription, 80) as seoDesc FROM blog_articles WHERE status = 'published' ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 37qau46u154uM4C.48befe471eba --database b8NfgMGTwkTWijLEpyKPTW --execute SELECT id, title, slug, status, seoTitle, LEFT(seoDescription, 80) as seoDesc FROM blog_articles WHERE status = 'published' ORDER BY id;",
+  "rows": [
+    {
+      "id": "30002",
+      "title": "KI-Manager (IHK): Alles zur Weiterbildung mit Zertifikat [2026]",
+      "slug": "ki-manager-ihk-weiterbildung",
+      "status": "published",
+      "seoTitle": "KI-Manager (IHK): Weiterbildung mit Zertifikat | Kosten, Inhalte & Ablauf",
+      "seoDesc": "Du willst KI-Manager mit IHK-Zertifikat werden? Erfahre alles zu Inhalten, Koste"
+    },
+    {
+      "id": "30003",
+      "title": "KI-Experte werden: Der komplette Karriereguide für 2026",
+      "slug": "ki-experte-werden",
+      "status": "published",
+      "seoTitle": "KI-Experte werden 2026: Ausbildung, Gehalt & Karrierewege",
+      "seoDesc": "So wirst du KI-Experte: Welche Wege es gibt, welche Skills du brauchst und wie d"
+    },
+    {
+      "id": "30004",
+      "title": "KI-Automatisierung lernen: Von Null zum Profi in 13 Wochen",
+      "slug": "ki-automatisierung-lernen",
+      "status": "published",
+      "seoTitle": "KI-Automatisierung lernen: Schritt-für-Schritt Anleitung 2026",
+      "seoDesc": "KI-Automatisierung lernen ohne Programmierkenntnisse: Dieser Guide zeigt dir Too"
+    },
+    {
+      "id": "30005",
+      "title": "Prozesse automatisieren mit KI: 5 Beispiele aus der Praxis",
+      "slug": "prozesse-automatisieren-ki",
+      "status": "published",
+      "seoTitle": "Prozesse automatisieren mit KI: 5 Praxisbeispiele für Unternehmen",
+      "seoDesc": "Erfahre anhand von 5 konkreten Praxisbeispielen, wie du mit KI-Automatisierung G"
+    },
+    {
+      "id": "30006",
+      "title": "KI-Chatbot erstellen: Die Schritt-für-Schritt Anleitung für Unternehmen",
+      "slug": "chatbot-erstellen-unternehmen",
+      "status": "published",
+      "seoTitle": "KI-Chatbot erstellen: Anleitung ohne Programmierung | 2026",
+      "seoDesc": "Erstelle deinen eigenen KI-Chatbot für Kundensupport ohne Programmierung. Schrit"
+    },
+    {
+      "id": "30007",
+      "title": "RAG-System aufbauen: So nutzt du KI mit eigenen Unternehmensdaten",
+      "slug": "rag-system-aufbauen",
+      "status": "published",
+      "seoTitle": "RAG-System aufbauen: KI mit eigenen Daten nutzen | Praxis-Guide",
+      "seoDesc": "Lerne, wie du mit RAG eine KI baust, die auf Basis eigener Unternehmensdaten ant"
+    },
+    {
+      "id": "30008",
+      "title": "Make vs. n8n: Welches Automatisierungstool passt zu dir?",
+      "slug": "make-vs-n8n-vergleich",
+      "status": "published",
+      "seoTitle": "Make vs. n8n 2026: Der ehrliche Vergleich für Automatisierer",
+      "seoDesc": "Make oder n8n? Wir vergleichen Kosten, Funktionen, Lernkurve und Einsatzgebiete."
+    },
+    {
+      "id": "30009",
+      "title": "KI-Agenten im Unternehmen: Was sie können und wie du sie einsetzt",
+      "slug": "ki-agenten-unternehmen",
+      "status": "published",
+      "seoTitle": "KI-Agenten erklärt: Aufbau, Einsatz und Praxis-Beispiele 2026",
+      "seoDesc": "Was sind KI-Agenten, wie funktionieren sie und wie setzt du sie im Unternehmen e"
+    },
+    {
+      "id": "30010",
+      "title": "KI-Weiterbildung 2026: Die besten Kurse im Vergleich",
+      "slug": "ki-weiterbildung-vergleich",
+      "status": "published",
+      "seoTitle": "KI-Weiterbildung 2026: Kurse, Kosten & Zertifikate im Vergleich",
+      "seoDesc": "Welche KI-Weiterbildung lohnt sich wirklich? Vergleich der besten Kurse 2026 nac"
+    },
+    {
+      "id": "30011",
+      "title": "KI für KMU: So automatisierst du dein Unternehmen Schritt für Schritt",
+      "slug": "ki-fuer-kmu",
+      "status": "published",
+      "seoTitle": "KI für KMU: Automatisierung als Wettbewerbsvorteil | Praxis-Guide",
+      "seoDesc": "KI-Automatisierung für KMU: Konkrete Strategien, Tools und ROI-Beispiele für sof"
+    },
+    {
+      "id": "30012",
+      "title": "ROI von KI-Automatisierung: So berechnest du den echten Nutzen",
+      "slug": "roi-ki-automatisierung",
+      "status": "published",
+      "seoTitle": "ROI von KI-Automatisierung berechnen: Formel, Beispiele & Tipps",
+      "seoDesc": "95% der KI-Projekte scheitern am ROI. Lerne, wie du den Nutzen präzise berechnes"
+    },
+    {
+      "id": "30013",
+      "title": "KI im Marketing: Lead-Generierung automatisieren in 2026",
+      "slug": "ki-marketing-automatisierung",
+      "status": "published",
+      "seoTitle": "KI im Marketing: Lead-Generierung automatisieren | Praxis-Guide",
+      "seoDesc": "Automatisiere deine Lead-Generierung mit KI: Von Messenger-Bots über CRM-Integra"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\tslug\tstatus\tseoTitle\tseoDesc\n30002\tKI-Manager (IHK): Alles zur Weiterbildung mit Zertifikat [2026]\tki-manager-ihk-weiterbildung\tpublished\tKI-Manager (IHK): Weiterbildung mit Zertifikat | Kosten, Inhalte & Ablauf\tDu willst KI-Manager mit IHK-Zertifikat werden? Erfahre alles zu Inhalten, Koste\n30003\tKI-Experte werden: Der komplette Karriereguide für 2026\tki-experte-werden\tpublished\tKI-Experte werden 2026: Ausbildung, Gehalt & Karrierewege\tSo wirst du KI-Experte: Welche Wege es gibt, welche Skills du brauchst und wie d\n30004\tKI-Automatisierung lernen: Von Null zum Profi in 13 Wochen\tki-automatisierung-lernen\tpublished\tKI-Automatisierung lernen: Schritt-für-Schritt Anleitung 2026\tKI-Automatisierung lernen ohne Programmierkenntnisse: Dieser Guide zeigt dir Too\n30005\tProzesse automatisieren mit KI: 5 Beispiele aus der Praxis\tprozesse-automatisieren-ki\tpublished\tProzesse automatisieren mit KI: 5 Praxisbeispiele für Unternehmen\tErfahre anhand von 5 konkreten Praxisbeispielen, wie du mit KI-Automatisierung G\n30006\tKI-Chatbot erstellen: Die Schritt-für-Schritt Anleitung für Unternehmen\tchatbot-erstellen-unternehmen\tpublished\tKI-Chatbot erstellen: Anleitung ohne Programmierung | 2026\tErstelle deinen eigenen KI-Chatbot für Kundensupport ohne Programmierung. Schrit\n30007\tRAG-System aufbauen: So nutzt du KI mit eigenen Unternehmensdaten\trag-system-aufbauen\tpublished\tRAG-System aufbauen: KI mit eigenen Daten nutzen | Praxis-Guide\tLerne, wie du mit RAG eine KI baust, die auf Basis eigener Unternehmensdaten ant\n30008\tMake vs. n8n: Welches Automatisierungstool passt zu dir?\tmake-vs-n8n-vergleich\tpublished\tMake vs. n8n 2026: Der ehrliche Vergleich für Automatisierer\tMake oder n8n? Wir vergleichen Kosten, Funktionen, Lernkurve und Einsatzgebiete.\n30009\tKI-Agenten im Unternehmen: Was sie können und wie du sie einsetzt\tki-agenten-unternehmen\tpublished\tKI-Agenten erklärt: Aufbau, Einsatz und Praxis-Beispiele 2026\tWas sind KI-Agenten, wie funktionieren sie und wie setzt du sie im Unternehmen e\n30010\tKI-Weiterbildung 2026: Die besten Kurse im Vergleich\tki-weiterbildung-vergleich\tpublished\tKI-Weiterbildung 2026: Kurse, Kosten & Zertifikate im Vergleich\tWelche KI-Weiterbildung lohnt sich wirklich? Vergleich der besten Kurse 2026 nac\n30011\tKI für KMU: So automatisierst du dein Unternehmen Schritt für Schritt\tki-fuer-kmu\tpublished\tKI für KMU: Automatisierung als Wettbewerbsvorteil | Praxis-Guide\tKI-Automatisierung für KMU: Konkrete Strategien, Tools und ROI-Beispiele für sof\n30012\tROI von KI-Automatisierung: So berechnest du den echten Nutzen\troi-ki-automatisierung\tpublished\tROI von KI-Automatisierung berechnen: Formel, Beispiele & Tipps\t95% der KI-Projekte scheitern am ROI. Lerne, wie du den Nutzen präzise berechnes\n30013\tKI im Marketing: Lead-Generierung automatisieren in 2026\tki-marketing-automatisierung\tpublished\tKI im Marketing: Lead-Generierung automatisieren | Praxis-Guide\tAutomatisiere deine Lead-Generierung mit KI: Von Messenger-Bots über CRM-Integra\n",
+  "stderr": "",
+  "execution_time_ms": 56
+}

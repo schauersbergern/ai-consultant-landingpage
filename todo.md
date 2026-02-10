@@ -92,3 +92,7 @@
 - [x] Blog-Link im Footer hinzufügen
 - [x] Bulk-Import-Funktion für Blog-Artikel (JSON/CSV Upload)
 - [x] Admin-Navigation verbessern (Admin-Link für eingeloggte Admins)
+- [x] 12 SEO-Blogartikel aus DOCX-Dateien extrahieren und veröffentlichen
+- [x] Meta-Titel und Meta-Beschreibung gemäß Anweisungen in jedem Artikel setzen
+- [x] Umlaute in allen Artikeln korrigiert
+- [x] Markdown-Rendering für Blog-Artikel implementiert (react-markdown)

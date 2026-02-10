@@ -1,23 +1,66 @@
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Loader2, ArrowLeft, Calendar, Share2 } from "lucide-react";
-import { useLocation } from "wouter";
+import { useLocation, useParams } from "wouter";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import { useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
-interface BlogArticleProps {
-  slug: string;
-}
-
-export default function BlogArticle({ slug }: BlogArticleProps) {
+export default function BlogArticle() {
+  const params = useParams<{ slug: string }>();
+  const slug = params.slug || "";
   const [, navigate] = useLocation();
-  const { data: article, isLoading, error } = trpc.blog.getBySlug.useQuery(slug);
+  const { data: article, isLoading, error } = trpc.blog.getBySlug.useQuery(slug, {
+    enabled: !!slug,
+  });
 
   useEffect(() => {
-    // Scroll to top when article loads
     window.scrollTo(0, 0);
   }, [slug]);
+
+  // Set SEO meta tags
+  useEffect(() => {
+    if (article) {
+      if (article.seoTitle) {
+        document.title = article.seoTitle;
+      } else {
+        document.title = `${article.title} | AI Practitioner Blog`;
+      }
+      // Set meta description
+      let metaDesc = document.querySelector('meta[name="description"]');
+      if (!metaDesc) {
+        metaDesc = document.createElement("meta");
+        metaDesc.setAttribute("name", "description");
+        document.head.appendChild(metaDesc);
+      }
+      metaDesc.setAttribute("content", article.seoDescription || article.excerpt || "");
+
+      // Set Open Graph tags
+      const ogTags: Record<string, string> = {
+        "og:title": article.seoTitle || article.title,
+        "og:description": article.seoDescription || article.excerpt || "",
+        "og:type": "article",
+        "og:url": window.location.href,
+      };
+      if (article.featuredImage) {
+        ogTags["og:image"] = article.featuredImage;
+      }
+      Object.entries(ogTags).forEach(([property, content]) => {
+        let tag = document.querySelector(`meta[property="${property}"]`);
+        if (!tag) {
+          tag = document.createElement("meta");
+          tag.setAttribute("property", property);
+          document.head.appendChild(tag);
+        }
+        tag.setAttribute("content", content);
+      });
+    }
+    return () => {
+      document.title = "KI Ausbildung mit IHK-Zertifikat | AI Practitioner in 12 Wochen";
+    };
+  }, [article]);
 
   if (isLoading) {
     return (
@@ -54,22 +97,27 @@ export default function BlogArticle({ slug }: BlogArticleProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Header Navigation */}
-      <div className="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-white/20">
-        <div className="container max-w-4xl mx-auto px-4 py-4">
-          <Button
-            variant="ghost"
-            onClick={() => navigate("/blog")}
-            className="text-gray-600 hover:text-gray-900"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Zurück zum Blog
-          </Button>
+      <nav className="fixed top-0 w-full z-50 border-b border-white/20" style={{
+        background: 'rgba(255, 255, 255, 0.7)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
+      }}>
+        <div className="container flex items-center justify-between py-4">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/XjvoXOCMszZFXAGc.png" alt="AI Practitioner" className="w-8 h-8" />
+            <span className="font-semibold text-lg">AI Practitioner</span>
+          </div>
+          <div className="flex items-center gap-6">
+            <a href="/" className="text-gray-600 hover:text-gray-900 transition hidden md:inline">Startseite</a>
+            <a href="/blog" className="text-gray-600 hover:text-gray-900 transition">Blog</a>
+          </div>
         </div>
-      </div>
+      </nav>
 
       {/* Featured Image */}
       {article.featuredImage && (
-        <div className="h-96 overflow-hidden bg-gradient-to-br from-blue-100 to-blue-50">
+        <div className="pt-16 h-96 overflow-hidden bg-gradient-to-br from-blue-100 to-blue-50">
           <img
             src={article.featuredImage}
             alt={article.title}
@@ -79,7 +127,7 @@ export default function BlogArticle({ slug }: BlogArticleProps) {
       )}
 
       {/* Article Content */}
-      <article className="py-20 px-4">
+      <article className={`${article.featuredImage ? 'py-12' : 'pt-28 pb-12'} px-4`}>
         <div className="container max-w-4xl mx-auto">
           {/* Meta Information */}
           <div className="mb-8 pb-8 border-b border-gray-200">
@@ -91,7 +139,7 @@ export default function BlogArticle({ slug }: BlogArticleProps) {
               </div>
             )}
 
-            <h1 className="text-5xl md:text-6xl font-semibold mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl font-semibold mb-6 leading-tight">
               {article.title}
             </h1>
 
@@ -124,7 +172,6 @@ export default function BlogArticle({ slug }: BlogArticleProps) {
                       url: window.location.href,
                     });
                   } else {
-                    // Fallback: copy to clipboard
                     navigator.clipboard.writeText(window.location.href);
                     alert("Link kopiert!");
                   }
@@ -136,23 +183,11 @@ export default function BlogArticle({ slug }: BlogArticleProps) {
             </div>
           </div>
 
-          {/* Article Body */}
-          <div className="prose prose-lg max-w-none mb-16">
-            <div
-              className="text-gray-700 leading-relaxed"
-              dangerouslySetInnerHTML={{
-                __html: article.content
-                  .split("\n")
-                  .map((line: string) => {
-                    if (line.startsWith("# ")) return `<h2 class="text-3xl font-bold mt-8 mb-4">${line.slice(2)}</h2>`;
-                    if (line.startsWith("## ")) return `<h3 class="text-2xl font-bold mt-6 mb-3">${line.slice(3)}</h3>`;
-                    if (line.startsWith("- ")) return `<li class="ml-4">${line.slice(2)}</li>`;
-                    if (line.trim() === "") return "<br />";
-                    return `<p class="mb-4">${line}</p>`;
-                  })
-                  .join(""),
-              }}
-            />
+          {/* Article Body - Markdown Rendering */}
+          <div className="prose prose-lg max-w-none mb-16 prose-headings:font-semibold prose-headings:text-gray-900 prose-p:text-gray-700 prose-p:leading-relaxed prose-li:text-gray-700 prose-strong:text-gray-900 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {article.content}
+            </ReactMarkdown>
           </div>
 
           {/* Tags */}
@@ -179,25 +214,12 @@ export default function BlogArticle({ slug }: BlogArticleProps) {
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
               Lerne in der AI Practitioner Ausbildung, wie du professionelle KI-Lösungen aufbaust und damit Geld verdienst.
             </p>
-            <Button className="btn-apple">
+            <Button className="btn-apple" onClick={() => navigate("/")}>
               Zur Ausbildung
             </Button>
           </div>
         </div>
       </article>
-
-      {/* Related Articles Section */}
-      <section className="py-20 px-4 bg-gradient-to-b from-white to-gray-50 border-t border-gray-200">
-        <div className="container max-w-4xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-12">Weitere Artikel</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Placeholder for related articles */}
-            <div className="card-glass p-6 text-center text-gray-500">
-              <p>Weitere Artikel werden in Kürze hinzugefügt</p>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

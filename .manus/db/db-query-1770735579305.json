@@ -1,0 +1,70 @@
+{
+  "query": "SELECT id, slug, status FROM blog_articles WHERE status = 'published' ORDER BY id;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 37qau46u154uM4C.48befe471eba --database b8NfgMGTwkTWijLEpyKPTW --execute SELECT id, slug, status FROM blog_articles WHERE status = 'published' ORDER BY id;",
+  "rows": [
+    {
+      "id": "30002",
+      "slug": "ki-manager-ihk-weiterbildung",
+      "status": "published"
+    },
+    {
+      "id": "30003",
+      "slug": "ki-experte-werden",
+      "status": "published"
+    },
+    {
+      "id": "30004",
+      "slug": "ki-automatisierung-lernen",
+      "status": "published"
+    },
+    {
+      "id": "30005",
+      "slug": "prozesse-automatisieren-ki",
+      "status": "published"
+    },
+    {
+      "id": "30006",
+      "slug": "chatbot-erstellen-unternehmen",
+      "status": "published"
+    },
+    {
+      "id": "30007",
+      "slug": "rag-system-aufbauen",
+      "status": "published"
+    },
+    {
+      "id": "30008",
+      "slug": "make-vs-n8n-vergleich",
+      "status": "published"
+    },
+    {
+      "id": "30009",
+      "slug": "ki-agenten-unternehmen",
+      "status": "published"
+    },
+    {
+      "id": "30010",
+      "slug": "ki-weiterbildung-vergleich",
+      "status": "published"
+    },
+    {
+      "id": "30011",
+      "slug": "ki-fuer-kmu",
+      "status": "published"
+    },
+    {
+      "id": "30012",
+      "slug": "roi-ki-automatisierung",
+      "status": "published"
+    },
+    {
+      "id": "30013",
+      "slug": "ki-marketing-automatisierung",
+      "status": "published"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\tslug\tstatus\n30002\tki-manager-ihk-weiterbildung\tpublished\n30003\tki-experte-werden\tpublished\n30004\tki-automatisierung-lernen\tpublished\n30005\tprozesse-automatisieren-ki\tpublished\n30006\tchatbot-erstellen-unternehmen\tpublished\n30007\trag-system-aufbauen\tpublished\n30008\tmake-vs-n8n-vergleich\tpublished\n30009\tki-agenten-unternehmen\tpublished\n30010\tki-weiterbildung-vergleich\tpublished\n30011\tki-fuer-kmu\tpublished\n30012\troi-ki-automatisierung\tpublished\n30013\tki-marketing-automatisierung\tpublished\n",
+  "stderr": "",
+  "execution_time_ms": 54
+}
