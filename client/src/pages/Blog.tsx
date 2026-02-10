@@ -1,6 +1,7 @@
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, ArrowRight, Calendar, User, Settings } from "lucide-react";
 import { useLocation } from "wouter";
@@ -11,6 +12,21 @@ export default function Blog() {
   const [, navigate] = useLocation();
   const { user } = useAuth();
   const isAdmin = user?.role === "admin";
+
+  useEffect(() => {
+    document.title = "KI-Blog: Fachwissen zu KI-Automatisierung & Weiterbildung | AI Practitioner";
+    // Set meta description
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.setAttribute('name', 'description');
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute('content', 'Fachartikel zu KI-Automatisierung, Chatbots, RAG-Systemen, Make, n8n und IHK-Weiterbildung. Praxiswissen für angehende KI-Experten und Unternehmer.');
+    return () => {
+      document.title = 'AI Practitioner';
+    };
+  }, []);
   const { data: articles, isLoading, error } = trpc.blog.listPublished.useQuery({
     limit: 12,
   });

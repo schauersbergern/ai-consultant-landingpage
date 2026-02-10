@@ -30,7 +30,102 @@ export default function Home() {
   const [showCheckout, setShowCheckout] = useState(false);
 
   useEffect(() => {
-    document.title = "KI-Ausbildung mit IHK-Zertifikat | AI Practitioner";
+    document.title = "KI-Automatisierungsexperte (IHK) | Weiterbildung mit Zertifikat 2026";
+
+    // Schema.org Course Schema
+    const courseSchema = {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "KI-Automatisierungsexperte (IHK) – AI Practitioner Weiterbildung",
+      "description": "In 13 Wochen zum IHK-zertifizierten KI-Experten. Lerne KI-Automatisierung mit Chatbots, RAG-Systemen, Make & n8n.",
+      "provider": {
+        "@type": "Organization",
+        "name": "AI Practitioner",
+        "url": "https://aipractitioner.manus.space"
+      },
+      "educationalCredentialAwarded": "IHK-Zertifikat KI-Automatisierungsexperte",
+      "timeToComplete": "P13W",
+      "numberOfCredits": "61 Unterrichtseinheiten",
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "Online",
+        "courseWorkload": "PT10H/Woche",
+        "instructor": {
+          "@type": "Person",
+          "name": "Josef Held"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "6500",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock",
+        "url": "https://aipractitioner.manus.space"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "40",
+        "bestRating": "5"
+      }
+    };
+
+    // Schema.org FAQPage Schema
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Brauche ich Programmierkenntnisse für die KI-Weiterbildung?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Die Ausbildung nutzt No-Code-Tools wie Make, n8n und Voiceflow. Du lernst KI-Automatisierung Schritt für Schritt – ganz ohne Programmierkenntnisse." } },
+        { "@type": "Question", "name": "Wie viel Zeit muss ich pro Woche investieren?", "acceptedAnswer": { "@type": "Answer", "text": "Plane etwa 10 Stunden pro Woche ein. Die KI-Weiterbildung umfasst 61 Unterrichtseinheiten über 13 Wochen. Du hast lebenslangen Zugang und kannst in deinem Tempo lernen." } },
+        { "@type": "Question", "name": "Ist das IHK-Zertifikat bundesweit anerkannt?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Das Zertifikat wird direkt von der Industrie- und Handelskammer (IHK) ausgestellt und ist bundesweit anerkannt. Es bestätigt deine Qualifikation als KI-Automatisierungsexperte." } },
+        { "@type": "Question", "name": "Kann ich mit KI-Automatisierung wirklich Geld verdienen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Absolventen verdienen durchschnittlich 3.000–10.000€ pro KI-Automatisierungsprojekt. Die Nachfrage nach KI-Experten wächst stark, besonders bei KMU und im Mittelstand." } },
+        { "@type": "Question", "name": "Was lerne ich in der KI-Ausbildung konkret?", "acceptedAnswer": { "@type": "Answer", "text": "Du lernst Chatbots zu erstellen, RAG-Systeme mit Flowise aufzubauen, Prozesse mit Make und n8n zu automatisieren, KI-Agenten zu entwickeln und Kunden für KI-Projekte zu gewinnen – alles praxisnah in 7 Modulen." } },
+        { "@type": "Question", "name": "Was ist der Unterschied zwischen AI Practitioner und anderen KI-Kursen?", "acceptedAnswer": { "@type": "Answer", "text": "Unsere KI-Weiterbildung ist die einzige mit IHK-Zertifikat. Du lernst nicht nur Theorie, sondern baust echte Automatisierungsprojekte mit professionellen Tools wie Make, n8n, Voiceflow und Flowise." } },
+        { "@type": "Question", "name": "Für wen ist die KI-Weiterbildung geeignet?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung richtet sich an Berater, Freelancer, Unternehmer und Angestellte, die KI-Automatisierung als neue Kompetenz oder Einnahmequelle aufbauen möchten. Vorkenntnisse sind nicht erforderlich." } },
+        { "@type": "Question", "name": "Gibt es eine Geld-zurück-Garantie?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du hast eine 14-Tage Geld-zurück-Garantie. Wenn die Ausbildung nicht deinen Erwartungen entspricht, erhältst du den vollen Betrag zurück – ohne Wenn und Aber." } },
+        { "@type": "Question", "name": "Kann ich die KI-Ausbildung neben dem Beruf absolvieren?", "acceptedAnswer": { "@type": "Answer", "text": "Absolut. Die Weiterbildung ist berufsbegleitend konzipiert. Mit ca. 10 Stunden pro Woche und lebenslangem Zugang kannst du flexibel lernen und die Module in deinem eigenen Tempo durcharbeiten." } },
+        { "@type": "Question", "name": "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung zum KI-Automatisierungsexperten kostet 6.500€ (einmalig) oder 6x 1.083€/Monat als Ratenzahlung. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates." } },
+        { "@type": "Question", "name": "Welche Tools lerne ich in der Ausbildung?", "acceptedAnswer": { "@type": "Answer", "text": "Du arbeitest mit den führenden KI-Automatisierungstools: ChatGPT, Make, n8n, Zapier, Voiceflow, ManyChat und Flowise. Damit deckst du das gesamte Spektrum von Chatbots über Prozessautomatisierung bis hin zu RAG-Systemen ab." } },
+        { "@type": "Question", "name": "Erhalte ich nach Abschluss Unterstützung?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du erhältst lebenslangen Zugang zu allen Kursinhalten und Updates. Zusätzlich profitierst du von der Community der Absolventen für Austausch und Networking." } }
+      ]
+    };
+
+    // Schema.org Organization Schema
+    const orgSchema = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "AI Practitioner",
+      "url": "https://aipractitioner.manus.space",
+      "logo": "https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/XjvoXOCMszZFXAGc.png",
+      "description": "IHK-zertifizierte KI-Weiterbildung zum Automatisierungsexperten. Praxisnahe Ausbildung mit Chatbots, RAG-Systemen, Make & n8n.",
+      "sameAs": [],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": "German"
+      }
+    };
+
+    // Inject JSON-LD scripts
+    const schemas = [courseSchema, faqSchema, orgSchema];
+    const scriptIds = ["schema-course", "schema-faq", "schema-org"];
+    schemas.forEach((schema, i) => {
+      let script = document.getElementById(scriptIds[i]) as HTMLScriptElement | null;
+      if (!script) {
+        script = document.createElement("script");
+        script.id = scriptIds[i];
+        script.type = "application/ld+json";
+        document.head.appendChild(script);
+      }
+      script.textContent = JSON.stringify(schema);
+    });
+
+    return () => {
+      scriptIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.remove();
+      });
+    };
   }, []);
 
   // Load ThriveCart script when checkout modal opens
@@ -104,7 +199,7 @@ export default function Home() {
       }}>
         <div className="container flex items-center justify-between py-4">
           <div className="flex items-center gap-2">
-            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/XjvoXOCMszZFXAGc.png" alt="AI Practitioner" className="w-8 h-8" />
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/XjvoXOCMszZFXAGc.png" alt="KI Automatisierungsexperte IHK Zertifikat Logo" className="w-8 h-8" />
             <span className="font-semibold text-lg">AI Practitioner</span>
           </div>
           <div className="hidden md:flex items-center gap-8">
@@ -135,12 +230,12 @@ export default function Home() {
             </motion.div>
 
             <h1 className="text-5xl md:text-6xl font-semibold mb-6 leading-tight">
-              Werde der KI-Experte,<br />
-              <span className="shiny-text">den dein Markt braucht</span>
+              KI-Automatisierungsexperte (IHK):<br />
+              <span className="shiny-text">Praxisnahe Weiterbildung mit Zertifikat</span>
             </h1>
 
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-              In 12 Wochen zum IHK-zertifizierten AI Practitioner. Baue KI-Automatisierungen, die Unternehmen wirklich nutzen – und bezahlen.
+              In 13 Wochen zum IHK-zertifizierten KI-Experten. Lerne KI-Automatisierung mit Chatbots, RAG-Systemen, Make & n8n – und baue Systeme, die Unternehmen wirklich nutzen und bezahlen.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -164,7 +259,7 @@ export default function Home() {
               </motion.div>
             </div>
 
-            <p className="text-sm text-gray-500">50+ erfolgreiche Absolventen • 14-Tage Geld-zurück-Garantie</p>
+            <p className="text-sm text-gray-500">40+ Teilnehmer aus der Pilotkohorte • 14-Tage Geld-zurück-Garantie</p>
           </motion.div>
         </div>
 
@@ -177,7 +272,7 @@ export default function Home() {
         >
           <img
             src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/iEorTlaquYKZmtLt.png"
-            alt="AI Practitioner Ausbildung"
+            alt="KI Automatisierung Weiterbildung Kursplattform mit IHK Zertifikat"
             className="hero-image w-full"
           />
         </motion.div>
@@ -191,16 +286,19 @@ export default function Home() {
               {
                 icon: "https://private-us-east-1.manuscdn.com/sessionFile/YcbjwiWInGIVL0BsT3oWwc/sandbox/BcMJFSTsWIBgVRq2mfZscL_1770291693299_na1fn_aWNvbi10aW1lLWdsYXNzLXRyYW5zcGFyZW50.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvWWNiandpV0luR0lWTDBCc1Qzb1d3Yy9zYW5kYm94L0JjTUpGU1RzV0lCZ1ZScTJtZlpzY0xfMTc3MDI5MTY5MzI5OV9uYTFmbl9hV052YmkxMGFXMWxMV2RzWVhOekxYUnlZVzV6Y0dGeVpXNTAucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=ryEtxrL2sIWWl48Sc6jkNhF6vnmnAU7395lXc05asV0zR3WezYWl-pFgUijMEtcODQGtjxRHr~VdihQUma07csKdzaRbJfCWP5wLCFCChYhEfFMWb6QE86Q5-h2bjmNm-4o5VBqZXDgcPY4AowaN4C7AQRYbzae0rWBuh1dGgscmlHdqc61GvQtKyMqTkE6nFYCAfRY2PJrkhbX1JKE8kTwACYfIXcdVA1i3Kdjv3XhlQdalCoJUo1RB-34Bb604LyRFbW9H65c9d9~mQlkEFjze-hCHl1Aw8vKRllUsi2Jdiicx6DQYCDXsGmZP11p-IkkD4ie1Yx~IeiXceP-8DQ__",
                 title: "10+ Stunden/Woche sparen",
+                alt: "Zeitersparnis durch KI Automatisierung 10 Stunden pro Woche",
                 description: "Automatisiere repetitive Aufgaben und konzentriere dich auf strategische Arbeit"
               },
               {
                 icon: "https://private-us-east-1.manuscdn.com/sessionFile/YcbjwiWInGIVL0BsT3oWwc/sandbox/BcMJFSTsWIBgVRq2mfZscL_1770291693300_na1fn_aWNvbi1pbmNvbWUtZ2xhc3MtdHJhbnNwYXJlbnQ.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvWWNiandpV0luR0lWTDBCc1Qzb1d3Yy9zYW5kYm94L0JjTUpGU1RzV0lCZ1ZScTJtZlpzY0xfMTc3MDI5MTY5MzMwMF9uYTFmbl9hV052YmkxcGJtTnZiV1V0WjJ4aGMzTXRkSEpoYm5Od1lYSmxiblEucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=rA6SSBnPWMgim6xr~7Od~muq9RPf18aEI70wWXGWnc2n9OL9S52t~qjHfgEckcxx8H8m9pWdQ4bf2iDpzfCbF6smL1FL5ZtKTMmKwUGeK9Qj~TDqFiIS~WbwBwpVqIKsLiuv1IrCk1uTd4Fw8iQsGO0Q13ZIwVOgiVjRraE-9c-KKtXDKeZBtPZytNS3SuUviwTDDVgDXoHu5TJEb96QKCcg1MY6lNB5QmNbBIUlj0PcejZOUkb1uNeK7cEnk~6TCRtd6bQBpU5GIDPR1p6VPfHlhu06g6eS6aCCsKTR9OYxENnL9iJ9hlTfcGrEuetdOCpdvj6fkumrJCfli1S3jQ__",
                 title: "Neue Einnahmequelle",
+                alt: "Einnahmen als KI Automatisierungsexperte 3000 bis 10000 Euro pro Projekt",
                 description: "Verdiene 3.000-10.000€ pro KI-Automatisierungsprojekt"
               },
               {
                 icon: "https://private-us-east-1.manuscdn.com/sessionFile/YcbjwiWInGIVL0BsT3oWwc/sandbox/BcMJFSTsWIBgVRq2mfZscL_1770291693300_na1fn_aWNvbi1zeXN0ZW1zLWdsYXNzLXRyYW5zcGFyZW50.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvWWNiandpV0luR0lWTDBCc1Qzb1d3Yy9zYW5kYm94L0JjTUpGU1RzV0lCZ1ZScTJtZlpzY0xfMTc3MDI5MTY5MzMwMF9uYTFmbl9hV052YmkxemVYTjBaVzF6TFdkc1lYTnpMWFJ5WVc1emNHRnlaVzUwLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Z0cDdNiZfoBrTdW5rVoqpRNVGwMafZajF-xYXo~SxmRU-Z486rpczJQ1VG0R1Qjnsr9RxYj9PCRTwgBnYxjXuObnwPbD0uzt4Cyf-c-o8vGKTMSCzQDTJWnr3fQ5SqaKMT15y1ilXnyJ5bCzks4mryUyMf~qR4rb8tHoV0a5WJK1-Qjk6DC7w-x59fTWyvGrL36-eUVcfJwLkzxvcystTgjsSJ7bX3qwudnZJy39cMKvXPPbTg0b9lKwfCQ1HJyRHUs0S~YWE-UAL3qAyIKjR3dxb6HSJBlClt1JKqvQwysh1tPzj0VL1NdUbnih2lAyjjdxd4bodSM-aIqCGjlpSg__",
                 title: "Professionelle Systeme",
+                alt: "Professionelle KI Automatisierungssysteme mit Make und n8n",
                 description: "Baue Automationen, die zuverlässig funktionieren und skalieren"
               }
             ].map((benefit, index) => (
@@ -212,7 +310,7 @@ export default function Home() {
                 transition={{ delay: index * 0.1 }}
                 className="card-glass text-center"
               >
-                <img src={benefit.icon} alt={benefit.title} className="w-16 h-16 mx-auto mb-4" />
+                <img src={benefit.icon} alt={benefit.alt} className="w-16 h-16 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-3">{benefit.title}</h3>
                 <p className="text-gray-600">{benefit.description}</p>
               </motion.div>
@@ -231,10 +329,10 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-semibold mb-4">
-              Was du lernst
+              7 Praxis-Module: Von Chatbots bis KI-Agenten
             </h2>
             <p className="text-xl text-gray-600">
-              8 Module, die dich vom Anfänger zum Profi machen
+              Die KI-Weiterbildung, die dich in 13 Wochen zum Automatisierungsexperten macht
             </p>
           </motion.div>
 
@@ -246,21 +344,20 @@ export default function Home() {
           >
             <img
               src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/OjzFLcWANByZmJSv.png"
-              alt="8 Module der Ausbildung"
+              alt="7 Module der KI Automatisierung Weiterbildung Uebersicht"
               className="w-full shadow-2xl"
             />
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-6 mt-12">
             {[
-              { num: "01", title: "KI-Grundlagen", desc: "ChatGPT, Prompting, AI-Systeme verstehen" },
-              { num: "02", title: "Chatbots bauen", desc: "Intelligente Bots mit Voiceflow & ManyChat" },
-              { num: "03", title: "Automatisierungen", desc: "Make, N8N, Zapier meistern" },
-              { num: "04", title: "Datenverarbeitung", desc: "APIs, Datenströme, Integrationen" },
-              { num: "05", title: "KI-Agenten", desc: "Autonome Systeme mit Flowise" },
-              { num: "06", title: "Akquise & Sales", desc: "Kunden gewinnen und überzeugen" },
-              { num: "07", title: "Business-Modelle", desc: "Verdienmodelle und Skalierung" },
-              { num: "08", title: "Compliance & DSGVO", desc: "Rechtssicher arbeiten" }
+              { num: "01", title: "KI-Grundlagen & Prompting", desc: "ChatGPT, Prompt Engineering und KI-Systeme verstehen – die Basis für deine KI-Weiterbildung" },
+              { num: "02", title: "Chatbot erstellen", desc: "Intelligente Chatbots mit Voiceflow & ManyChat bauen – für Kundenservice und Lead-Generierung" },
+              { num: "03", title: "RAG-Systeme & Flowise", desc: "Retrieval Augmented Generation mit Flowise – KI-Systeme mit eigenem Wissen ausstatten" },
+              { num: "04", title: "Prozesse automatisieren", desc: "Make, n8n und Zapier meistern – KI-Automatisierung für KMU und Unternehmen" },
+              { num: "05", title: "KI-Agenten & Datenverarbeitung", desc: "Autonome KI-Agenten, APIs und Datenströme integrieren" },
+              { num: "06", title: "Akquise & Sales für KI-Experten", desc: "Kunden gewinnen, KI-Projekte verkaufen und als KI-Berater positionieren" },
+              { num: "07", title: "Compliance, DSGVO & Business", desc: "Rechtssicher arbeiten, Verdienmodelle aufbauen und skalieren" }
             ].map((module, index) => (
               <motion.div
                 key={index}
@@ -291,10 +388,10 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-semibold mb-4">
-              Erfolgsgeschichten
+              Erfahrungen: Was Absolventen der KI-Weiterbildung berichten
             </h2>
             <p className="text-xl text-gray-600">
-              Das sagen unsere Absolventen
+              Echte Ergebnisse von Teilnehmern des KI-Kurses
             </p>
           </motion.div>
 
@@ -354,7 +451,7 @@ export default function Home() {
           >
             <img
               src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/oDfrkEvmjFxZDozO.png"
-              alt="Erfolgsstatistiken"
+              alt="Erfolgsstatistiken KI Kurs 120 Projekte 95 Prozent Zufriedenheit"
               className="w-full"
             />
           </motion.div>
@@ -371,10 +468,10 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-semibold mb-4">
-              Investition
+              Kosten & Investition: KI-Ausbildung mit IHK-Zertifikat
             </h2>
             <p className="text-xl text-gray-600">
-              Einmalige Zahlung oder flexible Raten
+              Einmalige Zahlung oder flexible Ratenzahlung
             </p>
           </motion.div>
 
@@ -392,7 +489,7 @@ export default function Home() {
             >
               <img
                 src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/gMrfgNKGYGRdAKCR.png"
-                alt="Premium Pricing"
+                alt="KI Weiterbildung IHK Zertifikat Kosten und Preise"
                 className="w-full"
               />
             </motion.div>
@@ -435,27 +532,59 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-semibold mb-4">
-              Häufig gestellte Fragen
+              Häufige Fragen zur KI-Weiterbildung
             </h2>
           </motion.div>
 
           <div className="space-y-4">
             {[
               {
-                q: "Brauche ich Programmierkenntnisse?",
-                a: "Nein. Wir nutzen No-Code-Tools wie Make und Voiceflow. Du lernst alles Schritt für Schritt."
+                q: "Brauche ich Programmierkenntnisse für die KI-Weiterbildung?",
+                a: "Nein. Die Ausbildung nutzt No-Code-Tools wie Make, n8n und Voiceflow. Du lernst KI-Automatisierung Schritt für Schritt – ganz ohne Programmierkenntnisse."
               },
               {
-                q: "Wie viel Zeit muss ich investieren?",
-                a: "Etwa 5-8 Stunden pro Woche. Du hast lebenslangen Zugang und kannst in deinem Tempo lernen."
+                q: "Wie viel Zeit muss ich pro Woche investieren?",
+                a: "Plane etwa 10 Stunden pro Woche ein. Die KI-Weiterbildung umfasst 61 Unterrichtseinheiten über 13 Wochen. Du hast lebenslangen Zugang und kannst in deinem Tempo lernen."
               },
               {
-                q: "Ist das IHK-Zertifikat anerkannt?",
-                a: "Ja, es wird von der Industrie- und Handelskammer ausgestellt und ist bundesweit anerkannt."
+                q: "Ist das IHK-Zertifikat bundesweit anerkannt?",
+                a: "Ja. Das Zertifikat wird direkt von der Industrie- und Handelskammer (IHK) ausgestellt und ist bundesweit anerkannt. Es bestätigt deine Qualifikation als KI-Automatisierungsexperte."
               },
               {
-                q: "Kann ich damit wirklich Geld verdienen?",
-                a: "Ja. Absolventen verdienen durchschnittlich 3.000-10.000€ pro KI-Automatisierungsprojekt."
+                q: "Kann ich mit KI-Automatisierung wirklich Geld verdienen?",
+                a: "Ja. Absolventen verdienen durchschnittlich 3.000–10.000€ pro KI-Automatisierungsprojekt. Die Nachfrage nach KI-Experten wächst stark, besonders bei KMU und im Mittelstand."
+              },
+              {
+                q: "Was lerne ich in der KI-Ausbildung konkret?",
+                a: "Du lernst Chatbots zu erstellen, RAG-Systeme mit Flowise aufzubauen, Prozesse mit Make und n8n zu automatisieren, KI-Agenten zu entwickeln und Kunden für KI-Projekte zu gewinnen – alles praxisnah in 7 Modulen."
+              },
+              {
+                q: "Was ist der Unterschied zwischen AI Practitioner und anderen KI-Kursen?",
+                a: "Unsere KI-Weiterbildung ist die einzige mit IHK-Zertifikat. Du lernst nicht nur Theorie, sondern baust echte Automatisierungsprojekte mit professionellen Tools wie Make, n8n, Voiceflow und Flowise."
+              },
+              {
+                q: "Für wen ist die KI-Weiterbildung geeignet?",
+                a: "Die Ausbildung richtet sich an Berater, Freelancer, Unternehmer und Angestellte, die KI-Automatisierung als neue Kompetenz oder Einnahmequelle aufbauen möchten. Vorkenntnisse sind nicht erforderlich."
+              },
+              {
+                q: "Gibt es eine Geld-zurück-Garantie?",
+                a: "Ja. Du hast eine 14-Tage Geld-zurück-Garantie. Wenn die Ausbildung nicht deinen Erwartungen entspricht, erhältst du den vollen Betrag zurück – ohne Wenn und Aber."
+              },
+              {
+                q: "Kann ich die KI-Ausbildung neben dem Beruf absolvieren?",
+                a: "Absolut. Die Weiterbildung ist berufsbegleitend konzipiert. Mit ca. 10 Stunden pro Woche und lebenslangem Zugang kannst du flexibel lernen und die Module in deinem eigenen Tempo durcharbeiten."
+              },
+              {
+                q: "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?",
+                a: "Die Ausbildung zum KI-Automatisierungsexperten kostet 6.500€ (einmalig) oder 6x 1.083€/Monat als Ratenzahlung. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates."
+              },
+              {
+                q: "Welche Tools lerne ich in der Ausbildung?",
+                a: "Du arbeitest mit den führenden KI-Automatisierungstools: ChatGPT, Make, n8n, Zapier, Voiceflow, ManyChat und Flowise. Damit deckst du das gesamte Spektrum von Chatbots über Prozessautomatisierung bis hin zu RAG-Systemen ab."
+              },
+              {
+                q: "Erhalte ich nach Abschluss Unterstützung?",
+                a: "Ja. Du erhältst lebenslangen Zugang zu allen Kursinhalten und Updates. Zusätzlich profitierst du von der Community der Absolventen für Austausch und Networking."
               }
             ].map((faq, index) => (
               <motion.div
@@ -483,10 +612,10 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-semibold mb-6">
-              Bereit, deine KI-Karriere zu starten?
+              Jetzt KI-Automatisierungsexperte werden
             </h2>
             <p className="text-xl text-gray-600 mb-8">
-              Schließe dich 50+ erfolgreichen Absolventen an und werde der KI-Experte, den dein Markt braucht.
+              Starte deine KI-Weiterbildung mit IHK-Zertifikat und werde der Automatisierungsexperte, den Unternehmen suchen.
             </p>
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -510,7 +639,7 @@ export default function Home() {
       }}>
         <div className="container flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="AI Practitioner" className="w-6 h-6" />
+            <img src="/logo.png" alt="KI Automatisierungsexperte IHK Zertifikat Logo" className="w-6 h-6" />
             <span className="font-semibold">AI Practitioner</span>
           </div>
           <div className="flex items-center gap-6 flex-wrap justify-center">

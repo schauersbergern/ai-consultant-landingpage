@@ -108,3 +108,24 @@
 - [x] Facebook Pixel mit Consent-Logik verknüpfen (nur nach Zustimmung laden)
 - [x] Purchase-Event für Facebook Pixel nach erfolgreicher ThriveCart-Zahlung einrichten
 - [x] Danke-Seite (/danke, /thank-you) mit Purchase-Event erstellt
+
+## SEO-Audit Korrekturen
+
+- [x] Homepage Meta Title keyword-optimieren
+- [x] Homepage Meta Description setzen
+- [x] Blog-Seite Meta Title und Description setzen
+- [x] Open Graph Tags für Social Media setzen
+- [x] hreflang="de" Tag setzen (lang="de" in html tag)
+- [x] Canonical Tags setzen
+- [x] H1 keyword-optimieren
+- [x] H2-Struktur keyword-optimieren
+- [x] Inhaltliche Korrekturen: Kursdauer 13 Wochen, 7 Module, Flowise-Zuordnung, Zeitaufwand
+- [x] Bild-Alt-Tags keyword-optimieren
+- [x] Schema.org Course-Schema implementieren
+- [x] Schema.org FAQPage-Schema implementieren
+- [x] Schema.org Organization-Schema implementieren
+- [x] Sitemap.xml erstellen (dynamisch mit Blog-Artikeln)
+- [x] robots.txt konfigurieren
+- [x] FAQ auf 12 Fragen erweitert (SEO-optimiert)
+- [x] Content-Keywords eingebaut (ki manager ihk, ki weiterbildung, ki kurs, etc.)
+- [x] FAQPage-Schema mit allen 12 Fragen synchronisiert
