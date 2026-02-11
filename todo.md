@@ -210,3 +210,7 @@
 - [x] Meta Description auf 118 Zeichen gekürzt
 - [x] Impressum von ki-club.org übernommen (Pundamilia Marketing OÜ)
 - [x] Datenschutzerklärung von ki-club.org vollständig übernommen (Purple Zebra Consulting)
+
+## Preis-Korrektur
+- [x] Preis von 4.797€ auf 6.500€ zurückgeändert (User-Edit)
+- [x] Schema.org Preis auf 6500 aktualisiert

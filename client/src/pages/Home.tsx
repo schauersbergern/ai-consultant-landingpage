@@ -57,7 +57,7 @@ export default function Home() {
       },
       "offers": {
         "@type": "Offer",
-        "price": "4797",
+        "price": "6500",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock",
         "url": "https://aipractitioner.manus.space"
@@ -537,7 +537,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                4.797€
+                6.500€
               </motion.p>
               <p className="text-gray-500 text-lg">zzgl. MwSt. – Einmalige Zahlung, kein Abo</p>
             </div>
