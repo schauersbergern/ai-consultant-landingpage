@@ -233,3 +233,6 @@
 ## CTA Section Hintergrundbild
 - [x] Statistik-Bild auf CDN hochgeladen
 - [x] Bild als Hintergrund der letzten CTA-Section eingebaut mit dunklem Overlay
+
+## Cleanup
+- [x] Altes Statistik-Bild als Standalone-Element von der Seite entfernt

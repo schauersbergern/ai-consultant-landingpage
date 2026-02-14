@@ -487,23 +487,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="rounded-3xl overflow-hidden shadow-2xl"
-          >
-            <img
-              src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/oDfrkEvmjFxZDozO.png"
-              alt="Erfolgsstatistiken KI Kurs 120 Projekte 95 Prozent Zufriedenheit"
-              className="w-full"
-            />
-          </motion.div>
-        </div>
-      </section>
 
       {/* Pricing Section */}
       <section id="pricing" className="py-24 px-4 section-premium">
