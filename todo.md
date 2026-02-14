@@ -214,3 +214,7 @@
 ## Preis-Korrektur
 - [x] Preis von 4.797€ auf 6.500€ zurückgeändert (User-Edit)
 - [x] Schema.org Preis auf 6500 aktualisiert
+
+## IHK Logo Integration
+- [x] IHK Bildungszentrum Halle-Dessau Logo auf CDN hochgeladen
+- [x] IHK Logo prominent in Hero-Bereich und Pricing-Bereich eingebaut

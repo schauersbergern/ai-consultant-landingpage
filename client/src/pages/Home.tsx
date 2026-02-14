@@ -222,11 +222,15 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <motion.div
-              className="badge-glass mb-8 justify-center"
-              whileHover={{ scale: 1.05 }}
+              className="mb-8 flex flex-col items-center gap-3"
+              whileHover={{ scale: 1.02 }}
             >
-              <Award className="w-4 h-4 text-blue-600" />
-              <span className="text-sm font-medium text-gray-700">IHK-zertifiziert</span>
+              <img
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/CZAtZTUbDpyvWpkZ.jpg"
+                alt="IHK Bildungszentrum Halle-Dessau GmbH – Zertifizierungspartner"
+                className="h-12 md:h-14 w-auto object-contain"
+              />
+              <span className="text-sm font-medium text-gray-600">Zertifiziert durch das IHK Bildungszentrum Halle-Dessau</span>
             </motion.div>
 
             <h1 className="text-5xl md:text-6xl font-semibold mb-6 leading-tight">
@@ -570,6 +574,16 @@ export default function Home() {
                 <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
                 <span>Alle Updates inklusive</span>
               </div>
+            </div>
+
+            {/* IHK Trust Badge */}
+            <div className="mt-8 pt-6 border-t border-gray-200/50 flex flex-col items-center gap-2">
+              <img
+                src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/CZAtZTUbDpyvWpkZ.jpg"
+                alt="IHK Bildungszentrum Halle-Dessau GmbH – Offizieller Zertifizierungspartner"
+                className="h-10 w-auto object-contain opacity-80"
+              />
+              <span className="text-xs text-gray-400">Offizieller Zertifizierungspartner</span>
             </div>
           </motion.div>
         </div>
