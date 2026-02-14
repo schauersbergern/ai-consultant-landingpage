@@ -229,3 +229,7 @@
 - [x] Modulübersichts-Bild als Hintergrund der Module-Section
 - [x] Dunkles Overlay für Lesbarkeit
 - [x] 7 Module-Karten darüber platzieren mit Glass-Effekt
+
+## CTA Section Hintergrundbild
+- [x] Statistik-Bild auf CDN hochgeladen
+- [x] Bild als Hintergrund der letzten CTA-Section eingebaut mit dunklem Overlay

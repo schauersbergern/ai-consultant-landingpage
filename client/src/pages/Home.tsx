@@ -682,17 +682,26 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 section-premium">
-        <div className="container max-w-3xl text-center">
+      <section className="relative py-24 px-4 overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/cClyWGwPGcqqeyJT.png')`,
+          }}
+        />
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/70 via-gray-900/60 to-gray-900/70" />
+        <div className="container max-w-3xl text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-semibold mb-6">
+            <h2 className="text-4xl md:text-5xl font-semibold mb-6 text-white">
               Jetzt KI-Automatisierungsexperte werden
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl text-gray-200 mb-8">
               Starte deine KI-Weiterbildung mit IHK-Zertifikat und werde der Automatisierungsexperte, den Unternehmen suchen.
             </p>
             <motion.div
