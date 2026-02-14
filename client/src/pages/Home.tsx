@@ -14,9 +14,7 @@ import { motion } from "framer-motion";
 import "@/glass.css";
 import {
   ArrowRight,
-  Award,
   CheckCircle2,
-  Play,
 } from "lucide-react";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useEffect, useState, useCallback } from "react";
@@ -191,10 +189,10 @@ export default function Home() {
 
     <div className="min-h-screen bg-white text-gray-900">
       {/* Navigation - Glasmorphism */}
-      <nav className="fixed top-0 w-full z-50 border-b border-white/20" style={{
-        background: 'rgba(255, 255, 255, 0.7)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
+      <nav className="fixed top-0 w-full z-50 border-b border-white/10 transition-all duration-300" style={{
+        background: 'rgba(255, 255, 255, 0.85)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
       }}>
         <div className="container flex items-center justify-between py-4">
@@ -213,73 +211,84 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 section-premium">
-        <div className="container max-w-4xl mx-auto text-center">
+      {/* Hero Section - Fullscreen Background Image */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/iEorTlaquYKZmtLt.png"
+            alt="KI Automatisierung Weiterbildung Kursplattform mit IHK Zertifikat"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Dark gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.65)] via-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.7)]"></div>
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 container max-w-4xl mx-auto text-center px-4 pt-28 pb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
+            {/* IHK Badge */}
             <motion.div
-              className="mb-8 flex flex-col items-center gap-3"
+              className="mb-6 flex flex-col items-center gap-2"
               whileHover={{ scale: 1.02 }}
             >
-              <img
-                src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/CZAtZTUbDpyvWpkZ.jpg"
-                alt="IHK Bildungszentrum Halle-Dessau GmbH – Zertifizierungspartner"
-                className="h-12 md:h-14 w-auto object-contain"
-              />
-              <span className="text-sm font-medium text-gray-600">Zertifiziert durch das IHK Bildungszentrum Halle-Dessau</span>
+              <div className="bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2 inline-flex items-center">
+                <img
+                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/CZAtZTUbDpyvWpkZ.jpg"
+                  alt="IHK Bildungszentrum Halle-Dessau GmbH – Zertifizierungspartner"
+                  className="h-10 md:h-12 w-auto object-contain"
+                />
+              </div>
+              <span className="text-sm font-medium text-white/80">Zertifiziert durch das IHK Bildungszentrum Halle-Dessau</span>
             </motion.div>
 
-            <h1 className="text-5xl md:text-6xl font-semibold mb-6 leading-tight">
+            {/* Headline */}
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight text-white">
               KI-Automatisierungsexperte (IHK):<br />
-              <span className="shiny-text">Praxisnahe Weiterbildung mit Zertifikat</span>
+              <span className="text-blue-400">Praxisnahe Weiterbildung mit Zertifikat</span>
             </h1>
 
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            {/* Subheadline */}
+            <p className="text-lg md:text-xl text-white/85 mb-8 max-w-2xl mx-auto leading-relaxed">
               In 13 Wochen zum IHK-zertifizierten KI-Experten. Lerne KI-Automatisierung mit Chatbots, RAG-Systemen, Make & n8n – und baue Systeme, die Unternehmen wirklich nutzen und bezahlen.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            {/* Single CTA */}
+            <div className="flex justify-center mb-8">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button className="btn-apple px-8 py-4 text-lg" onClick={openCheckout}>
+                <Button className="btn-apple px-10 py-5 text-lg" onClick={openCheckout}>
                   Ausbildung starten
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button className="btn-apple-secondary px-8 py-4 text-lg">
-                  <Play className="w-5 h-5 mr-2" />
-                  Video ansehen
-                </Button>
-              </motion.div>
             </div>
 
-            <p className="text-sm text-gray-500">40+ Teilnehmer aus der Pilotkohorte • 14-Tage Geld-zurück-Garantie</p>
+            {/* Social Proof */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-white/70">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-green-400" />
+                40+ Teilnehmer aus der Pilotkohorte
+              </span>
+              <span className="hidden sm:inline text-white/40">•</span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-green-400" />
+                14-Tage Geld-zurück-Garantie
+              </span>
+              <span className="hidden sm:inline text-white/40">•</span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-green-400" />
+                IHK-Zertifikat inklusive
+              </span>
+            </div>
           </motion.div>
         </div>
-
-        {/* Hero Image with Float Animation */}
-        <motion.div
-          className="container mt-16 float"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <img
-            src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/iEorTlaquYKZmtLt.png"
-            alt="KI Automatisierung Weiterbildung Kursplattform mit IHK Zertifikat"
-            className="hero-image w-full"
-          />
-        </motion.div>
       </section>
 
       {/* Intro Content Section - SEO Keywords */}

@@ -218,3 +218,9 @@
 ## IHK Logo Integration
 - [x] IHK Bildungszentrum Halle-Dessau Logo auf CDN hochgeladen
 - [x] IHK Logo prominent in Hero-Bereich und Pricing-Bereich eingebaut
+
+## Hero Section Redesign
+- [x] KI-Bild als Fullscreen-Hintergrund der Hero Section
+- [x] Text mit dunklem Overlay für gute Lesbarkeit darüber
+- [x] Zweiten CTA "Video ansehen" entfernt
+- [x] Alles above the fold: IHK-Badge, H1, Subheadline, CTA, Social Proof
