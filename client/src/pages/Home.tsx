@@ -364,37 +364,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Modules Section */}
-      <section id="modules" className="py-20 px-4">
-        <div className="container">
+      {/* Modules Section - Background Image */}
+      <section id="modules" className="relative py-24 px-4 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/OjzFLcWANByZmJSv.png"
+            alt="7 Module der KI Automatisierung Weiterbildung Uebersicht"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Dark overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.75)] via-[rgba(0,0,0,0.7)] to-[rgba(0,0,0,0.8)]"></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 container">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl md:text-5xl font-semibold mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
               7 Praxis-Module: Von Chatbots bis KI-Agenten
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-white/75">
               Die KI-Weiterbildung, die dich in 13 Wochen zum Automatisierungsexperten macht
             </p>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="rounded-3xl overflow-hidden"
-          >
-            <img
-              src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/OjzFLcWANByZmJSv.png"
-              alt="7 Module der KI Automatisierung Weiterbildung Uebersicht"
-              className="w-full shadow-2xl"
-            />
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-6 mt-12">
+          <div className="grid md:grid-cols-2 gap-6">
             {[
               { num: "01", title: "KI-Grundlagen & Prompting", desc: "ChatGPT, Prompt Engineering und KI-Systeme verstehen – die Basis für deine KI-Weiterbildung" },
               { num: "02", title: "Chatbot erstellen", desc: "Intelligente Chatbots mit Voiceflow & ManyChat bauen – für Kundenservice und Lead-Generierung" },
@@ -410,12 +409,15 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className="card-glass flex gap-6"
+                className="flex gap-6 rounded-xl p-6 backdrop-blur-md border border-white/15"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                }}
               >
-                <div className="text-3xl font-semibold text-blue-600">{module.num}</div>
+                <div className="text-3xl font-bold text-blue-400">{module.num}</div>
                 <div className="text-left">
-                  <h3 className="text-lg font-semibold mb-2">{module.title}</h3>
-                  <p className="text-gray-600">{module.desc}</p>
+                  <h3 className="text-lg font-semibold mb-2 text-white">{module.title}</h3>
+                  <p className="text-white/70">{module.desc}</p>
                 </div>
               </motion.div>
             ))}

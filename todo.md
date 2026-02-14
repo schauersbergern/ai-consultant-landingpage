@@ -224,3 +224,8 @@
 - [x] Text mit dunklem Overlay für gute Lesbarkeit darüber
 - [x] Zweiten CTA "Video ansehen" entfernt
 - [x] Alles above the fold: IHK-Badge, H1, Subheadline, CTA, Social Proof
+
+## Module Section Redesign
+- [x] Modulübersichts-Bild als Hintergrund der Module-Section
+- [x] Dunkles Overlay für Lesbarkeit
+- [x] 7 Module-Karten darüber platzieren mit Glass-Effekt
