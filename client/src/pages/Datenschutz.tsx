@@ -15,7 +15,7 @@ export default function Datenschutz() {
       }}>
         <div className="container flex items-center justify-between py-4">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663031116390/XjvoXOCMszZFXAGc.png" alt="AI Practitioner" className="w-8 h-8" />
+            <img src="/images/logo.png" alt="AI Practitioner" className="w-8 h-8" />
             <span className="font-semibold text-lg">AI Practitioner</span>
           </div>
           <div className="flex items-center gap-6">

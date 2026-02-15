@@ -3,7 +3,7 @@ import express from "express";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { registerOAuthRoutes } from "./oauth";
+// import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -34,11 +34,11 @@ async function startServer() {
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
-  registerOAuthRoutes(app);
+  // registerOAuthRoutes(app);
 
   // robots.txt
   app.get("/robots.txt", (req, res) => {
-    const baseUrl = "https://aipractitioner.manus.space";
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
     res.set("Content-Type", "text/plain");
     res.send(`User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nSitemap: ${baseUrl}/sitemap.xml`);
   });
@@ -50,7 +50,7 @@ async function startServer() {
       const { blogArticles } = await import("../../drizzle/schema");
       const { eq } = await import("drizzle-orm");
       const db = await getDb();
-      const baseUrl = "https://aipractitioner.manus.space";
+      const baseUrl = `${req.protocol}://${req.get("host")}`;
 
       // Static pages
       const staticPages = [

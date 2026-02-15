@@ -1,15 +1,26 @@
 import { eq, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
+import mysql from "mysql2/promise";
 import { InsertUser, users, blogArticles, InsertBlogArticle } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
-let _db: ReturnType<typeof drizzle> | null = null;
+let _db: ReturnType<typeof drizzle> | null | any = null;
 
 // Lazily create the drizzle instance so local tooling can run without a DB.
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
-      _db = drizzle(process.env.DATABASE_URL);
+      const url = process.env.DATABASE_URL;
+      // Strip query params to avoid parsing issues with mysql2
+      const connectionString = url.split("?")[0];
+      const connection = await mysql.createPool({
+        uri: connectionString,
+        ssl: { rejectUnauthorized: true },
+        waitForConnections: true,
+        connectionLimit: 10,
+        queueLimit: 0,
+      });
+      _db = drizzle(connection);
     } catch (error) {
       console.warn("[Database] Failed to connect:", error);
       _db = null;
@@ -55,9 +66,6 @@ export async function upsertUser(user: InsertUser): Promise<void> {
     if (user.role !== undefined) {
       values.role = user.role;
       updateSet.role = user.role;
-    } else if (user.openId === ENV.ownerOpenId) {
-      values.role = 'admin';
-      updateSet.role = 'admin';
     }
 
     if (!values.lastSignedIn) {
@@ -96,7 +104,7 @@ export async function getBlogArticles(filters?: { status?: string; category?: st
 
   try {
     let query = db.select().from(blogArticles) as any;
-    
+
     if (filters?.status) {
       query = query.where(eq(blogArticles.status, filters.status as any));
     }

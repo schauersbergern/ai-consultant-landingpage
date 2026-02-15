@@ -38,6 +38,12 @@ export async function setupVite(app: Express, server: Server) {
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`
       );
+      // Replace dynamic base URL placeholder
+      const protocol = req.protocol;
+      const host = req.get("host");
+      const baseUrl = `${protocol}://${host}`;
+      template = template.replaceAll("__DYNAMIC_BASE_URL__", baseUrl);
+
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
@@ -61,7 +67,20 @@ export function serveStatic(app: Express) {
   app.use(express.static(distPath));
 
   // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+  app.use("*", async (req, res) => {
+    try {
+      const templatePath = path.resolve(distPath, "index.html");
+      let template = await fs.promises.readFile(templatePath, "utf-8");
+
+      const protocol = req.protocol;
+      const host = req.get("host");
+      const baseUrl = `${protocol}://${host}`;
+      template = template.replaceAll("__DYNAMIC_BASE_URL__", baseUrl);
+
+      res.status(200).set({ "Content-Type": "text/html" }).send(template);
+    } catch (e) {
+      console.error("Error serving index.html:", e);
+      res.status(500).send("Internal Server Error");
+    }
   });
 }
