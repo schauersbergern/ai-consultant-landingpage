@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../../ai/doc-extractor"
 		}
 	],
 	"settings": {}

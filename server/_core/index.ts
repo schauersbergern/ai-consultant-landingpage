@@ -36,6 +36,12 @@ async function startServer() {
   // OAuth callback under /api/oauth/callback
   // registerOAuthRoutes(app);
 
+  // Force X-Robots-Tag to allow indexing (fixes Google Search Console issue)
+  app.use((req, res, next) => {
+    res.setHeader("X-Robots-Tag", "all");
+    next();
+  });
+
   // robots.txt
   app.get("/robots.txt", (req, res) => {
     const baseUrl = `${req.protocol}://${req.get("host")}`;
