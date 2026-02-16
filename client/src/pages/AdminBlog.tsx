@@ -65,6 +65,12 @@ export default function AdminBlog() {
             <div className="flex gap-3">
               <Button
                 variant="outline"
+                onClick={() => (window.location.href = "/api/auth/logout")}
+              >
+                Abmelden
+              </Button>
+              <Button
+                variant="outline"
                 onClick={() => navigate("/blog")}
               >
                 <ExternalLink className="w-4 h-4 mr-2" />

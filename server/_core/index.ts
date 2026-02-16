@@ -95,6 +95,15 @@ async function startServer() {
     }
   });
 
+  app.get("/api/auth/logout", async (req, res) => {
+    const { COOKIE_NAME } = await import("@shared/const");
+    const { getSessionCookieOptions } = await import("./cookies");
+
+    const cookieOptions = getSessionCookieOptions(req);
+    res.clearCookie(COOKIE_NAME, cookieOptions);
+    res.redirect("/");
+  });
+
   // Force X-Robots-Tag to allow indexing (fixes Google Search Console issue)
   app.use((req, res, next) => {
     res.setHeader("X-Robots-Tag", "all");
