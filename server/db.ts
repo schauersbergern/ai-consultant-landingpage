@@ -128,6 +128,14 @@ export async function getBlogArticleBySlug(slug: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
+export async function getBlogArticleById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+
+  const result = await db.select().from(blogArticles).where(eq(blogArticles.id, id));
+  return result.length > 0 ? result[0] : undefined;
+}
+
 export async function createBlogArticle(article: InsertBlogArticle) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");

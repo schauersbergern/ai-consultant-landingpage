@@ -43,8 +43,35 @@ export default function AdminBlogEditor({ id }: AdminBlogEditorProps) {
     },
   });
 
+  // Fetch article if ID is present
+  const { data: article, isLoading: isArticleLoading } = trpc.blog.getById.useQuery(
+    { id: parseInt(id!) },
+    {
+      enabled: !!id,
+      retry: false
+    }
+  );
+
+  useEffect(() => {
+    if (article) {
+      setFormData({
+        title: article.title,
+        slug: article.slug,
+        content: article.content,
+        excerpt: article.excerpt || "",
+        featuredImage: article.featuredImage || "",
+        status: article.status as any,
+        category: article.category || "",
+        tags: article.tags || "",
+        seoTitle: article.seoTitle || "",
+        seoDescription: article.seoDescription || "",
+        scheduledFor: article.scheduledFor ? new Date(article.scheduledFor).toISOString().slice(0, 16) : "",
+      });
+    }
+  }, [article]);
+
   // Redirect if not authenticated or not admin
-  if (authLoading) {
+  if (authLoading || (id && isArticleLoading)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
@@ -52,7 +79,12 @@ export default function AdminBlogEditor({ id }: AdminBlogEditorProps) {
     );
   }
 
-  if (!user || user.role !== "admin") {
+  if (!user) {
+    navigate("/login");
+    return null;
+  }
+
+  if (user.role !== "admin") {
     return (
       <div className="min-h-screen bg-white px-4 py-20">
         <div className="container max-w-4xl mx-auto text-center">

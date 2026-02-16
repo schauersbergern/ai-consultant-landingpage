@@ -13,18 +13,20 @@ import AdminBlogImport from "./pages/AdminBlogImport";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import ThankYou from "./pages/ThankYou";
+import Login from "./pages/Login";
 import CookieConsent from "./components/CookieConsent";
 
 function Router() {
   return (
     <Switch>
+      <Route path={"/login"} component={Login} />
       <Route path={"/"} component={Home} />
       <Route path={"/blog"} component={Blog} />
       <Route path={"/blog/:slug"} component={BlogArticle} />
       <Route path={"/admin/blog"} component={AdminBlog} />
       <Route path={"/admin/blog/new"} component={() => <AdminBlogEditor />} />
       <Route path={"/admin/blog/import"} component={AdminBlogImport} />
-      <Route path={"/admin/blog/:id/edit"} component={({ id }: any) => <AdminBlogEditor id={id} />} />
+      <Route path={"/admin/blog/:id/edit"}>{(params) => <AdminBlogEditor id={params.id} />}</Route>
       <Route path={"/impressum"} component={Impressum} />
       <Route path={"/datenschutz"} component={Datenschutz} />
       <Route path={"/danke"} component={ThankYou} />

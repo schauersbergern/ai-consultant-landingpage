@@ -3,7 +3,6 @@ import express from "express";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-// import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
@@ -34,7 +33,67 @@ async function startServer() {
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
-  // registerOAuthRoutes(app);
+
+  app.get("/api/auth/google", (req, res) => {
+    import("./googleAuth").then(({ googleAuthService }) => {
+      const url = googleAuthService.generateAuthUrl();
+      res.redirect(url);
+    });
+  });
+
+  app.get("/api/auth/google/callback", async (req, res) => {
+    const { code } = req.query;
+    if (typeof code !== "string") {
+      res.status(400).send("Missing code");
+      return;
+    }
+
+    try {
+      const { googleAuthService } = await import("./googleAuth");
+      const { access_token } = await googleAuthService.getToken(code);
+      if (!access_token) throw new Error("No access token");
+
+      const userInfo = await googleAuthService.getUserInfo(access_token);
+
+      const { upsertUser, getUserByOpenId } = await import("../db");
+      const { ENV } = await import("./env");
+
+      const email = userInfo.email as string;
+      const isAdmin = ENV.adminEmails.includes(email);
+
+      // Sync user to DB
+      await upsertUser({
+        openId: userInfo.id as string,
+        email: email,
+        name: userInfo.name as string,
+        loginMethod: "google",
+        role: isAdmin ? "admin" : "user",
+        lastSignedIn: new Date(),
+      });
+
+      const user = await getUserByOpenId(userInfo.id as string);
+
+      if (!user) throw new Error("Failed to create user");
+
+      // Create session
+      const { sdk } = await import("./sdk");
+      const { COOKIE_NAME, ONE_YEAR_MS } = await import("@shared/const");
+      const { getSessionCookieOptions } = await import("./cookies");
+
+      const sessionToken = await sdk.createSessionToken(user.openId, {
+        name: user.name || "",
+        expiresInMs: ONE_YEAR_MS,
+      });
+
+      const cookieOptions = getSessionCookieOptions(req);
+      res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });
+
+      res.redirect("/admin/blog");
+    } catch (error: any) {
+      console.error("OAuth error:", error);
+      res.redirect(`/login?error=oauth_failed&message=${encodeURIComponent(error.message || String(error))}`);
+    }
+  });
 
   // Force X-Robots-Tag to allow indexing (fixes Google Search Console issue)
   app.use((req, res, next) => {

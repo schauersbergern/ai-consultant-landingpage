@@ -42,7 +42,7 @@ export function getSessionCookieOptions(
   return {
     httpOnly: true,
     path: "/",
-    sameSite: "none",
+    sameSite: "lax", // Strict can block OAuth redirects, None requires Secure
     secure: isSecureRequest(req),
   };
 }

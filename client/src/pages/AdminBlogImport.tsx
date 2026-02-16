@@ -46,7 +46,12 @@ export default function AdminBlogImport() {
     );
   }
 
-  if (!user || user.role !== "admin") {
+  if (!user) {
+    navigate("/login");
+    return null;
+  }
+
+  if (user.role !== "admin") {
     return (
       <div className="min-h-screen bg-white px-4 py-20">
         <div className="container max-w-4xl mx-auto text-center">
@@ -331,13 +336,12 @@ export default function AdminBlogImport() {
                             /blog/{article.slug}
                           </p>
                           <div className="flex gap-3 mt-2 text-xs text-gray-500">
-                            <span className={`px-2 py-0.5 rounded-full ${
-                              article.status === "published"
+                            <span className={`px-2 py-0.5 rounded-full ${article.status === "published"
                                 ? "bg-green-100 text-green-700"
                                 : article.status === "scheduled"
-                                ? "bg-blue-100 text-blue-700"
-                                : "bg-gray-100 text-gray-700"
-                            }`}>
+                                  ? "bg-blue-100 text-blue-700"
+                                  : "bg-gray-100 text-gray-700"
+                              }`}>
                               {article.status === "published" ? "Veröffentlicht" : article.status === "scheduled" ? "Geplant" : "Entwurf"}
                             </span>
                             {article.category && <span>Kategorie: {article.category}</span>}
@@ -389,11 +393,10 @@ export default function AdminBlogImport() {
                   {importResults.map((result, index) => (
                     <div
                       key={index}
-                      className={`p-3 rounded-lg flex items-center gap-3 ${
-                        result.success
+                      className={`p-3 rounded-lg flex items-center gap-3 ${result.success
                           ? "bg-green-50 border border-green-200"
                           : "bg-red-50 border border-red-200"
-                      }`}
+                        }`}
                     >
                       {result.success ? (
                         <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
@@ -436,7 +439,7 @@ export default function AdminBlogImport() {
               <div>
                 <h4 className="font-semibold mb-2">JSON-Format (empfohlen)</h4>
                 <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm overflow-x-auto">
-{`[
+                  {`[
   {
     "title": "Artikeltitel",
     "slug": "artikel-slug",
@@ -455,7 +458,7 @@ export default function AdminBlogImport() {
               <div>
                 <h4 className="font-semibold mb-2">CSV-Format (Semikolon-getrennt)</h4>
                 <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm overflow-x-auto">
-{`title;slug;content;excerpt;status;category;tags;seoTitle;seoDescription
+                  {`title;slug;content;excerpt;status;category;tags;seoTitle;seoDescription
 Mein Artikel;mein-artikel;Artikeltext;Zusammenfassung;draft;KI;KI, Make;SEO Titel;SEO Beschreibung`}
                 </pre>
               </div>

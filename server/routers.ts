@@ -1,15 +1,16 @@
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
+import { authRouter } from "./routers/auth";
 import { publicProcedure, router, protectedProcedure } from "./_core/trpc";
 import { z } from "zod";
-import { getBlogArticles, getBlogArticleBySlug, createBlogArticle, updateBlogArticle, deleteBlogArticle } from "./db";
+import { getBlogArticles, getBlogArticleBySlug, getBlogArticleById, createBlogArticle, updateBlogArticle, deleteBlogArticle } from "./db";
 import { TRPCError } from "@trpc/server";
 import { COOKIE_NAME } from "../shared/const";
 
 export const appRouter = router({
   // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
   system: systemRouter,
-  // auth: router({ ... }), // Removed
+  auth: authRouter, // Restored
 
   blog: router({
     // Get all published articles (public)
@@ -32,6 +33,26 @@ export const appRouter = router({
       .query(async ({ input }) => {
         const article = await getBlogArticleBySlug(input);
         if (!article || article.status !== 'published') {
+          throw new TRPCError({
+            code: 'NOT_FOUND',
+            message: 'Article not found',
+          });
+        }
+        return article;
+      }),
+
+    // Admin: Get article by ID
+    getById: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .query(async ({ ctx, input }) => {
+        if (ctx.user.role !== 'admin') {
+          throw new TRPCError({
+            code: 'FORBIDDEN',
+            message: 'Only admins can view article details',
+          });
+        }
+        const article = await getBlogArticleById(input.id);
+        if (!article) {
           throw new TRPCError({
             code: 'NOT_FOUND',
             message: 'Article not found',

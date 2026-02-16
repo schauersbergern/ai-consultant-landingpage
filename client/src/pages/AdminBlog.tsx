@@ -33,7 +33,12 @@ export default function AdminBlog() {
     );
   }
 
-  if (!user || user.role !== "admin") {
+  if (!user) {
+    navigate("/login");
+    return null;
+  }
+
+  if (user.role !== "admin") {
     return (
       <div className="min-h-screen bg-white px-4 py-20">
         <div className="container max-w-4xl mx-auto text-center">
