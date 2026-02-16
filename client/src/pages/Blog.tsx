@@ -68,8 +68,8 @@ export default function Blog() {
             <span className="font-semibold text-lg">AI Practitioner</span>
           </div>
           <div className="flex items-center gap-6">
-            <a href="/" className="text-gray-600 hover:text-gray-900 transition hidden md:inline">Startseite</a>
-            <a href="/blog" className="text-gray-900 font-medium transition">Blog</a>
+            <a href="/" className="text-gray-600 hover:text-gray-900 transition hidden md:inline">Zur Startseite</a>
+            <a href="/blog" className="text-gray-900 font-medium transition">KI-Automatisierung Blog</a>
             {isAdmin && (
               <Button
                 variant="outline"
@@ -190,7 +190,7 @@ export default function Blog() {
               <h2 className="text-2xl font-semibold mb-4">Keine Artikel gefunden</h2>
               <p className="text-gray-600 mb-8">Es gibt noch keine veröffentlichten Blog-Artikel.</p>
               <Button onClick={() => navigate("/")} className="btn-apple">
-                Zurück zur Startseite
+                Zurück zur KI-Ausbildung
               </Button>
             </div>
           )}
@@ -206,8 +206,8 @@ export default function Blog() {
           <p className="text-xl text-gray-600 mb-8">
             Schließe dich der AI Practitioner Ausbildung an und lerne von Experten.
           </p>
-          <Button className="btn-apple px-8 py-4 text-lg">
-            Ausbildung entdecken
+          <Button className="btn-apple px-8 py-4 text-lg" onClick={() => navigate("/")}>
+            KI-Ausbildung entdecken
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>

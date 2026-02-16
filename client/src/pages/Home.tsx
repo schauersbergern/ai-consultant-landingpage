@@ -197,15 +197,15 @@ export default function Home() {
         }}>
           <div className="container flex items-center justify-between py-4">
             <div className="flex items-center gap-2">
-              <img src="/images/logo.png" alt="KI Automatisierungsexperte IHK Zertifikat Logo" className="w-8 h-8" />
+              <img src="/images/logo.png" alt="KI Weiterbildung IHK-Zertifikat Logo" className="w-8 h-8" />
               <span className="font-semibold text-lg">AI Practitioner</span>
             </div>
             <div className="hidden md:flex items-center gap-8">
-              <a href="#modules" className="text-gray-600 hover:text-gray-900 transition">Module</a>
+              <a href="#modules" className="text-gray-600 hover:text-gray-900 transition">Module der KI-Ausbildung</a>
               <a href="#success" className="text-gray-600 hover:text-gray-900 transition">Erfolge</a>
               <a href="#pricing" className="text-gray-600 hover:text-gray-900 transition">Investition</a>
               <a href="#faq" className="text-gray-600 hover:text-gray-900 transition">FAQ</a>
-              <a href="/blog" className="text-gray-600 hover:text-gray-900 transition">Blog</a>
+              <a href="/blog" className="text-gray-600 hover:text-gray-900 transition">KI-Automatisierung Blog</a>
             </div>
             <Button className="btn-apple" onClick={openCheckout}>Jetzt sichern</Button>
           </div>
@@ -316,7 +316,7 @@ export default function Home() {
                   Die Ausbildung deckt das gesamte Spektrum ab: Du lernst, wie du einen <strong>Chatbot erstellst</strong>, <strong>RAG-Systeme</strong> mit eigenen Unternehmensdaten aufbaust, <strong>Prozesse automatisierst</strong> mit <strong>Make-Automatisierung</strong> und n8n-Workflows, und KI-Agenten entwickelst. Absolventen der Pilotkohorte haben über 120 Automatisierungsprojekte umgesetzt und sparen durchschnittlich 10+ Stunden pro Woche.
                 </p>
                 <p>
-                  Ob du <strong>KI-Experte werden</strong> möchtest, eine neue Einnahmequelle suchst oder dein Unternehmen mit KI-Automatisierung voranbringen willst – diese Weiterbildung gibt dir alle Werkzeuge und das Wissen, um sofort loszulegen. Erfahre mehr in unserem <a href="/blog" className="text-blue-600 hover:text-blue-800 underline">Blog über KI-Automatisierung</a>.
+                  Ob du <strong>KI-Experte werden</strong> möchtest, eine neue Einnahmequelle suchst oder dein Unternehmen mit KI-Automatisierung voranbringen willst – diese Weiterbildung gibt dir alle Werkzeuge und das Wissen, um sofort loszulegen. <a href="/blog" className="text-blue-600 hover:text-blue-800 underline">Mehr zur KI Weiterbildung im Blog</a>.
                 </p>
               </div>
             </motion.div>
@@ -713,9 +713,9 @@ export default function Home() {
               <span className="font-semibold">AI Practitioner</span>
             </div>
             <div className="flex items-center gap-6 flex-wrap justify-center">
-              <a href="/blog" className="text-gray-600 hover:text-gray-900 transition text-sm">Blog</a>
-              <a href="#modules" className="text-gray-600 hover:text-gray-900 transition text-sm">Module</a>
-              <a href="#faq" className="text-gray-600 hover:text-gray-900 transition text-sm">FAQ</a>
+              <a href="/blog" className="text-gray-600 hover:text-gray-900 transition text-sm">KI-Blog</a>
+              <a href="#modules" className="text-gray-600 hover:text-gray-900 transition text-sm">7 Module der Ausbildung</a>
+              <a href="#faq" className="text-gray-600 hover:text-gray-900 transition text-sm">Häufige Fragen</a>
               <a href="/impressum" className="text-gray-600 hover:text-gray-900 transition text-sm">Impressum</a>
               <a href="/datenschutz" className="text-gray-600 hover:text-gray-900 transition text-sm">Datenschutz</a>
             </div>

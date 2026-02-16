@@ -1,9 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useLocation } from "wouter";
+import { useEffect } from "react";
 
 export default function Datenschutz() {
   const [, navigate] = useLocation();
+
+  useEffect(() => {
+    document.title = "Datenschutzerklärung | AI Practitioner";
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.setAttribute('name', 'description');
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute('content', 'Datenschutzerklärung der AI Practitioner Ausbildung. Informationen zur Verarbeitung Ihrer personenbezogenen Daten gemäß DSGVO.');
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">

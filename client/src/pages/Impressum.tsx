@@ -1,9 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useLocation } from "wouter";
+import { useEffect } from "react";
 
 export default function Impressum() {
   const [, navigate] = useLocation();
+
+  useEffect(() => {
+    document.title = "Impressum | AI Practitioner";
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+      metaDesc = document.createElement('meta');
+      metaDesc.setAttribute('name', 'description');
+      document.head.appendChild(metaDesc);
+    }
+    metaDesc.setAttribute('content', 'Impressum der AI Practitioner Ausbildung. Rechtliche Informationen und Kontaktmöglichkeiten.');
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
