@@ -61,7 +61,6 @@ export default function BlogArticle() {
           title="Artikel nicht gefunden | AI Practitioner Blog"
           description="Der gesuchte Blog-Artikel konnte nicht gefunden werden."
           canonicalPath={`/blog/${slug}`}
-          robots="noindex, follow"
         />
         <div className="container max-w-4xl mx-auto">
           <Button

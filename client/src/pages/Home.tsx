@@ -97,7 +97,7 @@ export default function Home() {
         { "@type": "Question", "name": "Für wen ist die KI-Weiterbildung geeignet?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung richtet sich an Berater, Freelancer, Unternehmer und Angestellte, die KI-Automatisierung als neue Kompetenz oder Einnahmequelle aufbauen möchten. Vorkenntnisse sind nicht erforderlich." } },
         { "@type": "Question", "name": "Gibt es eine Geld-zurück-Garantie?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du hast eine 14-Tage Geld-zurück-Garantie. Wenn die Ausbildung nicht deinen Erwartungen entspricht, erhältst du den vollen Betrag zurück – ohne Wenn und Aber." } },
         { "@type": "Question", "name": "Kann ich die KI-Ausbildung neben dem Beruf absolvieren?", "acceptedAnswer": { "@type": "Answer", "text": "Absolut. Die Weiterbildung ist berufsbegleitend konzipiert. Mit ca. 10 Stunden pro Woche und lebenslangem Zugang kannst du flexibel lernen und die Module in deinem eigenen Tempo durcharbeiten." } },
-        { "@type": "Question", "name": "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung zum KI-Automatisierungsexperten kostet 4.797€ zzgl. MwSt. als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates." } },
+        { "@type": "Question", "name": "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung zum KI-Automatisierungsexperten kostet 6.500€ zzgl. MwSt. als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates." } },
         { "@type": "Question", "name": "Welche Tools lerne ich in der Ausbildung?", "acceptedAnswer": { "@type": "Answer", "text": "Du arbeitest mit den führenden KI-Automatisierungstools: ChatGPT, Make, n8n, Zapier, Voiceflow, ManyChat und Flowise. Damit deckst du das gesamte Spektrum von Chatbots über Prozessautomatisierung bis hin zu RAG-Systemen ab." } },
         { "@type": "Question", "name": "Erhalte ich nach Abschluss Unterstützung?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du erhältst lebenslangen Zugang zu allen Kursinhalten und Updates. Zusätzlich profitierst du von der Community der Absolventen für Austausch und Networking." } }
       ]
@@ -448,19 +448,19 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  icon: "https://private-us-east-1.manuscdn.com/sessionFile/YcbjwiWInGIVL0BsT3oWwc/sandbox/BcMJFSTsWIBgVRq2mfZscL_1770291693299_na1fn_aWNvbi10aW1lLWdsYXNzLXRyYW5zcGFyZW50.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvWWNiandpV0luR0lWTDBCc1Qzb1d3Yy9zYW5kYm94L0JjTUpGU1RzV0lCZ1ZScTJtZlpzY0xfMTc3MDI5MTY5MzI5OV9uYTFmbl9hV052YmkxMGFXMWxMV2RzWVhOekxYUnlZVzV6Y0dGeVpXNTAucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=ryEtxrL2sIWWl48Sc6jkNhF6vnmnAU7395lXc05asV0zR3WezYWl-pFgUijMEtcODQGtjxRHr~VdihQUma07csKdzaRbJfCWP5wLCFCChYhEfFMWb6QE86Q5-h2bjmNm-4o5VBqZXDgcPY4AowaN4C7AQRYbzae0rWBuh1dGgscmlHdqc61GvQtKyMqTkE6nFYCAfRY2PJrkhbX1JKE8kTwACYfIXcdVA1i3Kdjv3XhlQdalCoJUo1RB-34Bb604LyRFbW9H65c9d9~mQlkEFjze-hCHl1Aw8vKRllUsi2Jdiicx6DQYCDXsGmZP11p-IkkD4ie1Yx~IeiXceP-8DQ__",
+                  icon: "/images/benefit-time.webp",
                   title: "10+ Stunden/Woche sparen",
                   alt: "Zeitersparnis durch KI Automatisierung 10 Stunden pro Woche",
                   description: "Automatisiere repetitive Aufgaben und konzentriere dich auf strategische Arbeit"
                 },
                 {
-                  icon: "https://private-us-east-1.manuscdn.com/sessionFile/YcbjwiWInGIVL0BsT3oWwc/sandbox/BcMJFSTsWIBgVRq2mfZscL_1770291693300_na1fn_aWNvbi1pbmNvbWUtZ2xhc3MtdHJhbnNwYXJlbnQ.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvWWNiandpV0luR0lWTDBCc1Qzb1d3Yy9zYW5kYm94L0JjTUpGU1RzV0lCZ1ZScTJtZlpzY0xfMTc3MDI5MTY5MzMwMF9uYTFmbl9hV052YmkxcGJtTnZiV1V0WjJ4aGMzTXRkSEpoYm5Od1lYSmxiblEucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=rA6SSBnPWMgim6xr~7Od~muq9RPf18aEI70wWXGWnc2n9OL9S52t~qjHfgEckcxx8H8m9pWdQ4bf2iDpzfCbF6smL1FL5ZtKTMmKwUGeK9Qj~TDqFiIS~WbwBwpVqIKsLiuv1IrCk1uTd4Fw8iQsGO0Q13ZIwVOgiVjRraE-9c-KKtXDKeZBtPZytNS3SuUviwTDDVgDXoHu5TJEb96QKCcg1MY6lNB5QmNbBIUlj0PcejZOUkb1uNeK7cEnk~6TCRtd6bQBpU5GIDPR1p6VPfHlhu06g6eS6aCCsKTR9OYxENnL9iJ9hlTfcGrEuetdOCpdvj6fkumrJCfli1S3jQ__",
+                  icon: "/images/benefit-income.webp",
                   title: "Neue Einnahmequelle",
                   alt: "Einnahmen als KI Automatisierungsexperte 3000 bis 10000 Euro pro Projekt",
                   description: "Verdiene 3.000-10.000€ pro KI-Automatisierungsprojekt"
                 },
                 {
-                  icon: "https://private-us-east-1.manuscdn.com/sessionFile/YcbjwiWInGIVL0BsT3oWwc/sandbox/BcMJFSTsWIBgVRq2mfZscL_1770291693300_na1fn_aWNvbi1zeXN0ZW1zLWdsYXNzLXRyYW5zcGFyZW50.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvWWNiandpV0luR0lWTDBCc1Qzb1d3Yy9zYW5kYm94L0JjTUpGU1RzV0lCZ1ZScTJtZlpzY0xfMTc3MDI5MTY5MzMwMF9uYTFmbl9hV052YmkxemVYTjBaVzF6TFdkc1lYTnpMWFJ5WVc1emNHRnlaVzUwLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=Z0cDdNiZfoBrTdW5rVoqpRNVGwMafZajF-xYXo~SxmRU-Z486rpczJQ1VG0R1Qjnsr9RxYj9PCRTwgBnYxjXuObnwPbD0uzt4Cyf-c-o8vGKTMSCzQDTJWnr3fQ5SqaKMT15y1ilXnyJ5bCzks4mryUyMf~qR4rb8tHoV0a5WJK1-Qjk6DC7w-x59fTWyvGrL36-eUVcfJwLkzxvcystTgjsSJ7bX3qwudnZJy39cMKvXPPbTg0b9lKwfCQ1HJyRHUs0S~YWE-UAL3qAyIKjR3dxb6HSJBlClt1JKqvQwysh1tPzj0VL1NdUbnih2lAyjjdxd4bodSM-aIqCGjlpSg__",
+                  icon: "/images/benefit-systems.webp",
                   title: "Professionelle Systeme",
                   alt: "Professionelle KI Automatisierungssysteme mit Make und n8n",
                   description: "Baue Automationen, die zuverlässig funktionieren und skalieren"
@@ -756,7 +756,7 @@ export default function Home() {
                 },
                 {
                   q: "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?",
-                  a: "Die Ausbildung zum KI-Automatisierungsexperten kostet 4.797€ zzgl. MwSt. als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates."
+                  a: "Die Ausbildung zum KI-Automatisierungsexperten kostet 6.500€ zzgl. MwSt. als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates."
                 },
                 {
                   q: "Welche Tools lerne ich in der Ausbildung?",

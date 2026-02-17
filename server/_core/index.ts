@@ -204,9 +204,12 @@ async function startServer() {
     }
   });
 
-  // Force X-Robots-Tag to allow indexing (fixes Google Search Console issue)
+  // Enforce crawlable robots header for all responses.
   app.use((req, res, next) => {
-    res.setHeader("X-Robots-Tag", "all");
+    res.setHeader(
+      "X-Robots-Tag",
+      "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    );
     next();
   });
 
