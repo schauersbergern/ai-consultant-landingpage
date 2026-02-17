@@ -6,6 +6,7 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { ENV, validateSecurityEnv } from "./env";
+import { createOrUpdateQuentnLead, isValidEmail, isValidPhone } from "./quentn";
 import {
   clearOAuthStateCookie,
   createOAuthStateValue,
@@ -56,6 +57,11 @@ async function startServer() {
   const trpcLimiter = createRateLimiter({
     name: "api-trpc",
     max: 180,
+    windowMs: 60_000,
+  });
+  const leadCaptureLimiter = createRateLimiter({
+    name: "lead-capture",
+    max: 60,
     windowMs: 60_000,
   });
 
@@ -151,6 +157,51 @@ async function startServer() {
     const cookieOptions = getSessionCookieOptions(req);
     res.clearCookie(COOKIE_NAME, cookieOptions);
     res.redirect("/");
+  });
+
+  app.post("/api/lead-capture", leadCaptureLimiter, async (req, res) => {
+    const email = typeof req.body?.email === "string" ? req.body.email.trim() : "";
+    const phone = typeof req.body?.phone === "string" ? req.body.phone.trim() : "";
+    const utmSource = typeof req.body?.utmSource === "string" ? req.body.utmSource.trim() : "";
+
+    if (!isValidEmail(email)) {
+      res.status(400).json({ message: "Bitte gib eine gueltige E-Mail-Adresse ein." });
+      return;
+    }
+
+    if (!isValidPhone(phone)) {
+      res.status(400).json({ message: "Bitte gib eine gueltige Telefonnummer ein." });
+      return;
+    }
+
+    try {
+      const leadResult = await createOrUpdateQuentnLead({
+        email,
+        phone,
+        utmSource,
+      });
+
+      res.status(200).json({
+        success: true,
+        tag: leadResult.tag,
+        listId: leadResult.listId,
+      });
+    } catch (error: any) {
+      const message =
+        error instanceof Error ? error.message : "Unbekannter Fehler bei der Lead-Uebermittlung";
+      const statusCode =
+        message === "Quentn API is not configured"
+          ? 500
+          : 502;
+
+      console.error("Lead capture error:", message);
+      res.status(statusCode).json({
+        message:
+          statusCode === 500
+            ? "Serverseitige Quentn-Konfiguration fehlt."
+            : "Lead konnte nicht an Quentn uebermittelt werden.",
+      });
+    }
   });
 
   // Force X-Robots-Tag to allow indexing (fixes Google Search Console issue)

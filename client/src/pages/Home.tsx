@@ -17,16 +17,32 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { useAuth } from "@/_core/hooks/useAuth";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, type FormEvent } from "react";
 import { isTrackingAllowed } from "@/components/CookieConsent";
 import { PageSeo } from "@/ssr/head";
+
+type LeadFormState = {
+  email: string;
+  phone: string;
+};
+
+type LeadFormErrors = {
+  email?: string;
+  phone?: string;
+  submit?: string;
+};
 
 export default function Home() {
   // The userAuth hooks provides authentication state
   // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
   let { user, loading, error, isAuthenticated, logout } = useAuth();
 
-  const [showCheckout, setShowCheckout] = useState(false);
+  const [showLeadModal, setShowLeadModal] = useState(false);
+  const [leadForm, setLeadForm] = useState<LeadFormState>({ email: "", phone: "" });
+  const [leadErrors, setLeadErrors] = useState<LeadFormErrors>({});
+  const [submissionMessage, setSubmissionMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [ctaSource, setCtaSource] = useState("");
 
   useEffect(() => {
     // Schema.org Course Schema
@@ -125,24 +141,8 @@ export default function Home() {
     };
   }, []);
 
-  // Load ThriveCart script when checkout modal opens
   useEffect(() => {
-    if (showCheckout) {
-      // Check if script already loaded
-      const existingScript = document.getElementById("tc-ki-club-41-3RQOBP");
-      if (!existingScript) {
-        const script = document.createElement("script");
-        script.src = "//tinder.thrivecart.com/embed/v2/thrivecart.js";
-        script.id = "tc-ki-club-41-3RQOBP";
-        script.async = true;
-        document.body.appendChild(script);
-      } else {
-        // Re-trigger ThriveCart rendering
-        if ((window as any).ThriveCart) {
-          (window as any).ThriveCart.renderEmbeds();
-        }
-      }
-      // Prevent background scrolling
+    if (showLeadModal) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -150,15 +150,94 @@ export default function Home() {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [showCheckout]);
+  }, [showLeadModal]);
 
-  const openCheckout = useCallback(() => {
-    setShowCheckout(true);
+  const getUtmSource = useCallback(() => {
+    if (typeof window === "undefined") return "";
+    return new URLSearchParams(window.location.search).get("utm_source")?.trim() ?? "";
+  }, []);
+
+  const validateLeadForm = useCallback((values: LeadFormState): LeadFormErrors => {
+    const nextErrors: LeadFormErrors = {};
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
+      nextErrors.email = "Bitte gib eine gueltige E-Mail-Adresse ein.";
+    }
+
+    const trimmedPhone = values.phone.trim();
+    const digits = trimmedPhone.replace(/\D/g, "");
+    const hasAllowedChars = /^[0-9+\s()./-]+$/.test(trimmedPhone);
+    const plusCount = (trimmedPhone.match(/\+/g) || []).length;
+    const plusPositionValid = plusCount === 0 || trimmedPhone.startsWith("+");
+    if (!hasAllowedChars || digits.length < 7 || digits.length > 15 || plusCount > 1 || !plusPositionValid) {
+      nextErrors.phone = "Bitte gib eine gueltige Telefonnummer ein.";
+    }
+
+    return nextErrors;
+  }, []);
+
+  const closeLeadModal = useCallback(() => {
+    setShowLeadModal(false);
+    setLeadErrors({});
+    setSubmissionMessage("");
+  }, []);
+
+  const openLeadModal = useCallback((source: string) => {
+    setCtaSource(source);
+    setShowLeadModal(true);
+    setLeadErrors({});
+    setSubmissionMessage("");
     // Track Facebook Pixel event (only if consent given)
     if (isTrackingAllowed() && (window as any).fbq) {
       (window as any).fbq("track", "InitiateCheckout");
     }
   }, []);
+
+  const submitLead = useCallback(
+    async (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      setSubmissionMessage("");
+
+      const validationErrors = validateLeadForm(leadForm);
+      if (validationErrors.email || validationErrors.phone) {
+        setLeadErrors(validationErrors);
+        return;
+      }
+
+      setIsSubmitting(true);
+      setLeadErrors({});
+
+      try {
+        const response = await fetch("/api/lead-capture", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: leadForm.email.trim(),
+            phone: leadForm.phone.trim(),
+            utmSource: getUtmSource(),
+            ctaSource,
+          }),
+        });
+
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(payload?.message || "Lead konnte nicht uebermittelt werden.");
+        }
+
+        setSubmissionMessage("Danke, wir haben deine Daten erhalten.");
+        setLeadForm({ email: "", phone: "" });
+      } catch (error: any) {
+        setLeadErrors({
+          submit: error instanceof Error ? error.message : "Lead konnte nicht uebermittelt werden.",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [ctaSource, getUtmSource, leadForm, validateLeadForm]
+  );
 
   return (
     <>
@@ -168,26 +247,61 @@ export default function Home() {
         canonicalPath="/"
         ogImage="/images/hero-bg.png"
       />
-      {/* ThriveCart Checkout Modal */}
-      {showCheckout && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowCheckout(false)}>
-          <div className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl mx-4" onClick={(e) => e.stopPropagation()}>
+      {showLeadModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={closeLeadModal}>
+          <div className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl mx-4 p-6 pt-12" onClick={(e) => e.stopPropagation()}>
             <button
-              onClick={() => setShowCheckout(false)}
+              onClick={closeLeadModal}
               className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition text-gray-600 hover:text-gray-900"
-              aria-label="Schließen"
+              aria-label="Schliessen"
             >
               ✕
             </button>
-            <div className="p-6 pt-12">
-              <div
-                className="tc-v2-embeddable-target"
-                data-thrivecart-account="ki-club"
-                data-thrivecart-tpl="v2"
-                data-thrivecart-product="41"
-                data-thrivecart-embeddable="tc-ki-club-41-3RQOBP"
-              ></div>
-            </div>
+            <h3 className="text-2xl font-semibold mb-2">Fast geschafft</h3>
+            <p className="text-gray-600 mb-6">
+              Trage bitte E-Mail und Telefonnummer ein, damit wir dich in den naechsten Schritt bringen koennen.
+            </p>
+
+            <form className="space-y-4" onSubmit={submitLead}>
+              <div>
+                <label className="block text-sm font-medium mb-2" htmlFor="lead-email">
+                  E-Mail
+                </label>
+                <input
+                  id="lead-email"
+                  type="email"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  placeholder="max@beispiel.de"
+                  value={leadForm.email}
+                  onChange={(e) => setLeadForm((prev) => ({ ...prev, email: e.target.value }))}
+                  required
+                />
+                {leadErrors.email && <p className="mt-2 text-sm text-red-600">{leadErrors.email}</p>}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium mb-2" htmlFor="lead-phone">
+                  Telefonnummer
+                </label>
+                <input
+                  id="lead-phone"
+                  type="tel"
+                  className="w-full rounded-md border border-gray-300 px-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  placeholder="+49 170 1234567"
+                  value={leadForm.phone}
+                  onChange={(e) => setLeadForm((prev) => ({ ...prev, phone: e.target.value }))}
+                  required
+                />
+                {leadErrors.phone && <p className="mt-2 text-sm text-red-600">{leadErrors.phone}</p>}
+              </div>
+
+              {leadErrors.submit && <p className="text-sm text-red-600">{leadErrors.submit}</p>}
+              {submissionMessage && <p className="text-sm text-green-600">{submissionMessage}</p>}
+
+              <Button type="submit" className="btn-apple w-full" disabled={isSubmitting}>
+                {isSubmitting ? "Wird gesendet..." : "Jetzt absenden"}
+              </Button>
+            </form>
           </div>
         </div>
       )}
@@ -212,7 +326,7 @@ export default function Home() {
               <a href="#faq" className="text-gray-600 hover:text-gray-900 transition">FAQ</a>
               <a href="/blog" className="text-gray-600 hover:text-gray-900 transition">KI-Automatisierung Blog</a>
             </div>
-            <Button className="btn-apple" onClick={openCheckout}>Jetzt sichern</Button>
+            <Button className="btn-apple" onClick={() => openLeadModal("jetzt_sichern")}>Jetzt sichern</Button>
           </div>
         </nav>
 
@@ -268,7 +382,7 @@ export default function Home() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button className="btn-apple px-10 py-5 text-lg" onClick={openCheckout}>
+                  <Button className="btn-apple px-10 py-5 text-lg" onClick={() => openLeadModal("ausbildung_starten")}>
                     Ausbildung starten
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
@@ -551,7 +665,7 @@ export default function Home() {
                 whileTap={{ scale: 0.95 }}
                 className="mb-8"
               >
-                <Button className="btn-apple px-10 py-5 text-lg w-full max-w-sm mx-auto" onClick={openCheckout}>
+                <Button className="btn-apple px-10 py-5 text-lg w-full max-w-sm mx-auto" onClick={() => openLeadModal("jetzt_buchen")}>
                   Jetzt buchen
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
@@ -696,7 +810,7 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button className="btn-apple px-8 py-4 text-lg" onClick={openCheckout}>
+                <Button className="btn-apple px-8 py-4 text-lg" onClick={() => openLeadModal("ausbildung_sichern")}>
                   Ausbildung sichern
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
