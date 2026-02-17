@@ -70,6 +70,13 @@ export default function AdminBlogEditor({ id }: AdminBlogEditorProps) {
     }
   }, [article]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!authLoading && !user) {
+      navigate("/login");
+    }
+  }, [authLoading, user, navigate]);
+
   // Redirect if not authenticated or not admin
   if (authLoading || (id && isArticleLoading)) {
     return (
@@ -79,10 +86,7 @@ export default function AdminBlogEditor({ id }: AdminBlogEditorProps) {
     );
   }
 
-  if (!user) {
-    navigate("/login");
-    return null;
-  }
+  if (!user) return null;
 
   if (user.role !== "admin") {
     return (

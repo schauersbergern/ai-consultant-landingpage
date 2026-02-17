@@ -2,6 +2,8 @@ import { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
 import type { Express, Request, Response } from "express";
 import * as db from "../db";
 import { getSessionCookieOptions } from "./cookies";
+import { ENV } from "./env";
+import { googleAuthService } from "./googleAuth";
 import { sdk } from "./sdk";
 
 function getQueryParam(req: Request, key: string): string | undefined {
@@ -12,32 +14,40 @@ function getQueryParam(req: Request, key: string): string | undefined {
 export function registerOAuthRoutes(app: Express) {
   app.get("/api/oauth/callback", async (req: Request, res: Response) => {
     const code = getQueryParam(req, "code");
-    const state = getQueryParam(req, "state");
-
-    if (!code || !state) {
-      res.status(400).json({ error: "code and state are required" });
+    if (!code) {
+      res.status(400).json({ error: "code is required" });
       return;
     }
 
     try {
-      const tokenResponse = await sdk.exchangeCodeForToken(code, state);
-      const userInfo = await sdk.getUserInfo(tokenResponse.accessToken);
+      const { access_token } = await googleAuthService.getToken(code);
+      if (!access_token) {
+        res.status(400).json({ error: "missing access token" });
+        return;
+      }
 
-      if (!userInfo.openId) {
+      const userInfo = await googleAuthService.getUserInfo(access_token);
+
+      if (!userInfo.id) {
         res.status(400).json({ error: "openId missing from user info" });
         return;
       }
 
+      const openId = String(userInfo.id);
+      const email = userInfo.email ? String(userInfo.email) : null;
+      const isAdmin = email ? ENV.adminEmails.includes(email) : false;
+
       await db.upsertUser({
-        openId: userInfo.openId,
-        name: userInfo.name || null,
-        email: userInfo.email ?? null,
-        loginMethod: userInfo.loginMethod ?? userInfo.platform ?? null,
+        openId,
+        name: userInfo.name ? String(userInfo.name) : null,
+        email,
+        loginMethod: "google",
+        role: isAdmin ? "admin" : "user",
         lastSignedIn: new Date(),
       });
 
-      const sessionToken = await sdk.createSessionToken(userInfo.openId, {
-        name: userInfo.name || "",
+      const sessionToken = await sdk.createSessionToken(openId, {
+        name: userInfo.name ? String(userInfo.name) : "",
         expiresInMs: ONE_YEAR_MS,
       });
 

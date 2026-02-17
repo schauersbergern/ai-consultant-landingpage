@@ -12,9 +12,11 @@ export class GoogleAuthService {
         );
     }
 
-    generateAuthUrl() {
+    generateAuthUrl(state: string) {
         return this.oauth2Client.generateAuthUrl({
             access_type: "offline",
+            prompt: "consent",
+            state,
             scope: [
                 "https://www.googleapis.com/auth/userinfo.profile",
                 "https://www.googleapis.com/auth/userinfo.email",

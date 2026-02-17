@@ -8,20 +8,27 @@ type UseAuthOptions = {
 };
 
 export function useAuth(options?: UseAuthOptions) {
-  const { data: user, isLoading, error, refetch } = trpc.auth.me.useQuery(undefined, {
-    retry: false,
-    refetchOnWindowFocus: false,
-  });
+  const isBrowser = typeof window !== "undefined";
+  const { data: user, isLoading, error, refetch } = trpc.auth.me.useQuery(
+    undefined,
+    {
+      enabled: isBrowser,
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  );
 
   const [, navigate] = useLocation();
 
   useEffect(() => {
+    if (!isBrowser) return;
+
     if (options?.redirectOnUnauthenticated && !isLoading && !user) {
       if (options.redirectPath) {
         navigate(options.redirectPath);
       }
     }
-  }, [user, isLoading, options, navigate]);
+  }, [isBrowser, user, isLoading, options, navigate]);
 
   return {
     user: user ?? null,

@@ -19,6 +19,7 @@ import {
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useEffect, useState, useCallback } from "react";
 import { isTrackingAllowed } from "@/components/CookieConsent";
+import { PageSeo } from "@/ssr/head";
 
 export default function Home() {
   // The userAuth hooks provides authentication state
@@ -28,8 +29,6 @@ export default function Home() {
   const [showCheckout, setShowCheckout] = useState(false);
 
   useEffect(() => {
-    document.title = "KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner";
-
     // Schema.org Course Schema
     const courseSchema = {
       "@context": "https://schema.org",
@@ -163,6 +162,12 @@ export default function Home() {
 
   return (
     <>
+      <PageSeo
+        title="KI Weiterbildung IHK-Zertifikat | AI Automation Practitioner"
+        description="Werde KI Experte mit unserem IHK-zertifizierten KI Kurs. Lerne KI Automatisierung von Grund auf. 12-Wochen-Programm zum KI Manager IHK. Jetzt starten!"
+        canonicalPath="/"
+        ogImage="/images/hero-bg.png"
+      />
       {/* ThriveCart Checkout Modal */}
       {showCheckout && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowCheckout(false)}>
@@ -248,8 +253,8 @@ export default function Home() {
 
               {/* Headline */}
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight text-white">
-                KI-Automatisierungsexperte (IHK):<br />
-                <span className="text-blue-400">Praxisnahe Weiterbildung mit Zertifikat</span>
+                KI Weiterbildung mit IHK-Zertifikat –<br />
+                <span className="text-blue-400">Werde KI Experte</span>
               </h1>
 
               {/* Subheadline */}
@@ -300,7 +305,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-semibold mb-8 text-center">
-                Warum KI-Automatisierung die gefragteste Kompetenz 2026 ist
+                Warum KI Automatisierung lernen?
               </h2>
               <div className="prose prose-lg max-w-none text-gray-700 space-y-6">
                 <p>
@@ -386,7 +391,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-                7 Praxis-Module: Von Chatbots bis KI-Agenten
+                Dein Weg zum KI Manager IHK
               </h2>
               <p className="text-xl text-white/75">
                 Die KI-Weiterbildung, die dich in 13 Wochen zum Automatisierungsexperten macht
@@ -498,7 +503,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl md:text-5xl font-semibold mb-4">
-                Kosten & Investition: KI-Ausbildung mit IHK-Zertifikat
+                Das IHK-Zertifikat für KI Experten
               </h2>
               <p className="text-xl text-gray-600">
                 Einmalige Investition in deine Zukunft

@@ -5,22 +5,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
-  <!-- Primary Meta Tags -->
-  <title>KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner</title>
-  <meta name="title" content="KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner" />
+  <title>AI Practitioner</title>
   <meta name="description"
-    content="In 13 Wochen zum KI-Automatisierungsexperten (IHK). Chatbots, RAG-Systeme, Make & n8n praxisnah lernen. Jetzt starten!" />
-  <meta name="keywords"
-    content="ki weiterbildung ihk, ki automatisierung lernen, ki zertifikat ihk, ki kurs online, prozesse automatisieren ki, chatbot erstellen" />
+    content="AI Practitioner: KI-Weiterbildung, Automatisierung, Chatbots und praxisnahe Umsetzung für Unternehmen und Selbstständige." />
   <meta name="author" content="AI Practitioner" />
-  <meta name="creator" content="AI Practitioner" />
-  <meta name="publisher" content="AI Practitioner" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <meta name="language" content="de" />
-  <meta name="revisit-after" content="7 days" />
-  <link rel="canonical" href="__DYNAMIC_BASE_URL__" />
-  <link rel="alternate" hreflang="de" href="__DYNAMIC_BASE_URL__" />
-  <link rel="alternate" hreflang="x-default" href="__DYNAMIC_BASE_URL__" />
+  <meta property="og:site_name" content="AI Practitioner" />
+  <meta property="og:locale" content="de_DE" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -29,62 +20,11 @@
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="__DYNAMIC_BASE_URL__" />
-  <meta property="og:title" content="KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner" />
-  <meta property="og:description"
-    content="In 13 Wochen zum KI-Automatisierungsexperten (IHK). Chatbots, RAG-Systeme, Make & n8n praxisnah lernen. Jetzt starten!" />
-  <meta property="og:image" content="__DYNAMIC_BASE_URL__/images/hero-glass.png" />
-  <meta property="og:locale" content="de_DE" />
-  <meta property="og:site_name" content="AI Practitioner" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="__DYNAMIC_BASE_URL__" />
-  <meta name="twitter:title" content="KI-Weiterbildung mit IHK-Zertifikat | AI Practitioner" />
-  <meta name="twitter:description"
-    content="In 13 Wochen zum KI-Automatisierungsexperten (IHK). Chatbots, RAG-Systeme, Make & n8n praxisnah lernen. Jetzt starten!" />
-  <meta name="twitter:image" content="__DYNAMIC_BASE_URL__/images/hero-glass.png" />
-
-  <!-- Structured Data / Schema.org -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "AI Practitioner Ausbildung",
-      "description": "IHK-zertifizierte Weiterbildung zum KI-Automatisierungsexperten. Lerne in 13 Wochen KI-Automatisierungen mit Chatbots, RAG-Systemen, Make und n8n praxisnah zu bauen.",
-      "provider": {
-        "@type": "Organization",
-        "name": "AI Practitioner",
-        "sameAs": "https://ai-practitioner.com"
-      },
-      "educationalCredentialAwarded": "IHK-Zertifikat",
-      "hasCourseInstance": {
-        "@type": "CourseInstance",
-        "courseMode": "online",
-        "duration": "P13W"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "4797",
-        "priceCurrency": "EUR",
-        "availability": "https://schema.org/InStock",
-        "url": "__DYNAMIC_BASE_URL__"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "40"
-      },
-      "coursePrerequisites": "Keine Programmierkenntnisse erforderlich",
-      "inLanguage": "de",
-      "url": "https://aipractitioner.manus.space"
-    }
-    </script>
-
   <!-- Sitemap -->
   <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+  <!-- Dynamic SSR head injection -->
+  <!--app-head-->
 
   <!-- Meta Pixel Code -->
   <script>
@@ -121,34 +61,16 @@
 
     gtag('config', 'G-JPRCSY52DS');
   </script>
-
-  <!-- Schema.org Organization -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "AI Practitioner",
-        "url": "__DYNAMIC_BASE_URL__",
-      "logo": "__DYNAMIC_BASE_URL__/images/logo.png",
-      "description": "IHK-zertifizierte KI-Weiterbildung zum KI-Automatisierungsexperten. Praxisnahe Ausbildung mit Chatbots, RAG-Systemen, Make und n8n.",
-      "sameAs": [
-        "https://ai-practitioner.com"
-      ],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "availableLanguage": "German"
-      }
-    }
-    </script>
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root"><!--app-html--></div>
+  <!--app-ssr-data-->
+
   <!-- Meta Pixel noscript fallback (placed after root to avoid parse5 errors) -->
   <noscript><img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=1138180751401674&ev=PageView&noscript=1" /></noscript>
-  <script type="module" src="/src/main.tsx"></script>
+  <script type="module" src="/src/entry-client.tsx"></script>
 </body>
 
 </html>

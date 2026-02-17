@@ -6,7 +6,7 @@ import { Loader2, Plus, Edit2, Trash2, Eye, EyeOff, Clock, Upload, ExternalLink 
 import { useLocation } from "wouter";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function AdminBlog() {
   const { user, loading: authLoading } = useAuth();
@@ -24,6 +24,13 @@ export default function AdminBlog() {
     },
   });
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!authLoading && !user) {
+      navigate("/login");
+    }
+  }, [authLoading, user, navigate]);
+
   // Redirect if not authenticated or not admin
   if (authLoading) {
     return (
@@ -33,10 +40,7 @@ export default function AdminBlog() {
     );
   }
 
-  if (!user) {
-    navigate("/login");
-    return null;
-  }
+  if (!user) return null;
 
   if (user.role !== "admin") {
     return (

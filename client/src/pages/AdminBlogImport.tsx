@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Upload, FileJson, FileText, CheckCircle2, XCircle, ArrowLeft, Download } from "lucide-react";
 import { useLocation } from "wouter";
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface ImportArticle {
   title: string;
@@ -38,6 +38,13 @@ export default function AdminBlogImport() {
 
   const bulkImportMutation = trpc.blog.bulkImport.useMutation();
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!authLoading && !user) {
+      navigate("/login");
+    }
+  }, [authLoading, user, navigate]);
+
   if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
@@ -46,10 +53,7 @@ export default function AdminBlogImport() {
     );
   }
 
-  if (!user) {
-    navigate("/login");
-    return null;
-  }
+  if (!user) return null;
 
   if (user.role !== "admin") {
     return (

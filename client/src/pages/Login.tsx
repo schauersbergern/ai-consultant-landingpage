@@ -4,10 +4,12 @@ import { Loader2 } from "lucide-react";
 import { useLocation } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { useEffect } from "react";
+import { useRequestInfo } from "@/ssr/request-info";
 
 export default function Login() {
     const { user, loading } = useAuth();
     const [, navigate] = useLocation();
+    const requestInfo = useRequestInfo();
 
     useEffect(() => {
         if (user) {
@@ -16,6 +18,7 @@ export default function Login() {
     }, [user, navigate]);
 
     const handleLogin = () => {
+        if (typeof window === "undefined") return;
         window.location.href = "/api/auth/google";
     };
 
@@ -27,8 +30,11 @@ export default function Login() {
         );
     }
 
-    const error = new URLSearchParams(window.location.search).get("error");
-    const errorMessage = new URLSearchParams(window.location.search).get("message");
+    const search =
+        typeof window !== "undefined" ? window.location.search : requestInfo.search;
+    const params = new URLSearchParams(search);
+    const error = params.get("error");
+    const errorMessage = params.get("message");
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">

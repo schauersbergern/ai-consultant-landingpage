@@ -7,115 +7,62 @@ import { de } from "date-fns/locale";
 import { useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { PageSeo } from "@/ssr/head";
+import { useRequestInfo } from "@/ssr/request-info";
+import { useServerData } from "@/ssr/server-data";
 
 export default function BlogArticle() {
   const params = useParams<{ slug: string }>();
   const slug = params.slug || "";
   const [, navigate] = useLocation();
-  const { data: article, isLoading, error } = trpc.blog.getBySlug.useQuery(slug, {
-    enabled: !!slug,
+  const requestInfo = useRequestInfo();
+  const serverData = useServerData();
+
+  const articleRouteData = (() => {
+    if (serverData?.routeData?.kind !== "blog-article") return null;
+    if (serverData.routeData.slug !== slug) return null;
+    return serverData.routeData;
+  })();
+
+  const prefetchedArticle = articleRouteData?.article;
+  const prefetchedNotFound = articleRouteData?.notFound ?? false;
+
+  const query = trpc.blog.getBySlug.useQuery(slug, {
+    enabled: !!slug && !prefetchedNotFound,
+    initialData: (prefetchedArticle as any) ?? undefined,
+    staleTime: 60_000,
   });
 
+  const article = (prefetchedArticle ?? query.data) as any;
+
   useEffect(() => {
+    if (typeof window === "undefined") return;
     window.scrollTo(0, 0);
   }, [slug]);
 
-  // Set SEO meta tags
-  useEffect(() => {
-    if (article) {
-      if (article.seoTitle) {
-        document.title = article.seoTitle;
-      } else {
-        document.title = `${article.title} | AI Practitioner Blog`;
-      }
-      // Set meta description
-      let metaDesc = document.querySelector('meta[name="description"]');
-      if (!metaDesc) {
-        metaDesc = document.createElement("meta");
-        metaDesc.setAttribute("name", "description");
-        document.head.appendChild(metaDesc);
-      }
-      metaDesc.setAttribute("content", article.seoDescription || article.excerpt || "");
-
-      // Set Open Graph tags
-      const ogTags: Record<string, string> = {
-        "og:title": article.seoTitle || article.title,
-        "og:description": article.seoDescription || article.excerpt || "",
-        "og:type": "article",
-        "og:url": window.location.href,
-      };
-      if (article.featuredImage) {
-        ogTags["og:image"] = article.featuredImage;
-      }
-      Object.entries(ogTags).forEach(([property, content]) => {
-        let tag = document.querySelector(`meta[property="${property}"]`);
-        if (!tag) {
-          tag = document.createElement("meta");
-          tag.setAttribute("property", property);
-          document.head.appendChild(tag);
-        }
-        tag.setAttribute("content", content);
-      });
-
-      // JSON-LD Structured Data (Article Schema)
-      const existingJsonLd = document.querySelector('script[type="application/ld+json"][data-blog-article]');
-      if (existingJsonLd) existingJsonLd.remove();
-
-      const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": article.seoTitle || article.title,
-        "description": article.seoDescription || article.excerpt || "",
-        "url": window.location.href,
-        "datePublished": article.publishedAt ? new Date(article.publishedAt).toISOString() : undefined,
-        "dateModified": article.updatedAt ? new Date(article.updatedAt).toISOString() : (article.publishedAt ? new Date(article.publishedAt).toISOString() : undefined),
-        "author": {
-          "@type": "Organization",
-          "name": "AI Practitioner",
-          "url": window.location.origin
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "AI Practitioner",
-          "logo": {
-            "@type": "ImageObject",
-            "url": `${window.location.origin}/images/logo.png`
-          }
-        },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": window.location.href
-        },
-        ...(article.featuredImage ? { "image": article.featuredImage } : {}),
-        ...(article.category ? { "articleSection": article.category } : {}),
-        ...(article.tags ? { "keywords": article.tags } : {}),
-        "inLanguage": "de-DE"
-      };
-
-      const script = document.createElement("script");
-      script.type = "application/ld+json";
-      script.setAttribute("data-blog-article", "true");
-      script.textContent = JSON.stringify(jsonLd);
-      document.head.appendChild(script);
-    }
-    return () => {
-      document.title = "KI-Automatisierungsexperte (IHK) | Weiterbildung mit Zertifikat 2026";
-      const jsonLdScript = document.querySelector('script[type="application/ld+json"][data-blog-article]');
-      if (jsonLdScript) jsonLdScript.remove();
-    };
-  }, [article]);
-
-  if (isLoading) {
+  if (query.isLoading && !article) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
+        <PageSeo
+          title="KI-Automatisierung Blog | AI Practitioner"
+          description="Fachartikel zu KI-Automatisierung, RAG-Systemen und No-Code-Workflows."
+          canonicalPath={`/blog/${slug}`}
+          ogType="article"
+        />
         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
       </div>
     );
   }
 
-  if (error || !article) {
+  if (query.error || prefetchedNotFound || !article) {
     return (
       <div className="min-h-screen bg-white px-4 py-20">
+        <PageSeo
+          title="Artikel nicht gefunden | AI Practitioner Blog"
+          description="Der gesuchte Blog-Artikel konnte nicht gefunden werden."
+          canonicalPath={`/blog/${slug}`}
+          robots="noindex, follow"
+        />
         <div className="container max-w-4xl mx-auto">
           <Button
             variant="ghost"
@@ -137,8 +84,56 @@ export default function BlogArticle() {
     );
   }
 
+  const seoTitle = article.seoTitle || `${article.title} | AI Practitioner Blog`;
+  const seoDescription = article.seoDescription || article.excerpt || "";
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": article.seoTitle || article.title,
+    "description": seoDescription,
+    "url": requestInfo.href,
+    "datePublished": article.publishedAt
+      ? new Date(article.publishedAt).toISOString()
+      : undefined,
+    "dateModified": article.updatedAt
+      ? new Date(article.updatedAt).toISOString()
+      : article.publishedAt
+        ? new Date(article.publishedAt).toISOString()
+        : undefined,
+    "author": {
+      "@type": "Organization",
+      "name": "AI Practitioner",
+      "url": requestInfo.origin,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "AI Practitioner",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${requestInfo.origin}/images/logo.png`,
+      },
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": requestInfo.href,
+    },
+    ...(article.featuredImage ? { "image": article.featuredImage } : {}),
+    ...(article.category ? { "articleSection": article.category } : {}),
+    ...(article.tags ? { "keywords": article.tags } : {}),
+    "inLanguage": "de-DE",
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      <PageSeo
+        title={seoTitle}
+        description={seoDescription}
+        canonicalPath={`/blog/${slug}`}
+        ogType="article"
+        ogImage={article.featuredImage || undefined}
+        jsonLd={articleJsonLd}
+      />
       {/* Header Navigation */}
       <nav className="fixed top-0 w-full z-50 border-b border-white/20" style={{
         background: 'rgba(255, 255, 255, 0.7)',

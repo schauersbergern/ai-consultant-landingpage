@@ -12,11 +12,10 @@ import { motion } from "framer-motion";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { isTrackingAllowed } from "@/components/CookieConsent";
 import { Link } from "wouter";
+import { PageSeo } from "@/ssr/head";
 
 export default function ThankYou() {
   useEffect(() => {
-    document.title = "Vielen Dank! | AI Practitioner";
-
     // Fire Facebook Pixel Purchase event (only if consent given)
     if (isTrackingAllowed() && (window as any).fbq) {
       (window as any).fbq("track", "Purchase", {
@@ -30,6 +29,11 @@ export default function ThankYou() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900 flex items-center justify-center px-4">
+      <PageSeo
+        title="Vielen Dank! | AI Practitioner"
+        description="Vielen Dank für deine Buchung der AI Practitioner Ausbildung. Hier findest du die nächsten Schritte."
+        canonicalPath="/danke"
+      />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

@@ -16,7 +16,7 @@ import ThankYou from "./pages/ThankYou";
 import Login from "./pages/Login";
 import CookieConsent from "./components/CookieConsent";
 
-function Router() {
+function AppRoutes() {
   return (
     <Switch>
       <Route path={"/login"} component={Login} />
@@ -45,7 +45,7 @@ function App() {
       >
         <TooltipProvider>
           <Toaster />
-          <Router />
+          <AppRoutes />
           <CookieConsent />
         </TooltipProvider>
       </ThemeProvider>

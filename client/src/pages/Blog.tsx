@@ -1,39 +1,44 @@
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, ArrowRight, Calendar, User, Settings } from "lucide-react";
+import { Loader2, ArrowRight, Calendar, Settings } from "lucide-react";
 import { useLocation } from "wouter";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
+import { PageSeo } from "@/ssr/head";
+import { useServerData } from "@/ssr/server-data";
 
 export default function Blog() {
   const [, navigate] = useLocation();
   const { user } = useAuth();
   const isAdmin = user?.role === "admin";
+  const serverData = useServerData();
+  const initialArticles =
+    serverData?.routeData?.kind === "blog-list"
+      ? serverData.routeData.articles
+      : undefined;
 
-  useEffect(() => {
-    document.title = "KI-Blog: Fachwissen zu KI-Automatisierung & Weiterbildung | AI Practitioner";
-    // Set meta description
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (!metaDesc) {
-      metaDesc = document.createElement('meta');
-      metaDesc.setAttribute('name', 'description');
-      document.head.appendChild(metaDesc);
-    }
-    metaDesc.setAttribute('content', 'Fachartikel zu KI-Automatisierung, Chatbots, RAG-Systemen, Make, n8n und IHK-Weiterbildung. Praxiswissen für angehende KI-Experten und Unternehmer.');
-    return () => {
-      document.title = 'AI Practitioner';
-    };
-  }, []);
-  const { data: articles, isLoading, error } = trpc.blog.listPublished.useQuery({
-    limit: 20,
-  });
+  const { data: articles, isLoading, error } = trpc.blog.listPublished.useQuery(
+    { limit: 20 },
+    {
+      initialData: initialArticles as any[] | undefined,
+      staleTime: 60_000,
+    },
+  );
+
+  const seo = (
+    <PageSeo
+      title="KI Automatisierung Blog | Wissen für KI Manager IHK"
+      description="Expertenwissen zu KI Automatisierung, Praxistipps und Karrieretipps für KI Experten. Bleib auf dem neuesten Stand der KI Weiterbildung. Jetzt entdecken!"
+      canonicalPath="/blog"
+    />
+  );
 
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
+        {seo}
         <Loader2 className="w-8 h-8 animate-spin text-blue-600" />
       </div>
     );
@@ -42,6 +47,7 @@ export default function Blog() {
   if (error) {
     return (
       <div className="min-h-screen bg-white px-4 py-20">
+        {seo}
         <div className="container max-w-4xl mx-auto text-center">
           <h1 className="text-3xl font-semibold mb-4">Fehler beim Laden</h1>
           <p className="text-gray-600 mb-8">Es gab einen Fehler beim Laden der Blog-Artikel.</p>
@@ -55,6 +61,7 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-white">
+      {seo}
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 border-b border-white/20" style={{
         background: 'rgba(255, 255, 255, 0.7)',
@@ -88,7 +95,7 @@ export default function Blog() {
       <div className="pt-32 pb-16 px-4 section-premium">
         <div className="container max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-semibold mb-6">
-            AI & Automatisierung Blog
+            KI Automatisierung Blog – Tipps für angehende KI Experten
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Lerne die neuesten Trends in KI-Automatisierung, Make, N8N und praktische Anwendungen für dein Business.

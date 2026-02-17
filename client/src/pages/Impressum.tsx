@@ -1,24 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useLocation } from "wouter";
-import { useEffect } from "react";
+import { PageSeo } from "@/ssr/head";
 
 export default function Impressum() {
   const [, navigate] = useLocation();
 
-  useEffect(() => {
-    document.title = "Impressum | AI Practitioner";
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (!metaDesc) {
-      metaDesc = document.createElement('meta');
-      metaDesc.setAttribute('name', 'description');
-      document.head.appendChild(metaDesc);
-    }
-    metaDesc.setAttribute('content', 'Impressum der AI Practitioner Ausbildung. Rechtliche Informationen und Kontaktmöglichkeiten.');
-  }, []);
-
   return (
     <div className="min-h-screen bg-white">
+      <PageSeo
+        title="Impressum | AI Practitioner"
+        description="Impressum der AI Practitioner Ausbildung. Rechtliche Informationen und Kontaktmöglichkeiten."
+        canonicalPath="/impressum"
+      />
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 border-b border-white/20" style={{
         background: 'rgba(255, 255, 255, 0.7)',

@@ -1,10 +1,19 @@
 import "dotenv/config";
-import express from "express";
+import express, { type RequestHandler } from "express";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
+import { ENV, validateSecurityEnv } from "./env";
+import {
+  clearOAuthStateCookie,
+  createOAuthStateValue,
+  createRateLimiter,
+  securityHeaders,
+  validateOAuthState,
+  writeOAuthStateCookie,
+} from "./security";
 import { serveStatic, setupVite } from "./vite";
 
 function isPortAvailable(port: number): Promise<boolean> {
@@ -27,26 +36,59 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 }
 
 async function startServer() {
+  validateSecurityEnv();
+
   const app = express();
+  app.disable("x-powered-by");
+  app.set("trust proxy", 1);
+
   const server = createServer(app);
+  const authStartLimiter = createRateLimiter({
+    name: "auth-start",
+    max: 20,
+    windowMs: 60_000,
+  });
+  const authCallbackLimiter = createRateLimiter({
+    name: "auth-callback",
+    max: 30,
+    windowMs: 60_000,
+  });
+  const trpcLimiter = createRateLimiter({
+    name: "api-trpc",
+    max: 180,
+    windowMs: 60_000,
+  });
+
   // Configure body parser with larger size limit for file uploads
-  app.use(express.json({ limit: "50mb" }));
-  app.use(express.urlencoded({ limit: "50mb", extended: true }));
+  app.use(securityHeaders);
+  app.use(express.json({ limit: "10mb" }));
+  app.use(express.urlencoded({ limit: "10mb", extended: true }));
   // OAuth callback under /api/oauth/callback
 
-  app.get("/api/auth/google", (req, res) => {
+  app.get("/api/auth/google", authStartLimiter, (req, res) => {
     import("./googleAuth").then(({ googleAuthService }) => {
-      const url = googleAuthService.generateAuthUrl();
+      const state = createOAuthStateValue();
+      writeOAuthStateCookie(req, res, state);
+      const url = googleAuthService.generateAuthUrl(state);
       res.redirect(url);
     });
   });
 
-  app.get("/api/auth/google/callback", async (req, res) => {
-    const { code } = req.query;
-    if (typeof code !== "string") {
+  app.get("/api/auth/google/callback", authCallbackLimiter, async (req, res) => {
+    const { code, state } = req.query;
+
+    if (typeof code !== "string" || typeof state !== "string") {
       res.status(400).send("Missing code");
       return;
     }
+
+    if (!validateOAuthState(req, state)) {
+      clearOAuthStateCookie(req, res);
+      res.redirect("/login?error=invalid_oauth_state");
+      return;
+    }
+
+    clearOAuthStateCookie(req, res);
 
     try {
       const { googleAuthService } = await import("./googleAuth");
@@ -56,10 +98,17 @@ async function startServer() {
       const userInfo = await googleAuthService.getUserInfo(access_token);
 
       const { upsertUser, getUserByOpenId } = await import("../db");
-      const { ENV } = await import("./env");
 
-      const email = userInfo.email as string;
+      const email = String(userInfo.email || "").trim().toLowerCase();
+      if (!email) {
+        throw new Error("User email missing");
+      }
+
       const isAdmin = ENV.adminEmails.includes(email);
+      if (!isAdmin) {
+        res.redirect("/login?error=forbidden");
+        return;
+      }
 
       // Sync user to DB
       await upsertUser({
@@ -124,11 +173,35 @@ async function startServer() {
   // tRPC API
   app.use(
     "/api/trpc",
+    trpcLimiter,
     createExpressMiddleware({
       router: appRouter,
       createContext,
     })
   );
+
+  const requireAdminPageAccess: RequestHandler = async (req, res, next) => {
+    if (req.method !== "GET") {
+      next();
+      return;
+    }
+
+    try {
+      const { sdk } = await import("./sdk");
+      const user = await sdk.authenticateRequest(req);
+
+      if (user.role !== "admin") {
+        res.redirect("/login");
+        return;
+      }
+
+      next();
+    } catch {
+      res.redirect("/login");
+    }
+  };
+
+  app.use("/admin", requireAdminPageAccess);
   // development mode uses Vite, production mode uses static files
   if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
