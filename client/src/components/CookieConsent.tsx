@@ -108,7 +108,7 @@ export default function CookieConsent() {
                   Cookie-Einstellungen
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
-                  Wir verwenden Cookies und den Facebook Pixel, um unsere
+                  Wir verwenden Cookies sowie Facebook- und Spotify-Pixel, um unsere
                   Webseite zu optimieren und dir relevante Inhalte anzuzeigen.
                   Mit deiner Zustimmung helfen uns diese Technologien, unser
                   Angebot zu verbessern. Weitere Informationen findest du in

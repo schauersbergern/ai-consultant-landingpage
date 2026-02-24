@@ -10,6 +10,7 @@ type RateLimitOptions = {
   max: number;
   windowMs: number;
   name: string;
+  maxEntries?: number;
 };
 
 type RateLimitEntry = {
@@ -18,17 +19,7 @@ type RateLimitEntry = {
 };
 
 function getClientIp(req: Request) {
-  const forwardedFor = req.headers["x-forwarded-for"];
-
-  if (typeof forwardedFor === "string" && forwardedFor.length > 0) {
-    return forwardedFor.split(",")[0].trim();
-  }
-
-  if (Array.isArray(forwardedFor) && forwardedFor.length > 0) {
-    return forwardedFor[0];
-  }
-
-  return req.socket.remoteAddress || req.ip || "unknown";
+  return req.ip || req.socket.remoteAddress || "unknown";
 }
 
 function pruneStore(store: Map<string, RateLimitEntry>, now: number) {
@@ -39,20 +30,37 @@ function pruneStore(store: Map<string, RateLimitEntry>, now: number) {
   });
 }
 
-export function createRateLimiter({ max, windowMs, name }: RateLimitOptions) {
+export function createRateLimiter({
+  max,
+  windowMs,
+  name,
+  maxEntries = 5_000,
+}: RateLimitOptions) {
   const store = new Map<string, RateLimitEntry>();
+  let lastPruneAt = 0;
+  const pruneIntervalMs = Math.min(30_000, windowMs);
 
   return (req: Request, res: Response, next: NextFunction) => {
     const now = Date.now();
+    const shouldPrune =
+      store.size >= maxEntries || now - lastPruneAt >= pruneIntervalMs;
 
-    if (store.size > 5_000) {
+    if (shouldPrune) {
       pruneStore(store, now);
+      lastPruneAt = now;
     }
 
     const key = `${name}:${getClientIp(req)}`;
     const existing = store.get(key);
 
     if (!existing || existing.resetAt <= now) {
+      if (!existing && store.size >= maxEntries) {
+        // Fail closed when limiter storage is saturated to avoid memory abuse.
+        res.setHeader("Retry-After", "1");
+        res.status(429).json({ error: "Too many requests" });
+        return;
+      }
+
       store.set(key, {
         count: 1,
         resetAt: now + windowMs,
@@ -99,11 +107,11 @@ export function securityHeaders(req: Request, res: Response, next: NextFunction)
       "base-uri 'self'",
       "frame-ancestors 'none'",
       "object-src 'none'",
-      "img-src 'self' data: https:",
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net",
+      "img-src 'self' data: https: https://ping.byspotify.com",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://pixel.byspotify.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "font-src 'self' data: https://fonts.gstatic.com",
-      "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.facebook.com https://connect.facebook.net",
+      "connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.facebook.com https://connect.facebook.net https://ping.byspotify.com https://pixel.byspotify.com",
       "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://tinder.thrivecart.com",
       "form-action 'self' https://tinder.thrivecart.com",
     ].join("; ");

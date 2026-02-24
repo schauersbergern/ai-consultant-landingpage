@@ -48,6 +48,38 @@
   </script>
   <!-- End Meta Pixel Code -->
 
+  <!-- Spotify Pixel Code -->
+  <script>
+    !function (t) {
+      var e = window.spotify = window.spotify || {};
+      e.pixel = e.pixel || [];
+      if (!e.pixel.initialized) {
+        e.pixel.initialized = true;
+        var n = document.createElement("script");
+        n.async = true;
+        n.src = "https://pixel.byspotify.com/ping.min.js";
+        var r = document.getElementsByTagName("script")[0];
+        r.parentNode.insertBefore(n, r);
+        e.pixel.methods = ["init", "track"];
+        e.pixel.factory = function (t) {
+          return function () {
+            var n = Array.prototype.slice.call(arguments);
+            n.unshift(t);
+            e.pixel.push(n);
+            return e.pixel;
+          };
+        };
+        for (var o = 0; o < e.pixel.methods.length; o++) {
+          var i = e.pixel.methods[o];
+          e.pixel[i] = e.pixel.factory(i);
+        }
+      }
+    }();
+    spotify.pixel.init("d17e71c8-d748-41ea-9c8b-056d80bc9c69");
+    spotify.pixel.track("pageView");
+  </script>
+  <!-- End Spotify Pixel Code -->
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

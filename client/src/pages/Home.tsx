@@ -226,6 +226,15 @@ export default function Home() {
           throw new Error(payload?.message || "Lead konnte nicht uebermittelt werden.");
         }
 
+        // Spotify lead event only after successful submit.
+        const spotifyTrack = (window as any).spotify?.pixel?.track;
+        if (typeof spotifyTrack === "function") {
+          spotifyTrack("Lead", {
+            category: "Automatisierungskurs",
+            type: "form_submission",
+          });
+        }
+
         setSubmissionMessage("Danke, wir haben deine Daten erhalten.");
         setLeadForm({ email: "", phone: "" });
       } catch (error: any) {
