@@ -19,7 +19,7 @@ export default function ThankYou() {
     // Fire Facebook Pixel Purchase event (only if consent given)
     if (isTrackingAllowed() && (window as any).fbq) {
       (window as any).fbq("track", "Purchase", {
-        value: 6500.0,
+        value: 4797.0,
         currency: "EUR",
         content_name: "AI Practitioner Ausbildung",
         content_type: "product",
