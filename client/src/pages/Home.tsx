@@ -639,21 +639,6 @@ export default function Home() {
               viewport={{ once: true }}
               className="card-glass text-center glow overflow-hidden"
             >
-              {/* Premium Pricing Image */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="rounded-2xl overflow-hidden mb-10 shadow-xl mx-auto max-w-md"
-              >
-                <img
-                  src="/images/pricing-image.png"
-                  alt="KI Weiterbildung IHK Zertifikat Kosten und Preise"
-                  className="w-full"
-                />
-              </motion.div>
-
               {/* Price Display */}
               <div className="mb-10">
                 <motion.p
