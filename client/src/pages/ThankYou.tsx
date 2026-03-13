@@ -10,19 +10,23 @@ import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { CheckCircle2, ArrowRight } from "lucide-react";
-import { isTrackingAllowed } from "@/components/CookieConsent";
+import { initFacebookPixel, isTrackingAllowed } from "@/components/CookieConsent";
 import { Link } from "wouter";
 import { PageSeo } from "@/ssr/head";
 
 export default function ThankYou() {
   useEffect(() => {
     // Fire Facebook Pixel Purchase event (only if consent given)
-    if (isTrackingAllowed() && (window as any).fbq) {
-      (window as any).fbq("track", "Purchase", {
-        value: 4997.0,
-        currency: "EUR",
-        content_name: "AI Practitioner Ausbildung",
-        content_type: "product",
+    if (isTrackingAllowed()) {
+      void initFacebookPixel().finally(() => {
+        if ((window as any).fbq) {
+          (window as any).fbq("track", "Purchase", {
+            value: 4997.0,
+            currency: "EUR",
+            content_name: "AI Practitioner Ausbildung",
+            content_type: "product",
+          });
+        }
       });
     }
   }, []);

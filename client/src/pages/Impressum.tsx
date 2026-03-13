@@ -2,6 +2,13 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useLocation } from "wouter";
 import { PageSeo } from "@/ssr/head";
+import { PublicSiteFooter } from "@/components/PublicSiteFooter";
+import { PublicSiteHeader } from "@/components/PublicSiteHeader";
+
+const legalNavItems = [
+  { href: "/", label: "Startseite" },
+  { href: "/blog", label: "Blog" },
+] as const;
 
 export default function Impressum() {
   const [, navigate] = useLocation();
@@ -13,26 +20,9 @@ export default function Impressum() {
         description="Impressum der AI Practitioner Ausbildung. Rechtliche Informationen und Kontaktmöglichkeiten."
         canonicalPath="/impressum"
       />
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 border-b border-white/20" style={{
-        background: 'rgba(255, 255, 255, 0.7)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
-        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
-      }}>
-        <div className="container flex items-center justify-between py-4">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/images/logo.png" alt="AI Practitioner" className="w-8 h-8" />
-            <span className="font-semibold text-lg">AI Practitioner</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <a href="/" className="text-gray-600 hover:text-gray-900 transition">Startseite</a>
-            <a href="/blog" className="text-gray-600 hover:text-gray-900 transition">Blog</a>
-          </div>
-        </div>
-      </nav>
+      <PublicSiteHeader items={[...legalNavItems]} />
 
-      <article className="pt-28 pb-16 px-4">
+      <article className="px-4 pb-16 pt-28">
         <div className="container max-w-3xl mx-auto">
           <Button
             variant="ghost"
@@ -107,6 +97,8 @@ export default function Impressum() {
           </div>
         </div>
       </article>
+
+      <PublicSiteFooter />
     </div>
   );
 }

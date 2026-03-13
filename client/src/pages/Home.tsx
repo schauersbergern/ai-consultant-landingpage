@@ -12,14 +12,23 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import "@/glass.css";
-import {
-  ArrowRight,
-  CheckCircle2,
-} from "lucide-react";
-import { useAuth } from "@/_core/hooks/useAuth";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { useEffect, useState, useCallback, type FormEvent } from "react";
-import { isTrackingAllowed } from "@/components/CookieConsent";
+import { initFacebookPixel, isTrackingAllowed } from "@/components/CookieConsent";
 import { PageSeo } from "@/ssr/head";
+import { LazyVideoEmbed } from "@/components/LazyVideoEmbed";
+import { PublicSiteFooter } from "@/components/PublicSiteFooter";
+import { PublicSiteHeader } from "@/components/PublicSiteHeader";
+import { useRequestInfo } from "@/ssr/request-info";
+import {
+  getCourseJsonLd,
+  getFaqJsonLd,
+  getOrganizationJsonLd,
+  getWebsiteJsonLd,
+  HERO_OG_IMAGE_PATH,
+  homeFaqs,
+  trainerProfiles,
+} from "@/site-content";
 
 type LeadFormState = {
   email: string;
@@ -32,114 +41,29 @@ type LeadFormErrors = {
   submit?: string;
 };
 
-export default function Home() {
-  // The userAuth hooks provides authentication state
-  // To implement login/logout functionality, simply call logout() or redirect to getLoginUrl()
-  let { user, loading, error, isAuthenticated, logout } = useAuth();
+const homeNavItems = [
+  { href: "#modules", label: "Module" },
+  { href: "#trainer", label: "Trainer" },
+  { href: "#success", label: "Erfolge" },
+  { href: "#pricing", label: "Investition" },
+  { href: "#faq", label: "FAQ" },
+  { href: "/blog", label: "Blog" },
+] as const;
 
+export default function Home() {
+  const requestInfo = useRequestInfo();
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [leadForm, setLeadForm] = useState<LeadFormState>({ email: "", phone: "" });
   const [leadErrors, setLeadErrors] = useState<LeadFormErrors>({});
   const [submissionMessage, setSubmissionMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [ctaSource, setCtaSource] = useState("");
-
-  useEffect(() => {
-    // Schema.org Course Schema
-    const courseSchema = {
-      "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "KI-Automatisierungsexperte (IHK) – AI Practitioner Weiterbildung",
-      "description": "In 13 Wochen zum IHK-zertifizierten KI-Experten. Lerne KI-Automatisierung mit Chatbots, RAG-Systemen, Make & n8n.",
-      "provider": {
-        "@type": "Organization",
-        "name": "AI Practitioner",
-        "url": window.location.origin
-      },
-      "educationalCredentialAwarded": "IHK-Zertifikat KI-Automatisierungsexperte",
-      "timeToComplete": "P13W",
-      "numberOfCredits": "61 Unterrichtseinheiten",
-      "hasCourseInstance": {
-        "@type": "CourseInstance",
-        "courseMode": "Online",
-        "courseWorkload": "PT10H/Woche",
-        "instructor": {
-          "@type": "Person",
-          "name": "Josef Held"
-        }
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "4997",
-        "priceCurrency": "EUR",
-        "availability": "https://schema.org/InStock",
-        "url": window.location.origin
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "40",
-        "bestRating": "5"
-      }
-    };
-
-    // Schema.org FAQPage Schema
-    const faqSchema = {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        { "@type": "Question", "name": "Brauche ich Programmierkenntnisse für die KI-Weiterbildung?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Die Ausbildung nutzt No-Code-Tools wie Make, n8n und Voiceflow. Du lernst KI-Automatisierung Schritt für Schritt – ganz ohne Programmierkenntnisse." } },
-        { "@type": "Question", "name": "Wie viel Zeit muss ich pro Woche investieren?", "acceptedAnswer": { "@type": "Answer", "text": "Plane etwa 10 Stunden pro Woche ein. Die KI-Weiterbildung umfasst 61 Unterrichtseinheiten über 13 Wochen. Du hast lebenslangen Zugang und kannst in deinem Tempo lernen." } },
-        { "@type": "Question", "name": "Ist das IHK-Zertifikat bundesweit anerkannt?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Das Zertifikat wird direkt von der Industrie- und Handelskammer (IHK) ausgestellt und ist bundesweit anerkannt. Es bestätigt deine Qualifikation als KI-Automatisierungsexperte." } },
-        { "@type": "Question", "name": "Kann ich mit KI-Automatisierung wirklich Geld verdienen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Absolventen verdienen durchschnittlich 3.000–10.000€ pro KI-Automatisierungsprojekt. Die Nachfrage nach KI-Experten wächst stark, besonders bei KMU und im Mittelstand." } },
-        { "@type": "Question", "name": "Was lerne ich in der KI-Ausbildung konkret?", "acceptedAnswer": { "@type": "Answer", "text": "Du lernst Chatbots zu erstellen, RAG-Systeme mit Flowise aufzubauen, Prozesse mit Make und n8n zu automatisieren, KI-Agenten zu entwickeln und Kunden für KI-Projekte zu gewinnen – alles praxisnah in 7 Modulen." } },
-        { "@type": "Question", "name": "Was ist der Unterschied zwischen AI Practitioner und anderen KI-Kursen?", "acceptedAnswer": { "@type": "Answer", "text": "Unsere KI-Weiterbildung ist die einzige mit IHK-Zertifikat. Du lernst nicht nur Theorie, sondern baust echte Automatisierungsprojekte mit professionellen Tools wie Make, n8n, Voiceflow und Flowise." } },
-        { "@type": "Question", "name": "Für wen ist die KI-Weiterbildung geeignet?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung richtet sich an Berater, Freelancer, Unternehmer und Angestellte, die KI-Automatisierung als neue Kompetenz oder Einnahmequelle aufbauen möchten. Vorkenntnisse sind nicht erforderlich." } },
-        { "@type": "Question", "name": "Gibt es eine Geld-zurück-Garantie?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du hast eine 14-Tage Geld-zurück-Garantie. Wenn die Ausbildung nicht deinen Erwartungen entspricht, erhältst du den vollen Betrag zurück – ohne Wenn und Aber." } },
-        { "@type": "Question", "name": "Kann ich die KI-Ausbildung neben dem Beruf absolvieren?", "acceptedAnswer": { "@type": "Answer", "text": "Absolut. Die Weiterbildung ist berufsbegleitend konzipiert. Mit ca. 10 Stunden pro Woche und lebenslangem Zugang kannst du flexibel lernen und die Module in deinem eigenen Tempo durcharbeiten." } },
-        { "@type": "Question", "name": "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung zum KI-Automatisierungsexperten kostet 4.997 € zzgl. MwSt. als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates." } },
-        { "@type": "Question", "name": "Welche Tools lerne ich in der Ausbildung?", "acceptedAnswer": { "@type": "Answer", "text": "Du arbeitest mit den führenden KI-Automatisierungstools: ChatGPT, Make, n8n, Zapier, Voiceflow, ManyChat und Flowise. Damit deckst du das gesamte Spektrum von Chatbots über Prozessautomatisierung bis hin zu RAG-Systemen ab." } },
-        { "@type": "Question", "name": "Erhalte ich nach Abschluss Unterstützung?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du erhältst lebenslangen Zugang zu allen Kursinhalten und Updates. Zusätzlich profitierst du von der Community der Absolventen für Austausch und Networking." } }
-      ]
-    };
-
-    // Schema.org Organization Schema
-    const orgSchema = {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "AI Practitioner",
-      "url": window.location.origin,
-      "logo": `${window.location.origin}/images/logo.png`,
-      "description": "IHK-zertifizierte KI-Weiterbildung zum Automatisierungsexperten. Praxisnahe Ausbildung mit Chatbots, RAG-Systemen, Make & n8n.",
-      "sameAs": [],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer service",
-        "availableLanguage": "German"
-      }
-    };
-
-    // Inject JSON-LD scripts
-    const schemas = [courseSchema, faqSchema, orgSchema];
-    const scriptIds = ["schema-course", "schema-faq", "schema-org"];
-    schemas.forEach((schema, i) => {
-      let script = document.getElementById(scriptIds[i]) as HTMLScriptElement | null;
-      if (!script) {
-        script = document.createElement("script");
-        script.id = scriptIds[i];
-        script.type = "application/ld+json";
-        document.head.appendChild(script);
-      }
-      script.textContent = JSON.stringify(schema);
-    });
-
-    return () => {
-      scriptIds.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) el.remove();
-      });
-    };
-  }, []);
+  const homeJsonLd = [
+    getOrganizationJsonLd(requestInfo.origin),
+    getWebsiteJsonLd(requestInfo.origin),
+    getCourseJsonLd(requestInfo.origin),
+    getFaqJsonLd(),
+  ];
 
   useEffect(() => {
     if (showLeadModal) {
@@ -188,8 +112,12 @@ export default function Home() {
     setLeadErrors({});
     setSubmissionMessage("");
     // Track Facebook Pixel event (only if consent given)
-    if (isTrackingAllowed() && (window as any).fbq) {
-      (window as any).fbq("track", "InitiateCheckout");
+    if (isTrackingAllowed()) {
+      void initFacebookPixel().finally(() => {
+        if ((window as any).fbq) {
+          (window as any).fbq("track", "InitiateCheckout");
+        }
+      });
     }
   }, []);
 
@@ -252,9 +180,10 @@ export default function Home() {
     <>
       <PageSeo
         title="KI Weiterbildung IHK-Zertifikat | AI Automation Practitioner"
-        description="Werde KI Experte mit unserem IHK-zertifizierten KI Kurs. Lerne KI Automatisierung von Grund auf. 12-Wochen-Programm zum KI Manager IHK. Jetzt starten!"
+        description="Werde KI Experte mit unserem IHK-zertifizierten KI Kurs. Lerne KI Automatisierung von Grund auf. 13-Wochen-Programm zum KI Manager IHK. Jetzt starten!"
         canonicalPath="/"
-        ogImage="/images/hero-bg.png"
+        ogImage={HERO_OG_IMAGE_PATH}
+        jsonLd={homeJsonLd}
       />
       {showLeadModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={closeLeadModal}>
@@ -316,38 +245,26 @@ export default function Home() {
       )}
 
       <div className="min-h-screen bg-white text-gray-900">
-        {/* Navigation - Glasmorphism */}
-        <nav className="fixed top-0 w-full z-50 border-b border-white/10 transition-all duration-300" style={{
-          background: 'rgba(255, 255, 255, 0.85)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
-        }}>
-          <div className="container flex items-center justify-between py-4">
-            <div className="flex items-center gap-2">
-              <img src="/images/logo.png" alt="KI Weiterbildung IHK-Zertifikat Logo" className="w-8 h-8" />
-              <span className="font-semibold text-lg">AI Practitioner</span>
-            </div>
-            <div className="hidden md:flex items-center gap-8">
-              <a href="#modules" className="text-gray-600 hover:text-gray-900 transition">Module der KI-Ausbildung</a>
-              <a href="#success" className="text-gray-600 hover:text-gray-900 transition">Erfolge</a>
-              <a href="#pricing" className="text-gray-600 hover:text-gray-900 transition">Investition</a>
-              <a href="#faq" className="text-gray-600 hover:text-gray-900 transition">FAQ</a>
-              <a href="/blog" className="text-gray-600 hover:text-gray-900 transition">KI-Automatisierung Blog</a>
-            </div>
-            <Button className="btn-apple" onClick={() => openLeadModal("jetzt_sichern")}>Jetzt sichern</Button>
-          </div>
-        </nav>
+        <PublicSiteHeader
+          items={[...homeNavItems]}
+          cta={{ label: "Jetzt sichern", onClick: () => openLeadModal("jetzt_sichern") }}
+        />
 
         {/* Hero Section - Fullscreen Background Image */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
-            <img
-              src="/images/hero-bg.png"
-              alt="KI Automatisierung Weiterbildung Kursplattform mit IHK Zertifikat"
-              className="w-full h-full object-cover object-center"
-            />
+            <picture>
+              <source srcSet="/images/hero-bg.avif" type="image/avif" />
+              <source srcSet="/images/hero-bg.webp" type="image/webp" />
+              <img
+                src="/images/hero-bg.png"
+                alt="KI Automatisierung Weiterbildung Kursplattform mit IHK Zertifikat"
+                className="w-full h-full object-cover object-center"
+                fetchPriority="high"
+                decoding="async"
+              />
+            </picture>
             {/* Dark gradient overlay for text readability */}
             <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.65)] via-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.7)]"></div>
           </div>
@@ -355,7 +272,7 @@ export default function Home() {
           {/* Hero Content */}
           <div className="relative z-10 container max-w-4xl mx-auto text-center px-4 pt-28 pb-16">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
@@ -369,6 +286,9 @@ export default function Home() {
                     src="/images/ihk-logo.jpg"
                     alt="IHK Bildungszentrum Halle-Dessau GmbH – Zertifizierungspartner"
                     className="h-10 md:h-12 w-auto object-contain"
+                    width="176"
+                    height="48"
+                    decoding="async"
                   />
                 </div>
                 <span className="text-sm font-medium text-white/80">Zertifiziert durch das IHK Bildungszentrum Halle-Dessau</span>
@@ -483,7 +403,15 @@ export default function Home() {
                   transition={{ delay: index * 0.1 }}
                   className="card-glass text-center"
                 >
-                  <img src={benefit.icon} alt={benefit.alt} className="w-16 h-16 mx-auto mb-4" />
+                  <img
+                    src={benefit.icon}
+                    alt={benefit.alt}
+                    className="w-16 h-16 mx-auto mb-4"
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <h3 className="text-xl font-semibold mb-3">{benefit.title}</h3>
                   <p className="text-gray-600">{benefit.description}</p>
                 </motion.div>
@@ -496,11 +424,17 @@ export default function Home() {
         <section id="modules" className="relative py-24 px-4 overflow-hidden">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
-            <img
-              src="/images/modules-bg.png"
-              alt="7 Module der KI Automatisierung Weiterbildung Uebersicht"
-              className="w-full h-full object-cover object-center"
-            />
+            <picture>
+              <source srcSet="/images/modules-bg.avif" type="image/avif" />
+              <source srcSet="/images/modules-bg.webp" type="image/webp" />
+              <img
+                src="/images/modules-bg.png"
+                alt=""
+                className="w-full h-full object-cover object-center"
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             {/* Dark overlay for readability */}
             <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.75)] via-[rgba(0,0,0,0.7)] to-[rgba(0,0,0,0.8)]"></div>
           </div>
@@ -554,7 +488,7 @@ export default function Home() {
         </section>
 
         {/* Trainers Section */}
-        <section className="relative py-24 px-4 overflow-hidden bg-gradient-to-b from-white via-slate-50/80 to-white">
+        <section id="trainer" className="relative py-24 px-4 overflow-hidden bg-gradient-to-b from-white via-slate-50/80 to-white">
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-12 left-1/2 h-64 w-64 -translate-x-[140%] rounded-full bg-blue-100/60 blur-3xl" />
             <div className="absolute bottom-10 right-1/2 h-72 w-72 translate-x-[130%] rounded-full bg-sky-100/70 blur-3xl" />
@@ -581,22 +515,9 @@ export default function Home() {
             </motion.div>
 
             <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {[
-                {
-                  name: "Nikolaus Schauersberger",
-                  image: "/images/nikolaus-schauersberger.jpg",
-                  alt: "Nikolaus Schauersberger Trainer Portrait",
-                  description: "Seit 15 Jahren Software-Experte und Anforderungsmanager in Großprojekten. Technische Leitung und Produzent des AI Practitioners."
-                },
-                {
-                  name: "Markus Habermehl",
-                  image: "/images/markus-habermehl.jpg",
-                  alt: "Markus Habermehl Trainer Portrait",
-                  description: "Gründer des größten KI Clubs im DACH-Raum, Automatisierungsexperte und didaktische Leitung des AI Practitioners."
-                }
-              ].map((trainer, index) => (
+              {trainerProfiles.map((trainer, index) => (
                 <motion.div
-                  key={trainer.name}
+                  key={trainer.id}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -611,13 +532,17 @@ export default function Home() {
                     <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-blue-200/70 via-white to-sky-100/80 blur-2xl scale-105" />
                     <img
                       src={trainer.image}
-                      alt={trainer.alt}
+                      alt={`${trainer.name} Trainer Portrait`}
                       className="relative h-full w-full rounded-[2rem] object-cover shadow-[0_20px_60px_rgba(15,23,42,0.18)]"
+                      width="208"
+                      height="208"
+                      loading="lazy"
+                      decoding="async"
                     />
                   </div>
 
                   <p className="text-lg leading-relaxed text-gray-600 max-w-xl mx-auto">
-                    {trainer.description}
+                    {trainer.shortBio}
                   </p>
                 </motion.div>
               ))}
@@ -648,13 +573,15 @@ export default function Home() {
                   name: "René Koch",
                   role: "IT-Consultant",
                   quote: "Die Ausbildung hat mir gezeigt, wie ich meine Kunden mit KI-Lösungen begeistern kann.",
-                  video: "https://www.youtube.com/embed/uGUrBdPuCBA"
+                  video: "https://www.youtube.com/embed/uGUrBdPuCBA",
+                  poster: "/images/rene-koch.jpg",
                 },
                 {
                   name: "Katharina Jakob",
                   role: "Gründerin",
                   quote: "Mit den Templates habe ich in 2 Wochen mein erstes Projekt abgeschlossen.",
-                  video: "https://www.youtube.com/embed/Ar2GXCjUdLg"
+                  video: "https://www.youtube.com/embed/Ar2GXCjUdLg",
+                  poster: "/images/katharina-jakob.jpg",
                 }
               ].map((story, index) => (
                 <motion.div
@@ -666,15 +593,12 @@ export default function Home() {
                   className="card-glass"
                 >
                   <div className="aspect-video bg-gradient-to-br from-blue-100 to-blue-50 mb-6 rounded-xl overflow-hidden">
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={story.video}
-                      title={story.name}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
+                    <LazyVideoEmbed
+                      embedUrl={story.video}
+                      title={`${story.name} Erfahrungsbericht`}
+                      posterSrc={story.poster}
+                      posterAlt={`${story.name} Erfahrungsbericht Vorschaubild`}
+                    />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">{story.name}</h3>
@@ -783,56 +707,7 @@ export default function Home() {
             </motion.div>
 
             <div className="space-y-4">
-              {[
-                {
-                  q: "Brauche ich Programmierkenntnisse für die KI-Weiterbildung?",
-                  a: "Nein. Die Ausbildung nutzt No-Code-Tools wie Make, n8n und Voiceflow. Du lernst KI-Automatisierung Schritt für Schritt – ganz ohne Programmierkenntnisse."
-                },
-                {
-                  q: "Wie viel Zeit muss ich pro Woche investieren?",
-                  a: "Plane etwa 10 Stunden pro Woche ein. Die KI-Weiterbildung umfasst 61 Unterrichtseinheiten über 13 Wochen. Du hast lebenslangen Zugang und kannst in deinem Tempo lernen."
-                },
-                {
-                  q: "Ist das IHK-Zertifikat bundesweit anerkannt?",
-                  a: "Ja. Das Zertifikat wird direkt von der Industrie- und Handelskammer (IHK) ausgestellt und ist bundesweit anerkannt. Es bestätigt deine Qualifikation als KI-Automatisierungsexperte."
-                },
-                {
-                  q: "Kann ich mit KI-Automatisierung wirklich Geld verdienen?",
-                  a: "Ja. Absolventen verdienen durchschnittlich 3.000–10.000€ pro KI-Automatisierungsprojekt. Die Nachfrage nach KI-Experten wächst stark, besonders bei KMU und im Mittelstand."
-                },
-                {
-                  q: "Was lerne ich in der KI-Ausbildung konkret?",
-                  a: "Du lernst Chatbots zu erstellen, RAG-Systeme mit Flowise aufzubauen, Prozesse mit Make und n8n zu automatisieren, KI-Agenten zu entwickeln und Kunden für KI-Projekte zu gewinnen – alles praxisnah in 7 Modulen."
-                },
-                {
-                  q: "Was ist der Unterschied zwischen AI Practitioner und anderen KI-Kursen?",
-                  a: "Unsere KI-Weiterbildung ist die einzige mit IHK-Zertifikat. Du lernst nicht nur Theorie, sondern baust echte Automatisierungsprojekte mit professionellen Tools wie Make, n8n, Voiceflow und Flowise."
-                },
-                {
-                  q: "Für wen ist die KI-Weiterbildung geeignet?",
-                  a: "Die Ausbildung richtet sich an Berater, Freelancer, Unternehmer und Angestellte, die KI-Automatisierung als neue Kompetenz oder Einnahmequelle aufbauen möchten. Vorkenntnisse sind nicht erforderlich."
-                },
-                {
-                  q: "Gibt es eine Geld-zurück-Garantie?",
-                  a: "Ja. Du hast eine 14-Tage Geld-zurück-Garantie. Wenn die Ausbildung nicht deinen Erwartungen entspricht, erhältst du den vollen Betrag zurück – ohne Wenn und Aber."
-                },
-                {
-                  q: "Kann ich die KI-Ausbildung neben dem Beruf absolvieren?",
-                  a: "Absolut. Die Weiterbildung ist berufsbegleitend konzipiert. Mit ca. 10 Stunden pro Woche und lebenslangem Zugang kannst du flexibel lernen und die Module in deinem eigenen Tempo durcharbeiten."
-                },
-                {
-                  q: "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?",
-                  a: "Die Ausbildung zum KI-Automatisierungsexperten kostet 4.997 € zzgl. MwSt. als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates."
-                },
-                {
-                  q: "Welche Tools lerne ich in der Ausbildung?",
-                  a: "Du arbeitest mit den führenden KI-Automatisierungstools: ChatGPT, Make, n8n, Zapier, Voiceflow, ManyChat und Flowise. Damit deckst du das gesamte Spektrum von Chatbots über Prozessautomatisierung bis hin zu RAG-Systemen ab."
-                },
-                {
-                  q: "Erhalte ich nach Abschluss Unterstützung?",
-                  a: "Ja. Du erhältst lebenslangen Zugang zu allen Kursinhalten und Updates. Zusätzlich profitierst du von der Community der Absolventen für Austausch und Networking."
-                }
-              ].map((faq, index) => (
+              {homeFaqs.map((faq, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -841,8 +716,8 @@ export default function Home() {
                   transition={{ delay: index * 0.05 }}
                   className="card-glass"
                 >
-                  <h3 className="font-semibold mb-3">{faq.q}</h3>
-                  <p className="text-gray-600">{faq.a}</p>
+                  <h3 className="font-semibold mb-3">{faq.question}</h3>
+                  <p className="text-gray-600">{faq.answer}</p>
                 </motion.div>
               ))}
             </div>
@@ -885,30 +760,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="border-t border-white/20 py-8 px-4" style={{
-          background: 'rgba(255, 255, 255, 0.7)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
-          boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
-        }}>
-          <div className="container flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-2">
-              <img src="/images/logo.png" alt="KI Automatisierungsexperte IHK Zertifikat Logo" className="w-6 h-6" />
-              <span className="font-semibold">AI Practitioner</span>
-            </div>
-            <div className="flex items-center gap-6 flex-wrap justify-center">
-              <a href="/blog" className="text-gray-600 hover:text-gray-900 transition text-sm">KI-Blog</a>
-              <a href="#modules" className="text-gray-600 hover:text-gray-900 transition text-sm">7 Module der Ausbildung</a>
-              <a href="#faq" className="text-gray-600 hover:text-gray-900 transition text-sm">Häufige Fragen</a>
-              <a href="/impressum" className="text-gray-600 hover:text-gray-900 transition text-sm">Impressum</a>
-              <a href="/datenschutz" className="text-gray-600 hover:text-gray-900 transition text-sm">Datenschutz</a>
-            </div>
-            <p className="text-gray-600 text-sm">
-              © 2026 AI Practitioner. Alle Rechte vorbehalten.
-            </p>
-          </div>
-        </footer>
+        <PublicSiteFooter />
       </div>
     </>
   );

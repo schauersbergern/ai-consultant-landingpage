@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>AI Practitioner</title>
   <meta name="description"
@@ -22,63 +22,10 @@
 
   <!-- Sitemap -->
   <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-  <link rel="preload" as="image" href="/images/benefit-time.webp" type="image/webp" />
-  <link rel="preload" as="image" href="/images/benefit-income.webp" type="image/webp" />
-  <link rel="preload" as="image" href="/images/benefit-systems.webp" type="image/webp" />
+  <link rel="preload" as="image" href="/images/hero-bg.avif" type="image/avif" fetchpriority="high" />
 
   <!-- Dynamic SSR head injection -->
   <!--app-head-->
-
-  <!-- Meta Pixel Code -->
-  <script>
-    !function (f, b, e, v, n, t, s) {
-      if (f.fbq) return; n = f.fbq = function () {
-        n.callMethod ?
-          n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-      };
-      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-      n.queue = []; t = b.createElement(e); t.async = !0;
-      t.src = v; s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s)
-    }(window, document, 'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-    // DSGVO: Pixel SDK laden, aber NICHT initialisieren.
-    // Init + PageView erfolgt erst nach Cookie-Consent via CookieConsent.tsx
-    fbq('consent', 'revoke');
-  </script>
-  <!-- End Meta Pixel Code -->
-
-  <!-- Spotify Pixel Code -->
-  <script>
-    !function (t) {
-      var e = window.spotify = window.spotify || {};
-      e.pixel = e.pixel || [];
-      if (!e.pixel.initialized) {
-        e.pixel.initialized = true;
-        var n = document.createElement("script");
-        n.async = true;
-        n.src = "https://pixel.byspotify.com/ping.min.js";
-        var r = document.getElementsByTagName("script")[0];
-        r.parentNode.insertBefore(n, r);
-        e.pixel.methods = ["init", "track"];
-        e.pixel.factory = function (t) {
-          return function () {
-            var n = Array.prototype.slice.call(arguments);
-            n.unshift(t);
-            e.pixel.push(n);
-            return e.pixel;
-          };
-        };
-        for (var o = 0; o < e.pixel.methods.length; o++) {
-          var i = e.pixel.methods[o];
-          e.pixel[i] = e.pixel.factory(i);
-        }
-      }
-    }();
-    spotify.pixel.init("d17e71c8-d748-41ea-9c8b-056d80bc9c69");
-    spotify.pixel.track("pageView");
-  </script>
-  <!-- End Spotify Pixel Code -->
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -87,24 +34,12 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
     rel="stylesheet" />
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JPRCSY52DS"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-JPRCSY52DS');
-  </script>
 </head>
 
 <body>
   <div id="root"><!--app-html--></div>
   <!--app-ssr-data-->
 
-  <!-- Meta Pixel noscript fallback (placed after root to avoid parse5 errors) -->
-  <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1138180751401674&ev=PageView&noscript=1" /></noscript>
   <script type="module" src="/src/entry-client.tsx"></script>
 </body>
 

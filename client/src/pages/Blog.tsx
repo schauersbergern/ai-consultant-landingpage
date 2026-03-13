@@ -1,18 +1,22 @@
 import { trpc } from "@/lib/trpc";
-import { useAuth } from "@/_core/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, ArrowRight, Calendar, Settings } from "lucide-react";
+import { Loader2, ArrowRight, Calendar } from "lucide-react";
 import { useLocation } from "wouter";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import { PageSeo } from "@/ssr/head";
 import { useServerData } from "@/ssr/server-data";
+import { PublicSiteFooter } from "@/components/PublicSiteFooter";
+import { PublicSiteHeader } from "@/components/PublicSiteHeader";
+
+const blogNavItems = [
+  { href: "/", label: "Startseite" },
+  { href: "/blog", label: "Blog" },
+] as const;
 
 export default function Blog() {
   const [, navigate] = useLocation();
-  const { user } = useAuth();
-  const isAdmin = user?.role === "admin";
   const serverData = useServerData();
   const initialArticles =
     serverData?.routeData?.kind === "blog-list"
@@ -62,34 +66,7 @@ export default function Blog() {
   return (
     <div className="min-h-screen bg-white">
       {seo}
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 border-b border-white/20" style={{
-        background: 'rgba(255, 255, 255, 0.7)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
-        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
-      }}>
-        <div className="container flex items-center justify-between py-4">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/images/logo.png" alt="AI Practitioner" className="w-8 h-8" />
-            <span className="font-semibold text-lg">AI Practitioner</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <a href="/" className="text-gray-600 hover:text-gray-900 transition hidden md:inline">Zur Startseite</a>
-            <a href="/blog" className="text-gray-900 font-medium transition">KI-Automatisierung Blog</a>
-            {isAdmin && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => navigate("/admin/blog")}
-              >
-                <Settings className="w-4 h-4 mr-2" />
-                Admin
-              </Button>
-            )}
-          </div>
-        </div>
-      </nav>
+      <PublicSiteHeader items={[...blogNavItems]} />
 
       {/* Header */}
       <div className="pt-32 pb-16 px-4 section-premium">
@@ -121,6 +98,8 @@ export default function Blog() {
                         src={article.featuredImage}
                         alt={article.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                        decoding="async"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
@@ -219,6 +198,8 @@ export default function Blog() {
           </Button>
         </div>
       </section>
+
+      <PublicSiteFooter />
     </div>
   );
 }

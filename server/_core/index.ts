@@ -1,4 +1,5 @@
 import "dotenv/config";
+import compression from "compression";
 import express, { type RequestHandler } from "express";
 import { createServer } from "http";
 import net from "net";
@@ -16,6 +17,15 @@ import {
   writeOAuthStateCookie,
 } from "./security";
 import { serveStatic, setupVite } from "./vite";
+
+function shouldRedirectTrailingSlash(pathname: string) {
+  return (
+    pathname.length > 1 &&
+    pathname.endsWith("/") &&
+    !pathname.startsWith("/api/") &&
+    !/\.[a-z0-9]+$/i.test(pathname)
+  );
+}
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -67,8 +77,30 @@ async function startServer() {
 
   // Configure body parser with larger size limit for file uploads
   app.use(securityHeaders);
+  app.use(
+    compression({
+      threshold: 1024,
+      brotli: {},
+    }),
+  );
   app.use(express.json({ limit: "10mb" }));
   app.use(express.urlencoded({ limit: "10mb", extended: true }));
+
+  app.use((req, res, next) => {
+    const host = (req.get("host") || "").toLowerCase();
+    if (host.startsWith("www.")) {
+      res.redirect(301, `${req.protocol}://${host.slice(4)}${req.originalUrl}`);
+      return;
+    }
+
+    if ((req.method === "GET" || req.method === "HEAD") && shouldRedirectTrailingSlash(req.path)) {
+      const query = req.url.includes("?") ? req.url.slice(req.url.indexOf("?")) : "";
+      res.redirect(301, `${req.path.replace(/\/+$/, "")}${query}`);
+      return;
+    }
+
+    next();
+  });
   // OAuth callback under /api/oauth/callback
 
   app.get("/api/auth/google", authStartLimiter, (req, res) => {
@@ -217,6 +249,7 @@ async function startServer() {
   app.get("/robots.txt", (req, res) => {
     const baseUrl = `${req.protocol}://${req.get("host")}`;
     res.set("Content-Type", "text/plain");
+    res.set("Cache-Control", "public, max-age=300, stale-while-revalidate=86400");
     res.send(`User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nSitemap: ${baseUrl}/sitemap.xml`);
   });
 

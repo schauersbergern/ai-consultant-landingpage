@@ -100,7 +100,24 @@ export function serveStatic(app: Express) {
 
   let renderProduction: Awaited<ReturnType<typeof loadProductionRenderer>> | null = null;
 
-  app.use(express.static(distPath, { index: false }));
+  app.use(
+    express.static(distPath, {
+      index: false,
+      setHeaders(res, filePath) {
+        if (filePath.includes(`${path.sep}assets${path.sep}`)) {
+          res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+          return;
+        }
+
+        if (filePath.includes(`${path.sep}images${path.sep}`)) {
+          res.setHeader("Cache-Control", "public, max-age=604800, stale-while-revalidate=86400");
+          return;
+        }
+
+        res.setHeader("Cache-Control", "public, max-age=3600");
+      },
+    }),
+  );
 
   app.use("*", async (req, res) => {
     try {
@@ -113,6 +130,7 @@ export function serveStatic(app: Express) {
         if (fs.existsSync(prerenderFilePath)) {
           const prerenderedHtml = await fs.promises.readFile(prerenderFilePath, "utf-8");
           const page = applyBaseUrl(prerenderedHtml, baseUrl);
+          setSsrCacheHeaders(req, res);
           res.status(200).set({ "Content-Type": "text/html" }).send(page);
           return;
         }
@@ -138,6 +156,7 @@ export function serveStatic(app: Express) {
       }
 
       const fallback = stripSsrPlaceholders(applyBaseUrl(template, baseUrl));
+      setSsrCacheHeaders(req, res);
       res.status(200).set({ "Content-Type": "text/html" }).send(fallback);
     } catch (e) {
       console.error("Error serving index.html:", e);

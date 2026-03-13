@@ -2,6 +2,7 @@ export const BLOG_LIST_ROUTE = "/blog";
 
 export const STATIC_PRERENDER_ROUTES = [
   "/",
+  "/trainer",
   "/impressum",
   "/datenschutz",
   "/danke",

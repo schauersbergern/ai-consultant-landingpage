@@ -15,6 +15,7 @@ import Datenschutz from "./pages/Datenschutz";
 import ThankYou from "./pages/ThankYou";
 import Login from "./pages/Login";
 import CookieConsent from "./components/CookieConsent";
+import Trainer from "./pages/Trainer";
 
 function AppRoutes() {
   return (
@@ -23,6 +24,7 @@ function AppRoutes() {
       <Route path={"/"} component={Home} />
       <Route path={"/blog"} component={Blog} />
       <Route path={"/blog/:slug"} component={BlogArticle} />
+      <Route path={"/trainer"} component={Trainer} />
       <Route path={"/admin/blog"} component={AdminBlog} />
       <Route path={"/admin/blog/new"} component={() => <AdminBlogEditor />} />
       <Route path={"/admin/blog/import"} component={AdminBlogImport} />

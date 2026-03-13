@@ -1,6 +1,6 @@
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
-import { Loader2, ArrowLeft, Calendar, Share2 } from "lucide-react";
+import { Loader2, ArrowLeft, Calendar, Share2, UserRound } from "lucide-react";
 import { useLocation, useParams } from "wouter";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
@@ -10,6 +10,14 @@ import remarkGfm from "remark-gfm";
 import { PageSeo } from "@/ssr/head";
 import { useRequestInfo } from "@/ssr/request-info";
 import { useServerData } from "@/ssr/server-data";
+import { PublicSiteFooter } from "@/components/PublicSiteFooter";
+import { PublicSiteHeader } from "@/components/PublicSiteHeader";
+import { LOGO_PATH, trainerProfiles } from "@/site-content";
+
+const articleNavItems = [
+  { href: "/", label: "Startseite" },
+  { href: "/blog", label: "Blog" },
+] as const;
 
 export default function BlogArticle() {
   const params = useParams<{ slug: string }>();
@@ -85,6 +93,12 @@ export default function BlogArticle() {
 
   const seoTitle = article.seoTitle || `${article.title} | AI Practitioner Blog`;
   const seoDescription = article.seoDescription || article.excerpt || "";
+  const contentLead =
+    trainerProfiles.find(profile => profile.id === "markus-habermehl") ?? trainerProfiles[0];
+  const articleImage =
+    article.featuredImage
+      ? new URL(article.featuredImage, requestInfo.origin).toString()
+      : undefined;
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -101,23 +115,24 @@ export default function BlogArticle() {
         ? new Date(article.publishedAt).toISOString()
         : undefined,
     "author": {
-      "@type": "Organization",
-      "name": "AI Practitioner",
-      "url": requestInfo.origin,
+      "@type": "Person",
+      "name": contentLead.name,
+      "jobTitle": contentLead.role,
+      "url": `${requestInfo.origin}/trainer#${contentLead.id}`,
     },
     "publisher": {
       "@type": "Organization",
       "name": "AI Practitioner",
       "logo": {
         "@type": "ImageObject",
-        "url": `${requestInfo.origin}/images/logo.png`,
+        "url": `${requestInfo.origin}${LOGO_PATH}`,
       },
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": requestInfo.href,
     },
-    ...(article.featuredImage ? { "image": article.featuredImage } : {}),
+    ...(articleImage ? { "image": articleImage } : {}),
     ...(article.category ? { "articleSection": article.category } : {}),
     ...(article.tags ? { "keywords": article.tags } : {}),
     "inLanguage": "de-DE",
@@ -133,24 +148,7 @@ export default function BlogArticle() {
         ogImage={article.featuredImage || undefined}
         jsonLd={articleJsonLd}
       />
-      {/* Header Navigation */}
-      <nav className="fixed top-0 w-full z-50 border-b border-white/20" style={{
-        background: 'rgba(255, 255, 255, 0.7)',
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
-        boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.1)'
-      }}>
-        <div className="container flex items-center justify-between py-4">
-          <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-            <img src="/images/logo.png" alt="AI Practitioner" className="w-8 h-8" />
-            <span className="font-semibold text-lg">AI Practitioner</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <a href="/" className="text-gray-600 hover:text-gray-900 transition hidden md:inline">Startseite</a>
-            <a href="/blog" className="text-gray-600 hover:text-gray-900 transition">Blog</a>
-          </div>
-        </div>
-      </nav>
+      <PublicSiteHeader items={[...articleNavItems]} />
 
       {/* Featured Image */}
       {article.featuredImage && (
@@ -159,6 +157,9 @@ export default function BlogArticle() {
             src={article.featuredImage}
             alt={article.title}
             className="w-full h-full object-cover"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
           />
         </div>
       )}
@@ -194,6 +195,10 @@ export default function BlogArticle() {
                   <span>{article.viewCount} Aufrufe</span>
                 </div>
               )}
+              <div className="flex items-center gap-2">
+                <UserRound className="w-4 h-4" />
+                <span>Fachlich verantwortet von {contentLead.name}</span>
+              </div>
             </div>
 
             {/* Share Button */}
@@ -222,7 +227,31 @@ export default function BlogArticle() {
 
           {/* Article Body - Markdown Rendering */}
           <div className="prose prose-lg max-w-none mb-16 prose-headings:font-semibold prose-headings:text-gray-900 prose-p:text-gray-700 prose-p:leading-relaxed prose-li:text-gray-700 prose-strong:text-gray-900 prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                a: ({ href = "", ...props }) => {
+                  const isExternal = /^https?:\/\//i.test(href);
+                  return (
+                    <a
+                      href={href}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      target={isExternal ? "_blank" : undefined}
+                      {...props}
+                    />
+                  );
+                },
+                img: ({ src = "", alt = "", ...props }) => (
+                  <img
+                    src={src}
+                    alt={alt}
+                    loading="lazy"
+                    decoding="async"
+                    {...props}
+                  />
+                ),
+              }}
+            >
               {article.content}
             </ReactMarkdown>
           </div>
@@ -257,6 +286,8 @@ export default function BlogArticle() {
           </div>
         </div>
       </article>
+
+      <PublicSiteFooter />
     </div>
   );
 }
