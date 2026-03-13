@@ -70,7 +70,7 @@ export default function Home() {
       },
       "offers": {
         "@type": "Offer",
-        "price": "4797",
+        "price": "4997",
         "priceCurrency": "EUR",
         "availability": "https://schema.org/InStock",
         "url": window.location.origin
@@ -97,7 +97,7 @@ export default function Home() {
         { "@type": "Question", "name": "Für wen ist die KI-Weiterbildung geeignet?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung richtet sich an Berater, Freelancer, Unternehmer und Angestellte, die KI-Automatisierung als neue Kompetenz oder Einnahmequelle aufbauen möchten. Vorkenntnisse sind nicht erforderlich." } },
         { "@type": "Question", "name": "Gibt es eine Geld-zurück-Garantie?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du hast eine 14-Tage Geld-zurück-Garantie. Wenn die Ausbildung nicht deinen Erwartungen entspricht, erhältst du den vollen Betrag zurück – ohne Wenn und Aber." } },
         { "@type": "Question", "name": "Kann ich die KI-Ausbildung neben dem Beruf absolvieren?", "acceptedAnswer": { "@type": "Answer", "text": "Absolut. Die Weiterbildung ist berufsbegleitend konzipiert. Mit ca. 10 Stunden pro Woche und lebenslangem Zugang kannst du flexibel lernen und die Module in deinem eigenen Tempo durcharbeiten." } },
-        { "@type": "Question", "name": "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung zum KI-Automatisierungsexperten kostet 4.797 € zzgl. MwSt. als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates." } },
+        { "@type": "Question", "name": "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?", "acceptedAnswer": { "@type": "Answer", "text": "Die Ausbildung zum KI-Automatisierungsexperten kostet 4.997 € zzgl. MwSt. als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates." } },
         { "@type": "Question", "name": "Welche Tools lerne ich in der Ausbildung?", "acceptedAnswer": { "@type": "Answer", "text": "Du arbeitest mit den führenden KI-Automatisierungstools: ChatGPT, Make, n8n, Zapier, Voiceflow, ManyChat und Flowise. Damit deckst du das gesamte Spektrum von Chatbots über Prozessautomatisierung bis hin zu RAG-Systemen ab." } },
         { "@type": "Question", "name": "Erhalte ich nach Abschluss Unterstützung?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du erhältst lebenslangen Zugang zu allen Kursinhalten und Updates. Zusätzlich profitierst du von der Community der Absolventen für Austausch und Networking." } }
       ]
@@ -553,6 +553,78 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Trainers Section */}
+        <section className="relative py-24 px-4 overflow-hidden bg-gradient-to-b from-white via-slate-50/80 to-white">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-12 left-1/2 h-64 w-64 -translate-x-[140%] rounded-full bg-blue-100/60 blur-3xl" />
+            <div className="absolute bottom-10 right-1/2 h-72 w-72 translate-x-[130%] rounded-full bg-sky-100/70 blur-3xl" />
+          </div>
+
+          <div className="container relative z-10">
+            <motion.div
+              className="text-center max-w-4xl mx-auto mb-14"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/80 px-4 py-2 text-sm font-medium text-blue-700 shadow-sm backdrop-blur-sm mb-6">
+                <CheckCircle2 className="w-4 h-4" />
+                Persönliche Begleitung in jeder Kohorte
+              </div>
+              <h2 className="text-4xl md:text-5xl font-semibold mb-5">
+                Deine Trainer
+              </h2>
+              <p className="text-xl text-gray-600 leading-relaxed">
+                Gemeinsam betreuen sie jede Kohorte mit Live-Sessions, technischem Sparring
+                und direktem Feedback zu den Projektaufgaben.
+              </p>
+            </motion.div>
+
+            <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+              {[
+                {
+                  name: "Nikolaus Schauersberger",
+                  image: "/images/nikolaus-schauersberger.jpg",
+                  alt: "Nikolaus Schauersberger Trainer Portrait",
+                  description: "Seit 15 Jahren Software-Experte und Anforderungsmanager in Großprojekten. Technische Leitung und Produzent des AI Practitioners."
+                },
+                {
+                  name: "Markus Habermehl",
+                  image: "/images/markus-habermehl.jpg",
+                  alt: "Markus Habermehl Trainer Portrait",
+                  description: "Gründer des größten KI Clubs im DACH-Raum, Automatisierungsexperte und didaktische Leitung des AI Practitioners."
+                }
+              ].map((trainer, index) => (
+                <motion.div
+                  key={trainer.name}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.08 }}
+                  className="card-glass h-full text-center px-8 py-10 md:px-10 md:py-12"
+                >
+                  <h3 className="text-3xl font-semibold tracking-tight mb-8">
+                    {trainer.name}
+                  </h3>
+
+                  <div className="relative mx-auto mb-8 w-44 h-44 sm:w-52 sm:h-52">
+                    <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-blue-200/70 via-white to-sky-100/80 blur-2xl scale-105" />
+                    <img
+                      src={trainer.image}
+                      alt={trainer.alt}
+                      className="relative h-full w-full rounded-[2rem] object-cover shadow-[0_20px_60px_rgba(15,23,42,0.18)]"
+                    />
+                  </div>
+
+                  <p className="text-lg leading-relaxed text-gray-600 max-w-xl mx-auto">
+                    {trainer.description}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Success Stories */}
         <section id="success" className="py-20 px-4 section-premium">
           <div className="container">
@@ -648,7 +720,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
                 >
-                  4.797 €
+                  4.997 €
                 </motion.p>
                 <p className="text-gray-500 text-lg">zzgl. MwSt. – Einmalige Zahlung, kein Abo</p>
               </div>
@@ -750,7 +822,7 @@ export default function Home() {
                 },
                 {
                   q: "Was kostet die KI-Weiterbildung mit IHK-Zertifikat?",
-                  a: "Die Ausbildung zum KI-Automatisierungsexperten kostet 4.797 € zzgl. MwSt. als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates."
+                  a: "Die Ausbildung zum KI-Automatisierungsexperten kostet 4.997 € zzgl. MwSt. als einmalige Investition. Darin enthalten sind alle 7 Module, das IHK-Zertifikat, lebenslanger Zugang und alle zukünftigen Updates."
                 },
                 {
                   q: "Welche Tools lerne ich in der Ausbildung?",
